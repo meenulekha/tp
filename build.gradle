@@ -5,10 +5,9 @@ plugins {
     id 'application'
     id 'jacoco'
 }
-application {
-    mainClassName = 'seedu.address.Main'
-    applicationDefaultJvmArgs = ['-ea']
-}
+
+mainClassName = 'seedu.address.Main'
+
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
