@@ -54,6 +54,56 @@ public class AddCommandTest {
     }
 
     @Test
+    public void undo_validPerson_success() throws CommandException {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        // Execute the add command
+        addCommand.execute(modelStub);
+
+        // Undo the add command
+        CommandResult undoResult = addCommand.undo(modelStub);
+
+        // Verify that the person is removed from the model
+        assertFalse(modelStub.personsAdded.contains(validPerson));
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_UNDO, Messages.format(validPerson)),
+                undoResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void undo_nonExistentPerson_throwsCommandException() {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person nonExistentPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(nonExistentPerson);
+
+        // Undo the add command for a non-existent person
+        assertThrows(CommandException.class, AddCommand.MESSAGE_UNDO_NONEXISTENT_PERSON,
+                () -> addCommand.undo(modelStub));
+    }
+
+    @Test
+    public void redo_validPerson_success() throws CommandException {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        // Execute the add command
+        addCommand.execute(modelStub);
+
+        // Undo the add command
+        addCommand.undo(modelStub);
+
+        // Redo the add command
+        CommandResult redoResult = addCommand.redo(modelStub);
+
+        // Verify that the person is added back to the model
+        assertTrue(modelStub.personsAdded.contains(validPerson));
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                redoResult.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -198,6 +248,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            personsAdded.remove(target);
         }
     }
 
