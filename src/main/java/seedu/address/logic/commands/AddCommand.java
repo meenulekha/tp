@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -38,6 +38,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_UNDO = "Person deleted: %1$s";
+    public static final String MESSAGE_UNDO_NONEXISTENT_PERSON = "Undo failed: Person does not exist in the address book";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -60,6 +62,22 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        requireNonNull(model);
+
+        if (!model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_UNDO_NONEXISTENT_PERSON);
+        }
+        model.deletePerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS_UNDO, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult redo(Model model) throws CommandException {
+        return execute(model);
     }
 
     @Override
