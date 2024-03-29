@@ -8,8 +8,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.*;
 
 import java.util.List;
+import java.util.Random;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Changes the group of a person identified by the index number used in the displayed person list.
@@ -33,9 +35,18 @@ public class GroupCommand extends Command {
 
     private final int targetGroupNumber;
 
+    public GroupCommand(Index targetIndex) {
+        Random random = new Random();
+
+        this.targetIndex = targetIndex;
+        this.targetGroupNumber = random.nextInt(Group.getTotalGroupNumber());
+
+    }
+
     public GroupCommand(Index targetIndex, int targetGroupNumber) {
         this.targetIndex = targetIndex;
         this.targetGroupNumber = targetGroupNumber;
+        Group.setTotalGroupNumber(targetGroupNumber);
     }
 
     @Override
@@ -54,11 +65,13 @@ public class GroupCommand extends Command {
         } else if (personToGroup instanceof Staff) {
             Staff staffToGroup = (Staff) personToGroup;
             staffToGroup.setGroupNumber(targetGroupNumber);
+            model.setPerson(personToGroup, staffToGroup);
         } else if (personToGroup instanceof Participant) {
             Participant participantToGroup = (Participant) personToGroup;
             participantToGroup.setGroupNumber(targetGroupNumber);
+            model.setPerson(personToGroup, participantToGroup);
         }
-
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(personToGroup)));
     }
 
