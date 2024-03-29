@@ -19,6 +19,13 @@ public class Participant extends Person {
     }
 
     /**
+     * Sets the group number of the participant.
+     */
+    public void setGroupNumber(int groupNumber) {
+        this.group = new Group(groupNumber);
+    }
+
+    /**
      * Returns the group number of the participant.
      */
     public int getGroupNumber() {
