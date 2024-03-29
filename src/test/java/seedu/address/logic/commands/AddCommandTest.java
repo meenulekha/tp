@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -54,7 +55,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void undo_validPerson_success() throws CommandException {
+    public void undo_validPerson_success() throws CommandException, UndoException {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
@@ -78,12 +79,12 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(nonExistentPerson);
 
         // Undo the add command for a non-existent person
-        assertThrows(CommandException.class, AddCommand.MESSAGE_UNDO_NONEXISTENT_PERSON,
-                () -> addCommand.undo(modelStub));
+        String expectedMessage = AddCommand.MESSAGE_UNDO_NONEXISTENT_PERSON;
+        assertThrows(UndoException.class, expectedMessage, () -> addCommand.undo(modelStub));
     }
 
     @Test
-    public void redo_validPerson_success() throws CommandException {
+    public void redo_validPerson_success() throws CommandException, UndoException {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
@@ -205,6 +206,31 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult undoAddressBook() throws UndoException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult redoAddressBook() throws UndoException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommand(ReversibleCommand command) {
             throw new AssertionError("This method should not be called.");
         }
     }
