@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.history;
 
-import seedu.address.logic.commands.ReversibleCommand;
-import seedu.address.logic.commands.exceptions.UndoException;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import seedu.address.logic.commands.ReversibleCommand;
+import seedu.address.logic.commands.exceptions.UndoException;
 
 /**
  * Represents a history of reversible commands. This class is responsible for
