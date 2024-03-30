@@ -2,6 +2,8 @@ package seedu.address.commons.util;
 
 /**
  * Represents a queue that allows random access to its elements.
+ *
+ * @param <E> the type of elements in the queue
  */
 public interface RandomAccessQueue<E> {
 
