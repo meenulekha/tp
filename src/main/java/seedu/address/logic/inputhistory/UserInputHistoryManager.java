@@ -10,7 +10,7 @@ public class UserInputHistoryManager implements UserInputHistory<String> {
     private static final int MAX_HISTORY_SIZE = 100;
 
     /**
-     * The history of user input. Implemented as a circular buffer of strings.
+     * The history of user input.
      */
     private final RandomAccessQueue<String> history; // not sure if String should be used
 
