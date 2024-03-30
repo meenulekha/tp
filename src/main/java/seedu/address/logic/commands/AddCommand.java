@@ -71,7 +71,8 @@ public class AddCommand extends Command implements ReversibleCommand {
 
     @Override
     public CommandResult redo(Model model) throws UndoException, CommandException {
-        return execute(model);
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
