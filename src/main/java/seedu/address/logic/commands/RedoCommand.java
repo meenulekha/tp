@@ -7,29 +7,29 @@ import seedu.address.model.Model;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Undoes the most recent command that modifies the address book.
+ * Redoes the most recent undone command that modifies the address book.
  */
-public class UndoCommand extends Command {
-    public static final String COMMAND_WORD = "undo";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the most recent command that modifies the address book.\n" + "Example: " + COMMAND_WORD;
+            + ": Redoes the most recent undone command that modifies the address book.";
+    public static final String MESSAGE_FAILURE_NO_COMMAND_TO_REDO = "There is no command to redo.";
 
-    public static final String MESSAGE_FAILURE_NO_COMMAND_TO_UNDO = "There's no command to undo.";
-
-    public UndoCommand() {
+    public RedoCommand() {
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.canUndoAddressBook()) {
-            throw new CommandException(MESSAGE_FAILURE_NO_COMMAND_TO_UNDO);
+        if (!model.canRedoAddressBook()) {
+            throw new CommandException(MESSAGE_FAILURE_NO_COMMAND_TO_REDO);
         }
         try {
-            return model.undoAddressBook();
+            return model.redoAddressBook();
         } catch (UndoException e) {
             throw new CommandException(e.getMessage());
         }
     }
+
 }

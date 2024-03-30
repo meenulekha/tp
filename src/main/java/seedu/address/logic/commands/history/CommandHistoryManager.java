@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.history;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 import seedu.address.logic.commands.ReversibleCommand;
 import seedu.address.logic.commands.exceptions.UndoException;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Represents a history of reversible commands. This class is responsible for
@@ -12,8 +12,8 @@ import seedu.address.logic.commands.exceptions.UndoException;
  */
 public class CommandHistoryManager implements ReversibleCommandHistory {
     private static final int MAX_SIZE = 100;
-    private Deque<ReversibleCommand> history;
-    private Deque<ReversibleCommand> future;
+    private final Deque<ReversibleCommand> history;
+    private final Deque<ReversibleCommand> future;
 
     /**
      * Creates a new instance of CommandHistoryManager.

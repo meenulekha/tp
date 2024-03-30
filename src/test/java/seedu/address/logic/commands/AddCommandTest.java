@@ -280,6 +280,10 @@ public class AddCommandTest {
         public void deletePerson(Person target) {
             personsAdded.remove(target);
         }
+
+        @Override
+        public void addCommand(ReversibleCommand c) {
+        }
     }
 
 }
