@@ -28,6 +28,10 @@ public class UserInputHistoryManager implements UserInputHistory<String> {
         return !history.isEmpty();
     }
 
+    int size() {
+        return history.size();
+    }
+
     @Override
     public String getPreviousChat() {
         return history.traverseUp();
