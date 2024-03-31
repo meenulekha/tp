@@ -15,11 +15,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.UserInputHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
 
@@ -78,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -85,18 +87,18 @@ public class MainWindow extends UiPart<Stage> {
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later version of
+         * SDK.
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will not
+         * work when the focus is in them because the key event is consumed by the
+         * TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * help window purposely so to support accelerators even when focus is in
+         * CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -119,7 +121,9 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        UserInputHistory<String> history = logic.getUserInputHistory();
+        CommandBox commandBox = new CommandBox(this::executeCommand, history::getPreviousChat, history::getNextChat,
+                history::addChatToHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
