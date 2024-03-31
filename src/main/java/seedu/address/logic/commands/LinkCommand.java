@@ -44,8 +44,8 @@ public class LinkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Path filePath = Path.of("./selectedParticipants/list.csv");
-
         try {
+            FileUtil.createFile(filePath);
             String header = "Name, Phone, Email, Tags\n";
             FileUtil.writeToFile(filePath, header);
         } catch (IOException e) {
