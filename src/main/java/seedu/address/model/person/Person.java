@@ -122,4 +122,7 @@ public abstract class Person {
                 .toString();
     }
 
+    public String toCsvString() {
+        return name + "," + phone + "," + email + "," + tags + "\n";
+    }
 }
