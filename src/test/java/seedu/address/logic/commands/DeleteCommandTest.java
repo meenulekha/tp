@@ -109,6 +109,32 @@ public class DeleteCommandTest {
         assertEquals(expected, deleteCommand.toString());
     }
 
+    @Test
+    public void executeUndoRedo_validIndexUnfilteredList_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        // delete -> first person deleted
+        assertCommandSuccess(deleteCommand, model,
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+                expectedModel);
+
+        // undo -> reverts addressbook back to previous state and filtered person list
+        // to show all persons
+        expectedModel.addPerson(personToDelete);
+        assertCommandSuccess(new UndoCommand(), model,
+                String.format(DeleteCommand.MESSAGE_SUCCESS_UNDO, Messages.format(personToDelete)), expectedModel);
+
+        // redo -> same first person deleted again
+        expectedModel.deletePerson(personToDelete);
+        assertCommandSuccess(new RedoCommand(), model,
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)),
+                expectedModel);
+    }
+
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
