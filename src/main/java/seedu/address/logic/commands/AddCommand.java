@@ -20,10 +20,10 @@ public class AddCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. " + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n" + "Parameters: "
             + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + PREFIX_CATEGORY + "CATEGORY "
-            + "...\n" + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com " + PREFIX_CATEGORY + "participant";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
+            + "johnd@example.com " + PREFIX_CATEGORY + "participant";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_UNDO = "Person deleted: %1$s";
