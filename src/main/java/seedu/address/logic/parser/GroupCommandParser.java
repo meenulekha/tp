@@ -37,7 +37,11 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         if (trimmedArgs.length < 2) {
             return new GroupCommand(index);
         } else {
-            return new GroupCommand(index, Integer.parseInt(trimmedArgs[1]));
+            try {
+                return new GroupCommand(index, Integer.parseInt(trimmedArgs[1]));
+            } catch (NumberFormatException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE), e);
+            }
         }
     }
 
