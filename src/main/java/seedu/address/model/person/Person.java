@@ -2,13 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -22,21 +18,17 @@ public abstract class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Category category;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Category category, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, category, tags);
+    public Person(Name name, Phone phone, Email email, Category category) {
+        requireAllNonNull(name, phone, email, category);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.category = category;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -55,17 +47,6 @@ public abstract class Person {
         return category;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
 
     /**
      * Returns true if both persons have the same name.
@@ -99,15 +80,13 @@ public abstract class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && category.equals(otherPerson.category)
-                && tags.equals(otherPerson.tags);
+                && category.equals(otherPerson.category);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email);
     }
 
     @Override
@@ -116,13 +95,11 @@ public abstract class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("category", category)
-                .add("tags", tags)
                 .toString();
     }
 
     public String toCsvString() {
-        return name + "," + phone + "," + email + "," + tags + "\n";
+        return name + "," + phone + "," + email + "\n";
     }
 }
