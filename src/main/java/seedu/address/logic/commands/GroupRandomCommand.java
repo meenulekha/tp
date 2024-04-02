@@ -64,6 +64,8 @@ public class GroupRandomCommand extends Command {
                 targetGroupNumber = random.nextInt(numberOfGroup) + 1;
             }
 
+            groupSizes[targetGroupNumber - 1] += 1;
+
             if (personToGroup instanceof Staff) {
                 Staff staffToGroup = (Staff) personToGroup;
                 staffToGroup.setGroupNumber(targetGroupNumber);
