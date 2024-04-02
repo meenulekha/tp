@@ -34,7 +34,13 @@ public class AddSponsorAlias extends Alias<AddCommand> {
         try {
             return new AddCommandParser().parse(addCommandInput);
         } catch (ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            // Override add command usage with own usage. Temporary workaround for now
+            String addCommandUsage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+            if (e.getMessage().equals(addCommandUsage)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            } else {
+                throw e;
+            }
         }
     }
 }
