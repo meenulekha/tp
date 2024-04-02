@@ -26,6 +26,9 @@ public class AliasParser {
         case AddStaffAlias.ALIAS_WORD:
             return new AddStaffAlias().parse(arguments);
 
+        case AddSponsorAlias.ALIAS_WORD:
+            return new AddSponsorAlias().parse(arguments);
+
         default:
             return null;
         }
