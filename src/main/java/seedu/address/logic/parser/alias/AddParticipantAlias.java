@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.alias;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -24,8 +23,7 @@ public class AddParticipantAlias extends Alias<AddCommand> {
 
     private String toAddCommandInput(String input) {
         String paramCategory = PREFIX_CATEGORY + "participant";
-        String paramAddress = PREFIX_ADDRESS + "Nil"; // TODO: remove this after address is removed
-        return input + " " + paramCategory + " " + paramAddress;
+        return input + " " + paramCategory;
     }
 
     @Override
