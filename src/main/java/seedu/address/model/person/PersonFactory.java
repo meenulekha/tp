@@ -20,4 +20,19 @@ public class PersonFactory {
             throw new IllegalArgumentException("Invalid category");
         }
     }
+    /**
+     * Creates a Person based on the category and comment.
+     */
+    public static Person createPerson(Name name, Phone phone, Email email, Category category, Comment comment) {
+        switch (category.value) {
+        case "PARTICIPANT":
+            return new Participant(name, phone, email, category, comment);
+        case "STAFF":
+            return new Staff(name, phone, email, category, comment);
+        case "SPONSOR":
+            return new Sponsor(name, phone, email, category, comment);
+        default: // cannot happen due to category validation
+            throw new IllegalArgumentException("Invalid category");
+        }
+    }
 }
