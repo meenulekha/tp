@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
- * Changes the group of a person identified by the index number used in the displayed person list.
+ * Sets randomly the group of every person displayed on the list.
  */
 public class GroupRandomCommand extends Command {
 
