@@ -19,8 +19,13 @@ public class AliasParser {
      */
     public Command parseAlias(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
+
         case AddParticipantAlias.ALIAS_WORD:
             return new AddParticipantAlias().parse(arguments);
+
+        case AddStaffAlias.ALIAS_WORD:
+            return new AddStaffAlias().parse(arguments);
+
         default:
             return null;
         }
