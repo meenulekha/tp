@@ -24,6 +24,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.parser.alias.AliasParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -58,6 +59,12 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+
+        // Match alias first
+        Command command = new AliasParser().parseAlias(commandWord, arguments);
+        if (command != null) {
+            return command;
+        }
 
         switch (commandWord) {
 
