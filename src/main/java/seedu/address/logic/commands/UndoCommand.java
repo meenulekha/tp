@@ -13,7 +13,8 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the most recent command that modifies the address book.\n" + "Example: " + COMMAND_WORD;
+                                               + ": Undoes the most recent command that modifies the address book.\n" +
+                                               "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_FAILURE_NO_COMMAND_TO_UNDO = "There's no command to undo.";
 
@@ -31,5 +32,10 @@ public class UndoCommand extends Command {
         } catch (UndoException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof UndoCommand;
     }
 }

@@ -38,6 +38,15 @@ public class AliasParser {
         case ExitAlias.ALIAS_WORD:
             return new ExitAlias().parse(arguments);
 
+        case FindAlias.ALIAS_WORD:
+            return new FindAlias().parse(arguments);
+
+        case UndoAlias.ALIAS_WORD:
+            return new UndoAlias().parse(arguments);
+
+        case RedoAlias.ALIAS_WORD:
+            return new RedoAlias().parse(arguments);
+
         default:
             return null;
         }
