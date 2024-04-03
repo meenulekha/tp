@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(ContactContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
