@@ -122,6 +122,13 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void groupPerson(Person target, int groupNumber) {
+        requireAllNonNull(target, groupNumber);
+
+        addressBook.groupPerson(target, groupNumber);
+    }
+
     // =========== Filtered Person List Accessors
     // =============================================================
 
