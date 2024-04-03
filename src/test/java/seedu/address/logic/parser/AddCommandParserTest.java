@@ -55,11 +55,11 @@ public class AddCommandParserTest {
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_PARTICIPANT,
                 new AddCommand(expectedPersonMultipleTags));
 
-        // participant with group
+        // participant with a group
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + CATEGORY_DESC_PARTICIPANT + GROUP_DESC, new AddCommand(expectedPerson));
 
-        // staff with group
+        // staff with a group
         expectedPerson = new PersonBuilder(BOB).withCategory("STAFF").build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + CATEGORY_DESC_STAFF + GROUP_DESC, new AddCommand(expectedPerson));
