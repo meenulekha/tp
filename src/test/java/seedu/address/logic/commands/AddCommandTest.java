@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -51,6 +52,56 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void undo_validPerson_success() throws CommandException, UndoException {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        // Execute the add command
+        addCommand.execute(modelStub);
+
+        // Undo the add command
+        CommandResult undoResult = addCommand.undo(modelStub);
+
+        // Verify that the person is removed from the model
+        assertFalse(modelStub.personsAdded.contains(validPerson));
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_UNDO, Messages.format(validPerson)),
+                undoResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void undo_nonExistentPerson_throwsCommandException() {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person nonExistentPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(nonExistentPerson);
+
+        // Undo the add command for a non-existent person
+        String expectedMessage = AddCommand.MESSAGE_UNDO_NONEXISTENT_PERSON;
+        assertThrows(UndoException.class, expectedMessage, () -> addCommand.undo(modelStub));
+    }
+
+    @Test
+    public void redo_validPerson_success() throws CommandException, UndoException {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        // Execute the add command
+        addCommand.execute(modelStub);
+
+        // Undo the add command
+        addCommand.undo(modelStub);
+
+        // Redo the add command
+        CommandResult redoResult = addCommand.redo(modelStub);
+
+        // Verify that the person is added back to the model
+        assertTrue(modelStub.personsAdded.contains(validPerson));
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                redoResult.getFeedbackToUser());
     }
 
     @Test
@@ -157,6 +208,31 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public CommandResult undoAddressBook() throws UndoException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult redoAddressBook() throws UndoException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommand(ReversibleCommand command) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -198,6 +274,15 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            personsAdded.remove(target);
+        }
+
+        @Override
+        public void addCommand(ReversibleCommand c) {
         }
     }
 

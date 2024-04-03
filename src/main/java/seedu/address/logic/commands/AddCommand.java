@@ -10,13 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -35,6 +36,9 @@ public class AddCommand extends Command {
             + PREFIX_GROUP + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS_UNDO = "Person deleted: %1$s";
+    public static final String MESSAGE_UNDO_NONEXISTENT_PERSON = "Undo failed:"
+            + "Person does not exist in the address book";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -56,6 +60,24 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.addCommand(this);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws UndoException {
+        requireNonNull(model);
+
+        if (!model.hasPerson(toAdd)) {
+            throw new UndoException(MESSAGE_UNDO_NONEXISTENT_PERSON);
+        }
+        model.deletePerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS_UNDO, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult redo(Model model) throws UndoException, CommandException {
+        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -76,8 +98,6 @@ public class AddCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return new ToStringBuilder(this).add("toAdd", toAdd).toString();
     }
 }

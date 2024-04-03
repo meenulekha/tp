@@ -11,6 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ReversibleCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
+import seedu.address.logic.commands.history.CommandHistoryManager;
+import seedu.address.logic.commands.history.ReversibleCommandHistory;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,9 +28,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ReversibleCommandHistory commandHistory;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs, and an
+     * empty command history.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -34,13 +42,15 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        commandHistory = new CommandHistoryManager();
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -75,7 +85,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -111,11 +122,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -140,9 +152,38 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    // =========== Command History
+    // ========================================================================
+
+    @Override
+    public void addCommand(ReversibleCommand command) {
+        commandHistory.addCommand(command);
+    }
+
+    @Override
+    public boolean canUndoAddressBook() {
+        return commandHistory.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return commandHistory.canRedo();
+    }
+
+    @Override
+    public CommandResult undoAddressBook() throws UndoException {
+        ReversibleCommand command = commandHistory.getCommandToUndo();
+        return command.undo(this);
+    }
+
+    @Override
+    public CommandResult redoAddressBook() throws UndoException, CommandException {
+        ReversibleCommand command = commandHistory.getCommandToRedo();
+        return command.redo(this);
     }
 
 }
