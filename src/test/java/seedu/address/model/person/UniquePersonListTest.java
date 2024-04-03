@@ -124,6 +124,11 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void groupPerson_targetPersonNotInList_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.groupPerson(ALICE, 2));
+    }
+
+    @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((UniquePersonList) null));
     }

@@ -10,6 +10,13 @@ public class Sponsor extends Person {
         super(name, phone, email, category);
     }
 
+    /**
+     * Constructs a sponsor with comment. Every field must be present and not null.
+     */
+    public Sponsor(Name name, Phone phone, Email email, Category category, Comment comment) {
+        super(name, phone, email, category, comment);
+    }
+
     @Override
     public boolean isSamePerson(Person other) {
         if (other == this) {

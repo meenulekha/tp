@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_EVENTNAME = new Prefix("en/");
     public static final Prefix PREFIX_EVENTCATEGORY = new Prefix("ec/");
     public static final Prefix PREFIX_EVENTDATE = new Prefix("ed/");
+    public static final Prefix PREFIX_GROUP = new Prefix("g/");
 
 }

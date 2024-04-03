@@ -1,15 +1,18 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Event.EventCategory;
 import seedu.address.model.Event.EventDate;
 import seedu.address.model.Event.EventName;
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -121,4 +124,31 @@ public class ParserUtil {
         }
         return new EventCategory(trimmedCategory);
     }
+  
+    /**
+     * Parses a {@code String group} into a {@code Group}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code group} is invalid.
+     */
+    public static Group parseGroup(String group) throws ParseException {
+        requireNonNull(group);
+        String trimmedGroup = group.trim();
+        int groupNumber;
+
+        try {
+            groupNumber = Integer.parseInt(trimmedGroup);
+        } catch (NumberFormatException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
+        }
+
+        if (!Group.isValidGroup(groupNumber)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Group(groupNumber);
+
+    }
+
 }
