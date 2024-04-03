@@ -114,13 +114,13 @@ public class CommentCommand extends Command implements ReversibleCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof CommentCommand)) {
             return false;
         }
 
-        CommentCommand otherEditCommand = (CommentCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editComment.equals(otherEditCommand.editComment);
+        CommentCommand otherCommentCommand = (CommentCommand) other;
+        return index.equals(otherCommentCommand.index)
+                && editComment.equals(otherCommentCommand.editComment);
     }
 
     @Override

@@ -17,19 +17,23 @@ public class Comment {
 
     public static final String DEFAULT_COMMENT = "No comment provided.";
 
-    public final Boolean hasComment;
-
     public final String value;
+
+    /**
+     * Constructs a {@code Comment} with the default comment.
+     */
+    public Comment() {
+        value = DEFAULT_COMMENT;
+    }
 
     /**
      * Constructs an {@code Comment}.
      *
      * @param comment A valid comment.
      */
-    public Comment(Boolean hasComment, String comment) {
+    public Comment(String comment) {
         requireNonNull(comment);
         checkArgument(isValidComment(comment), MESSAGE_CONSTRAINTS);
-        this.hasComment = hasComment;
         value = comment;
     }
 
@@ -42,11 +46,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        if (hasComment) {
-            return value;
-        } else {
-            return DEFAULT_COMMENT;
-        }
+        return value;
     }
 
     @Override

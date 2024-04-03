@@ -170,7 +170,7 @@ public class EditCommand extends Command implements ReversibleCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email);
+            return CollectionUtil.isAnyNonNull(name, phone, email, category);
         }
 
         public void setName(Name name) {

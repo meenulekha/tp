@@ -30,7 +30,7 @@ public abstract class Person {
         this.phone = phone;
         this.email = email;
         this.category = category;
-        this.comment = new Comment(false, "No comment provided.");
+        this.comment = new Comment();
     }
     /**
      * Constructs person with comment. Every field must be present and not null.
@@ -113,10 +113,11 @@ public abstract class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("category", category)
+                .add("comment", comment)
                 .toString();
     }
 
     public String toCsvString() {
-        return name + "," + phone + "," + email + "\n";
+        return name + "," + phone + "," + email + "," + comment + "\n";
     }
 }
