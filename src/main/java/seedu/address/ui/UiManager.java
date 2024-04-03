@@ -55,7 +55,11 @@ public class UiManager implements Ui {
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+        if (mainWindow != null) {
+            showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+        } else {
+            logger.severe("MainWindow is not initialized");
+        }
     }
 
     /**
