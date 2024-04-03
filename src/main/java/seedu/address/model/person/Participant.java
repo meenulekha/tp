@@ -14,6 +14,14 @@ public class Participant extends Person {
     }
 
     /**
+     * Constructs participants with comment. Every field must be present and not null.
+     */
+    public Participant(Name name, Phone phone, Email email, Category category, Comment comment) {
+        super(name, phone, email, category, comment);
+        this.group = new Group();
+    }
+
+    /**
      * Returns the group number of the participant.
      */
     public int getGroupNumber() {
