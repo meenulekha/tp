@@ -6,11 +6,11 @@
     "email" : "alice@example.com",
     "category": "PARTICIPANT",
     "comment": "She is an Expert."
+
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
     "category": "PARTICIPANT",
     "comment": "No comment provided."
   }, {
