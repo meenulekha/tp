@@ -30,4 +30,23 @@ public class CommentCommandTest {
         Comment comment = new Comment("No comment provided.");
         assertEquals(comment, person.getComment());
     }
+
+    @Test
+    public void undo() throws CommandException {
+        CommentCommand commentCommand = new CommentCommand(INDEX_FIRST_PERSON, new Comment("This is a comment."));
+        commentCommand.execute(model);
+        commentCommand.undo(model);
+        assertEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getComment(),
+                new Comment("She is an Expert."));
+    }
+
+    @Test
+    public void redo() throws CommandException {
+        CommentCommand commentCommand = new CommentCommand(INDEX_FIRST_PERSON, new Comment("This is a comment."));
+        commentCommand.execute(model);
+        commentCommand.undo(model);
+        commentCommand.redo(model);
+        assertEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getComment(),
+                new Comment("This is a comment."));
+    }
 }
