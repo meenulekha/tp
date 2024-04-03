@@ -124,7 +124,6 @@ public class ParserUtil {
         }
         return new EventCategory(trimmedCategory);
     }
-  
     /**
      * Parses a {@code String group} into a {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
