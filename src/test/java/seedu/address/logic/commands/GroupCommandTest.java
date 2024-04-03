@@ -24,7 +24,8 @@ public class GroupCommandTest {
 
         GroupCommand groupCommand = new GroupCommand(INDEX_FIRST_PERSON, 2);
 
-        String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(personToGroup));
+        String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_PERSON_SUCCESS,
+                Messages.format(personToGroup));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), personToGroup);
