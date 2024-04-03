@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.BOB_STAFF;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,12 +25,12 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddParticipantAliasTest {
-    private AddParticipantAlias parser = new AddParticipantAlias();
+public class AddStaffAliasTest {
+    private AddStaffAlias parser = new AddStaffAlias();
 
     @Test
     void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Person expectedPerson = new PersonBuilder(BOB_STAFF).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
@@ -39,7 +39,7 @@ public class AddParticipantAliasTest {
 
     @Test
     public void parse_compulsoryFieldMissing_ownUsageMessage() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantAlias.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStaffAlias.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB, expectedMessage);
@@ -70,6 +70,6 @@ public class AddParticipantAliasTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantAlias.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStaffAlias.MESSAGE_USAGE));
     }
 }
