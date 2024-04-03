@@ -58,10 +58,10 @@ public class GroupRandomCommandTest {
 
     @Test
     public void equals() {
-        final GroupCommand standardCommand = new GroupCommand(INDEX_FIRST_PERSON, 2);
+        final GroupRandomCommand standardCommand = new GroupRandomCommand(2);
 
         // same values -> returns true
-        GroupCommand commandWithSameValues = new GroupCommand(INDEX_FIRST_PERSON, 2);
+        GroupRandomCommand commandWithSameValues = new GroupRandomCommand(2);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -73,20 +73,15 @@ public class GroupRandomCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // different index -> returns false
-        assertFalse(standardCommand.equals(new GroupCommand(INDEX_SECOND_PERSON, 2)));
-
-        // different targetGroupNumber -> returns false
-        assertFalse(standardCommand.equals(new GroupCommand(INDEX_FIRST_PERSON, 3)));
+        // different maxGroupSize -> returns false
+        assertFalse(standardCommand.equals(new GroupRandomCommand(3)));
     }
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        int targetGroupNumber = 2;
-        GroupCommand groupCommand = new GroupCommand(INDEX_FIRST_PERSON, targetGroupNumber);
-        String expected = GroupCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + ", targetGroup="
-                + targetGroupNumber + "}";
-        assertEquals(expected, groupCommand.toString());
+        int maxGroupSize = 2;
+        GroupRandomCommand groupRandomCommand = new GroupRandomCommand(maxGroupSize);
+        String expected = GroupRandomCommand.class.getCanonicalName() + "{maxGroupSize=" + maxGroupSize + "}";
+        assertEquals(expected, groupRandomCommand.toString());
     }
 }

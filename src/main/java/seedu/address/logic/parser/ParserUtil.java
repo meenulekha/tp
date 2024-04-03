@@ -106,7 +106,7 @@ public class ParserUtil {
 
         try {
             groupNumber = Integer.parseInt(trimmedGroup);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }

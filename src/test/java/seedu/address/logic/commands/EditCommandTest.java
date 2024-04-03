@@ -207,6 +207,25 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_editSponsor_success() {
+        PersonBuilder editedPersonBuilder = new PersonBuilder();
+        Person editedPerson = editedPersonBuilder.withCategory("SPONSOR").build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        modelUsed.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, modelUsed, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 

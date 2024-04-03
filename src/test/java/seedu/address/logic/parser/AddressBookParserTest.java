@@ -20,6 +20,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GroupCommand;
+import seedu.address.logic.commands.GroupRandomCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -87,6 +89,21 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
+
+    @Test
+    public void parseCommand_group() throws Exception {
+        GroupCommand command = (GroupCommand) parser.parseCommand(GroupCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " 3");
+        assertEquals(new GroupCommand(INDEX_FIRST_PERSON, 3), command);
+    }
+
+    @Test
+    public void parseCommand_grouprandom() throws Exception {
+        GroupRandomCommand command = (GroupRandomCommand) parser.parseCommand(GroupRandomCommand.COMMAND_WORD
+                + " " + " 3");
+        assertEquals(new GroupRandomCommand(3), command);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
