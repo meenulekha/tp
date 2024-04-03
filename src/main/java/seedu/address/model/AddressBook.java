@@ -94,6 +94,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Groups {@code target} into {@code groupNumber}.
+     * {@code target} must exist in the address book.
+     * {@code groupNumber} must be a positive integer.
+     */
+    public void groupPerson(Person target, int groupNumber) {
+        requireNonNull(target);
+
+        persons.groupPerson(target, groupNumber);
+    }
+
     //// util methods
 
     @Override

@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_PARTICIPANT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_STAFF;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -52,6 +54,15 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CATEGORY_DESC_PARTICIPANT,
                 new AddCommand(expectedPersonMultipleTags));
+
+        // participant with a group
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + CATEGORY_DESC_PARTICIPANT + GROUP_DESC, new AddCommand(expectedPerson));
+
+        // staff with a group
+        expectedPerson = new PersonBuilder(BOB).withCategory("STAFF").build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + CATEGORY_DESC_STAFF + GROUP_DESC, new AddCommand(expectedPerson));
     }
 
     @Test

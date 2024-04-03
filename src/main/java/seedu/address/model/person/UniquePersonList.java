@@ -98,6 +98,30 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Groups {@code target} into {@code groupNumber}.
+     * {@code target} must exist in the address book.
+     * {@code groupNumber} must be a positive integer.
+     */
+    public void groupPerson(Person target, int groupNumber) {
+        requireAllNonNull(target, groupNumber);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        if (target instanceof Staff) {
+            Staff staff = (Staff) target;
+            staff.setGroupNumber(groupNumber);
+        } else if (target instanceof Participant) {
+            Participant participant = (Participant) target;
+            participant.setGroupNumber(groupNumber);
+        }
+
+        internalList.set(index, target);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

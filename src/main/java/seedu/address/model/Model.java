@@ -81,6 +81,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Groups the given person {@code target} into {@code groupNumber}.
+     * {@code target} must exist in the address book.
+     * {@code groupNumber} must be a positive integer.
+     */
+    void groupPerson(Person target, int groupNumber);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
