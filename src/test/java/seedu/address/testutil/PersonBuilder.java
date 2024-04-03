@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.person.Category;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -16,11 +17,13 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_CATEGORY = "PARTICIPANT";
+    public static final String DEFAULT_COMMENT = "No comment provided.";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Category category;
+    private Comment comment;
 
 
     /**
@@ -31,6 +34,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         category = new Category(DEFAULT_CATEGORY);
+        comment = new Comment(DEFAULT_COMMENT);
     }
 
     /**
@@ -41,6 +45,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         category = personToCopy.getCategory();
+        comment = personToCopy.getComment();
     }
 
     /**
@@ -76,8 +81,15 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return PersonFactory.createPerson(name, phone, email, category);
+    /**
+     * Sets the {@code Comment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
     }
 
+    public Person build() {
+        return PersonFactory.createPerson(name, phone, email, category, comment);
+    }
 }

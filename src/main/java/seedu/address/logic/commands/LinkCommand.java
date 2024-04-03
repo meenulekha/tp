@@ -46,7 +46,7 @@ public class LinkCommand extends Command {
         Path filePath = Path.of("./selectedParticipants/list.csv");
         try {
             FileUtil.createFile(filePath);
-            String header = "Name, Phone, Email\n";
+            String header = "Name, Phone, Email, Comment\n";
             FileUtil.writeToFile(filePath, header);
         } catch (IOException e) {
             throw new CommandException(Messages.MESSAGE_IO_ERROR);

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Category;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,17 +23,20 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String category;
+    private final String comment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("category") String category) {
+            @JsonProperty("email") String email, @JsonProperty("category") String category,
+                             @JsonProperty("comment") String comment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.category = category;
+        this.comment = comment;
     }
 
     /**
@@ -43,6 +47,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         category = source.getCategory().value;
+        comment = source.getComment().value;
     }
 
     /**
@@ -84,7 +89,17 @@ class JsonAdaptedPerson {
         }
         final Category modelCategory = new Category(category);
 
-        return PersonFactory.createPerson(modelName, modelPhone, modelEmail, modelCategory);
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Comment.class.getSimpleName()));
+        }
+        if (!Comment.isValidComment(comment)) {
+            throw new IllegalValueException(Comment.MESSAGE_CONSTRAINTS);
+        }
+
+        final Comment modelComment = new Comment(comment);
+
+        return PersonFactory.createPerson(modelName, modelPhone, modelEmail, modelCategory, modelComment);
     }
 
 }
