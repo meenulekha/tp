@@ -1,23 +1,20 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Event.EventCategory;
 import seedu.address.model.Event.EventDate;
 import seedu.address.model.Event.EventName;
-import seedu.address.model.person.Category;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 
-/**
- * Contains utility methods used for parsing strings in the various *Parser classes.
- */
-public class ParserUtil {
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+import static java.util.Objects.requireNonNull;
+
+public class EventParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -63,6 +60,7 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -92,6 +90,7 @@ public class ParserUtil {
         }
         return new Category(trimmedCategory);
     }
+
 
 
     public static EventName parseEventName(String eventname) throws ParseException {

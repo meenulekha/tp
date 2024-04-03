@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.logic.commands.history.CommandHistoryManager;
 import seedu.address.logic.commands.history.ReversibleCommandHistory;
+import seedu.address.model.Event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,27 +27,31 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final EventBook eventBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
     private final ReversibleCommandHistory commandHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs, and an
      * empty command history.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEventBook eventBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.eventBook = new EventBook(eventBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.eventBook.getEventList());
         commandHistory = new CommandHistoryManager();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new EventBook(), new UserPrefs());
     }
 
     // =========== UserPrefs
@@ -185,5 +190,65 @@ public class ModelManager implements Model {
         ReversibleCommand command = commandHistory.getCommandToRedo();
         return command.redo(this);
     }
+
+    // =========== Event Handler
+    // ========================================================================
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return eventBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        eventBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        eventBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        eventBook.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate){
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList(){
+        return filteredEvents;
+    }
+
+    @Override
+    public ReadOnlyEventBook getEventBook() {
+        return eventBook;
+    }
+
+    @Override
+    public Path getEventBookFilePath() {
+        return userPrefs.getEventBookFilePath();
+    }
+
+    @Override
+    public void setEventBookFilePath(Path eventBookFilePath) {
+        requireNonNull(eventBookFilePath);
+        userPrefs.setEventBookFilePath(eventBookFilePath);
+    }
+    @Override
+    public void setEventBook(ReadOnlyEventBook eventBook) {
+        this.eventBook.resetData(eventBook);
+    }
+
+
 
 }

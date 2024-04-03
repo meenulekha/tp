@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.Event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,7 +16,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided in invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_DUPLICATE_INDEX = "Duplicate index detected";
@@ -45,6 +48,14 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Category: ")
                 .append(person.getCategory());
+        return builder.toString();
+    }
+
+    public static String formatEvent(Event toAdd) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(toAdd.getEventName())
+                .append("; Category: ")
+                .append(toAdd.getEventCategory());
         return builder.toString();
     }
 

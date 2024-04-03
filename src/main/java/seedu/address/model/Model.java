@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ReversibleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
+import seedu.address.model.Event.Event;
+import seedu.address.model.Event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,6 +20,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -56,6 +60,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the EventBook */
+    ReadOnlyEventBook getEventBook();
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in
      * the address book.
@@ -92,6 +99,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Returns true if the model has previous address book states to restore.
      *
@@ -126,4 +134,15 @@ public interface Model {
      * Adds a reversible command to the history for undo/redo.
      */
     void addCommand(ReversibleCommand command);
+
+    void addEvent(Event event);
+    void deleteEvent(Event event);
+    boolean hasEvent(Event event);
+    void setEvent(Event target, Event editedEvent);
+    void updateFilteredEventList(Predicate<Event> predicate);
+    ObservableList<Event> getFilteredEventList();
+    Path getEventBookFilePath();
+    public void setEventBook(ReadOnlyEventBook eventBook);
+    public void setEventBookFilePath(Path eventBookFilePath);
+
 }
