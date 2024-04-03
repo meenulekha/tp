@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -132,7 +135,8 @@ public class GroupCommandTest {
         // redo -> same first person edited again
         expectedModel.groupPerson(personToGroup, 2);
         assertCommandSuccess(new RedoCommand(), model,
-                String.format(GroupCommand.MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(personToGroup)), expectedModel);
+                String.format(GroupCommand.MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(personToGroup)),
+                expectedModel);
     }
 
     @Test

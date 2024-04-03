@@ -175,8 +175,8 @@ public class EditCommandTest {
         PersonBuilder editedPersonBuilder = new PersonBuilder();
         Person editedPerson = editedPersonBuilder.withCategory("PARTICIPANT").build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).
-                withGroup(2).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson)
+                .withGroup(2).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -196,8 +196,8 @@ public class EditCommandTest {
         PersonBuilder editedPersonBuilder = new PersonBuilder();
         Person editedPerson = editedPersonBuilder.withCategory("SPONSOR").build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).
-                withGroup(2).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson)
+                .withGroup(2).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
