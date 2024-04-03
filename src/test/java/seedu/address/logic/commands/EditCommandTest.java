@@ -186,12 +186,14 @@ public class EditCommandTest {
                 .withGroup(2).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(model.getEventBook()), new UserPrefs());
         modelUsed.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(model.getEventBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.groupPerson(editedPerson, 2);
 
@@ -207,7 +209,8 @@ public class EditCommandTest {
                 .withGroup(2).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(model.getEventBook()), new UserPrefs());
         modelUsed.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandFailure(editCommand, modelUsed, EditCommand.MESSAGE_SPONSOR_HAS_NO_GROUP);
@@ -221,12 +224,14 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model modelUsed = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(model.getEventBook()), new UserPrefs());
         modelUsed.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new EventBook(model.getEventBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, modelUsed, expectedMessage, expectedModel);
