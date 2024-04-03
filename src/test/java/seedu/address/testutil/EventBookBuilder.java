@@ -1,9 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Event.Event;
 import seedu.address.model.EventBook;
 
+/**
+ * A utility class to help with building Eventbook objects.
+ * Example usage: <br>
+ * {@code EventBook eb = new EventBookBuilder().withEVENT("EVENT1").build();}
+        */
 public class EventBookBuilder {
     private EventBook eventBook;
 

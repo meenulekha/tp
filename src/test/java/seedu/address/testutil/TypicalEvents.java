@@ -1,17 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Event.Event;
-import seedu.address.model.EventBook;
-import seedu.address.model.person.Person;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import seedu.address.model.Event.Event;
+import seedu.address.model.EventBook;
+import seedu.address.model.person.Person;
 
+/**
+ * A utility class containing a list of {@code Event} objects to be used in tests.
+ */
 public class TypicalEvents {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com").withPhone("94351253").withCategory("PARTICIPANT").build();

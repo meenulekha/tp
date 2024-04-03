@@ -48,7 +48,7 @@ public class LogicManagerTest {
         JsonEventBookStorage eventBookStorage =
                 new JsonEventBookStorage(temporaryFolder.resolve("eventBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage,eventBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, eventBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 

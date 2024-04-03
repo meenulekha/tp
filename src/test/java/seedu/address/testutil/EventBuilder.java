@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.Event.*;
 
+/**
+ * A utility class to help with building Event objects.
+ */
 public class EventBuilder {
     public static final String DEFAULT_NAME = "Meeting";
     public static final String DEFAULT_DATE = "05-05-2024";
@@ -25,7 +28,7 @@ public class EventBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public EventBuilder(Event eventToCopy) {
-        name =eventToCopy.getEventName();
+        name = eventToCopy.getEventName();
         date = eventToCopy.getEventDate();
         category = eventToCopy.getEventCategory();
     }
