@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonFactory;
