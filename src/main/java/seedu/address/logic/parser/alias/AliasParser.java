@@ -29,6 +29,15 @@ public class AliasParser {
         case AddSponsorAlias.ALIAS_WORD:
             return new AddSponsorAlias().parse(arguments);
 
+        case DeleteAlias.ALIAS_WORD:
+            return new DeleteAlias().parse(arguments);
+
+        case EditAlias.ALIAS_WORD:
+            return new EditAlias().parse(arguments);
+
+        case ExitAlias.ALIAS_WORD:
+            return new ExitAlias().parse(arguments);
+
         default:
             return null;
         }
