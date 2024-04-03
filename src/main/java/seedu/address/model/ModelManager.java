@@ -17,7 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.logic.commands.history.CommandHistoryManager;
 import seedu.address.logic.commands.history.ReversibleCommandHistory;
+import seedu.address.model.person.Participant;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -120,6 +122,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void groupPerson(Person target, int groupNumber) {
+        requireAllNonNull(target, groupNumber);
+
+        addressBook.groupPerson(target, groupNumber);
     }
 
     // =========== Filtered Person List Accessors

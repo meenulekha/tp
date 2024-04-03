@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
 import seedu.address.model.person.*;
 
@@ -16,7 +17,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 /**
  * Changes the group of a person identified by the index number used in the displayed person list.
  */
-public class GroupCommand extends Command {
+public class GroupCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "group";
 
@@ -30,10 +31,14 @@ public class GroupCommand extends Command {
     public static final String MESSAGE_GROUP_PERSON_SUCCESS = "Grouped Person: %1$s";
 
     public static final String MESSAGE_PERSON_WITHOUT_GROUP = "Sponsor doesn't have a group";
+    public static final String MESSAGE_SUCCESS_UNDO = "Changes reverted: %1$s";
 
     private final Index targetIndex;
 
     private final int targetGroupNumber;
+
+    private int originalGroupNumber;
+    private Person groupedPerson;
 
     public GroupCommand(Index targetIndex) {
         Random random = new Random();
@@ -62,17 +67,49 @@ public class GroupCommand extends Command {
 
         if (personToGroup instanceof Sponsor) {
             throw new CommandException(MESSAGE_PERSON_WITHOUT_GROUP);
+
         } else if (personToGroup instanceof Staff) {
             Staff staffToGroup = (Staff) personToGroup;
+
+            originalGroupNumber = staffToGroup.getGroupNumber();
+            groupedPerson = staffToGroup;
+
             staffToGroup.setGroupNumber(targetGroupNumber);
             model.setPerson(personToGroup, staffToGroup);
+
         } else if (personToGroup instanceof Participant) {
             Participant participantToGroup = (Participant) personToGroup;
+
+            originalGroupNumber = participantToGroup.getGroupNumber();
+            groupedPerson = participantToGroup;
+
             participantToGroup.setGroupNumber(targetGroupNumber);
             model.setPerson(personToGroup, participantToGroup);
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.addCommand(this);
         return new CommandResult(String.format(MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(personToGroup)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+
+        model.groupPerson(groupedPerson, originalGroupNumber);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(GroupCommand.MESSAGE_SUCCESS_UNDO, Messages.format(groupedPerson)));
+    }
+
+    @Override
+    public CommandResult redo(Model model) throws CommandException {
+        requireNonNull(model);
+
+        model.groupPerson(groupedPerson, targetGroupNumber);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(groupedPerson)));
     }
 
     @Override public boolean equals(Object other) {
