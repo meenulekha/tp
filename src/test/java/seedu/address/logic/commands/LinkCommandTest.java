@@ -16,11 +16,11 @@ public class LinkCommandTest {
     @Test
     public void execute_linkCommand_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        int[] indexes = {2, 3, 4};
+        int[] indexes = { 2, 3, 4 };
         LinkCommand linkCommand = new LinkCommand(indexes);
         try {
             linkCommand.execute(model);
-            assertEquals("Exported all selected participants", linkCommand.MESSAGE_SUCCESS);
+            assertEquals("Exported all selected participants", LinkCommand.MESSAGE_SUCCESS);
         } catch (CommandException e) {
             fail();
         }
@@ -29,7 +29,7 @@ public class LinkCommandTest {
     @Test
     public void execute_linkCommand_failure() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        int[] indexes = {999};
+        int[] indexes = { 999 };
         LinkCommand linkCommand = new LinkCommand(indexes);
         try {
             linkCommand.execute(model);
@@ -42,7 +42,7 @@ public class LinkCommandTest {
     @Test
     public void duplicateIndexes() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        int[] indexes = {2, 2, 3};
+        int[] indexes = { 2, 2, 3 };
         LinkCommand linkCommand = new LinkCommand(indexes);
         try {
             linkCommand.execute(model);

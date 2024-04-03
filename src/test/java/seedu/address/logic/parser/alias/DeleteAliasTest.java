@@ -6,11 +6,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 class DeleteAliasTest {
-    DeleteAlias parser = new DeleteAlias();
+    private DeleteAlias parser = new DeleteAlias();
 
     @Test
     void parse_validArg_success() throws ParseException {

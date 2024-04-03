@@ -1,6 +1,10 @@
 package seedu.address.logic.parser.alias;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -12,7 +16,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class AliasParserTest {
     private AliasParser parser = new AliasParser();
@@ -81,5 +84,4 @@ class AliasParserTest {
     void parseAlias_redo() throws ParseException {
         assertEquals(parser.parseAlias(RedoAlias.ALIAS_WORD, ""), new RedoCommand());
     }
-
 }

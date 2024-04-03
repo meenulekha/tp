@@ -3,6 +3,7 @@ package seedu.address.logic.parser.alias;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.ExitCommand;
 
 class ExitAliasTest {
