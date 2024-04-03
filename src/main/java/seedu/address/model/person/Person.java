@@ -19,6 +19,7 @@ public abstract class Person {
 
     // Data fields
     private final Category category;
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
@@ -29,6 +30,18 @@ public abstract class Person {
         this.phone = phone;
         this.email = email;
         this.category = category;
+        this.comment = new Comment();
+    }
+    /**
+     * Constructs person with comment. Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Category category, Comment comment) {
+        requireAllNonNull(name, phone, email, category);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.category = category;
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -45,6 +58,10 @@ public abstract class Person {
 
     public Category getCategory() {
         return category;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
 
@@ -96,10 +113,11 @@ public abstract class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("category", category)
+                .add("comment", comment)
                 .toString();
     }
 
     public String toCsvString() {
-        return name + "," + phone + "," + email + "\n";
+        return name + "," + phone + "," + email + "," + comment + "\n";
     }
 }

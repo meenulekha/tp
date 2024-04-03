@@ -14,6 +14,14 @@ public class Staff extends Person {
     }
 
     /**
+     * Constructs staff with comment. Every field must be present and not null.
+     */
+    public Staff(Name name, Phone phone, Email email, Category category, Comment comment) {
+        super(name, phone, email, category, comment);
+        this.group = new Group();
+    }
+
+    /**
      * Sets the group number of the staff.
      */
     public void setGroupNumber(int groupNumber) {
