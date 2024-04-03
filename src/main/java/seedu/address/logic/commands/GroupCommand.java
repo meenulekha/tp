@@ -51,7 +51,7 @@ public class GroupCommand extends Command implements ReversibleCommand {
         Random random = new Random();
 
         this.targetIndex = targetIndex;
-        this.targetGroupNumber = random.nextInt(Group.getTotalGroupNumber());
+        this.targetGroupNumber = random.nextInt(Group.getTotalGroupNumber()) + 1;
 
     }
 
