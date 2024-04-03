@@ -4,9 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.Event.Event;
-import seedu.address.model.Event.EventCategory;
-import seedu.address.model.Event.EventDate;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventCategory;
 
 public class EventCard extends UiPart<Region>{
     private static final String FXML = "EventListCard.fxml";
@@ -33,7 +32,7 @@ public class EventCard extends UiPart<Region>{
     @FXML
     private Label id;
     /**
-     * Creates a {@code EventCode} with the given {@code Event} and index to
+     * Creates a {@code EventCode} with the given {@code event} and index to
      * display.
      */
     public EventCard(Event event, int displayedIndex) {

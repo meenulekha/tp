@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.EventCommand;
 import seedu.address.logic.Messages;
-import seedu.address.model.Event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;

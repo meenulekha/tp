@@ -17,7 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.logic.commands.history.CommandHistoryManager;
 import seedu.address.logic.commands.history.ReversibleCommandHistory;
-import seedu.address.model.Event.Event;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -198,7 +198,7 @@ public class ModelManager implements Model {
         return command.redo(this);
     }
 
-    // =========== Event Handler
+    // =========== event Handler
     // ========================================================================
     @Override
     public boolean hasEvent(Event event) {

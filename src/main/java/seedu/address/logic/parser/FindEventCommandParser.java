@@ -1,10 +1,8 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Event.EventNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 
 import java.util.Arrays;
 

@@ -1,8 +1,6 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
 
-
-import java.util.Date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

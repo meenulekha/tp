@@ -1,4 +1,4 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
 import java.util.Objects;
 
@@ -64,7 +64,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
+        return "event{" +
                 "eventName=" + eventName +
                 ", eventCategory=" + eventCategory +
                 '}';

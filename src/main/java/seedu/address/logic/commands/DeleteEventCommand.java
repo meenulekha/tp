@@ -5,9 +5,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.EventCommand;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Event.Event;
+import seedu.address.model.event.Event;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 import java.util.List;
 
@@ -20,8 +19,8 @@ public class DeleteEventCommand extends EventCommand implements ReversibleComman
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
-    public static final String MESSAGE_SUCCESS_UNDO = "Undo deleting: Event added: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event: %1$s";
+    public static final String MESSAGE_SUCCESS_UNDO = "Undo deleting: event added: %1$s";
 
     private final Index targetIndex;
 

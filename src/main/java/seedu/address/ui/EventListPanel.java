@@ -1,14 +1,11 @@
 package seedu.address.ui;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Event.Event;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
 
 import java.util.logging.Logger;
 

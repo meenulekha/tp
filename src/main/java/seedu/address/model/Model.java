@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,8 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ReversibleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
-import seedu.address.model.Event.Event;
-import seedu.address.model.Event.EventNameContainsKeywordsPredicate;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**

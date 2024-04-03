@@ -1,11 +1,11 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
 import seedu.address.model.person.Categories;
 import seedu.address.model.person.Category;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.Event.EventName.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.event.EventName.MESSAGE_CONSTRAINTS;
 
 public class EventCategory {
     public final String value;

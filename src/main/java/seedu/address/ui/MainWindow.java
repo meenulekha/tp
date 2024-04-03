@@ -116,6 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        logger.info("PersonListPanel: " + personListPanel);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -215,7 +216,9 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            if (resultDisplay != null) {
+                resultDisplay.setFeedbackToUser(e.getMessage());
+            }
             throw e;
         }
     }

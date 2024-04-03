@@ -1,4 +1,4 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
 public class EventFactory {
     public static Event createEvent(EventName name, EventDate date, EventCategory category) {

@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.Event.Event;
 import seedu.address.model.EventBook;
+import seedu.address.model.event.Event;
 
 /**
  * A utility class to help with building Eventbook objects.

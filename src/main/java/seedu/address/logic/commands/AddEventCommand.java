@@ -9,7 +9,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
-import seedu.address.model.Event.Event;
+import seedu.address.model.event.Event;
 public class AddEventCommand extends EventCommand implements ReversibleCommand{
     public static final String COMMAND_WORD = "addevent";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
@@ -23,12 +23,12 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand{
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
     private final Event toAdd;
-    public static final String MESSAGE_SUCCESS_UNDO = "Event deleted: %1$s";
+    public static final String MESSAGE_SUCCESS_UNDO = "event deleted: %1$s";
     public static final String MESSAGE_UNDO_NONEXISTENT_EVENT = "Undo failed:"
             + "Person does not exist in the address book";
 
     /**
-     * Creates an AddEventCommand to add the specified {@code Event}
+     * Creates an AddEventCommand to add the specified {@code event}
      */
     public AddEventCommand(Event event) {
         requireNonNull(event);

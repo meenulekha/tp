@@ -1,13 +1,9 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
-import seedu.address.model.Event.Exceptions.EventNotFoundException;
-import seedu.address.model.Event.Exceptions.DuplicateEventException;
+import seedu.address.model.event.Exceptions.EventNotFoundException;
+import seedu.address.model.event.Exceptions.DuplicateEventException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;

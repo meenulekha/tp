@@ -1,4 +1,4 @@
-package seedu.address.model.Event;
+package seedu.address.model.event;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;

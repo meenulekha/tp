@@ -3,14 +3,10 @@ package seedu.address.logic.parser;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Event.EventCategory;
-import seedu.address.model.Event.EventDate;
-import seedu.address.model.Event.EventName;
+import seedu.address.model.event.EventCategory;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.*;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 

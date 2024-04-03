@@ -3,20 +3,14 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Event.*;
+import seedu.address.model.event.*;
 import seedu.address.model.person.*;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Event}.
  */
 public class JsonAdaptedEvent {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "event's %s field is missing!";
 
     private final String name;
     private final String date;

@@ -1,14 +1,14 @@
 package seedu.address.testutil;
 
-import seedu.address.model.Event.Event;
-import seedu.address.model.Event.EventCategory;
-import seedu.address.model.Event.EventDate;
-import seedu.address.model.Event.EventFactory;
-import seedu.address.model.Event.EventName;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventCategory;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventFactory;
+import seedu.address.model.event.EventName;
 
 
 /**
- * A utility class to help with building Event objects.
+ * A utility class to help with building event objects.
  */
 public class EventBuilder {
     public static final String DEFAULT_NAME = "Meeting";
