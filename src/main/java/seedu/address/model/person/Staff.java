@@ -1,9 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
-
 /**
  * Represents a staff in the hackathon.
  */
@@ -12,8 +8,8 @@ public class Staff extends Person {
     /**
      * Constructs staff. Every field must be present and not null.
      */
-    public Staff(Name name, Phone phone, Email email, Address address, Category category, Set<Tag> tags) {
-        super(name, phone, email, address, category, tags);
+    public Staff(Name name, Phone phone, Email email, Category category) {
+        super(name, phone, email, category);
         this.group = new Group();
     }
 

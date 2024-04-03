@@ -80,4 +80,10 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Appends given string to a file.
+     */
+    public static void appendToFile(Path filePath, String csvString) throws IOException {
+        Files.write(filePath, csvString.getBytes(), java.nio.file.StandardOpenOption.APPEND);
+    }
 }
