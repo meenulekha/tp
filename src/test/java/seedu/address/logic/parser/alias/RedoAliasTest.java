@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.RedoCommand;
 
-
 class RedoAliasTest {
 
     @Test
