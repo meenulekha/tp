@@ -6,9 +6,11 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.model.Model;import eedu.address.model.person.ContactContainsKeywordsPredicate;
+import seedu.address.model.Model;
+import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-/** * Find a nd lists all persons in address book whose name contains any of the
+
+/***Finds and lists all persons in address book whose name contains any of the
  * argument keywords. Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
