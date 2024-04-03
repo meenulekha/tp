@@ -5,6 +5,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 /**
  * Sets randomly the group of every person displayed on the list.
  */
-public class GroupRandomCommand extends Command {
+public class GroupRandomCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "grouprandom";
 
@@ -29,8 +30,13 @@ public class GroupRandomCommand extends Command {
     public static final String MESSAGE_GROUP_RANDOM_SUCCESS = "Grouped every person on the list";
 
     public static final String MESSAGE_INVALID_MAX_GROUP_SIZE = "MAX_GROUP_SIZE must be a positive integer";
+    public static final String MESSAGE_SUCCESS_UNDO = "Changes reverted.";
 
     private final int maxGroupSize;
+
+    private List<Integer> originalGroups = new ArrayList<>();
+    private List<Integer> randomGroups = new ArrayList<>();
+    private List<Person> noSponsorList;
 
     public GroupRandomCommand(int maxGroupSize) {
         this.maxGroupSize = maxGroupSize;
@@ -46,7 +52,7 @@ public class GroupRandomCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        List<Person> noSponsorList = lastShownList.stream()
+        noSponsorList = lastShownList.stream()
                 .filter(person -> !person.getCategory().equals(new Category("SPONSOR")))
                 .collect(Collectors.toList());
 
@@ -68,13 +74,48 @@ public class GroupRandomCommand extends Command {
 
             if (personToGroup instanceof Staff) {
                 Staff staffToGroup = (Staff) personToGroup;
+                originalGroups.add(staffToGroup.getGroupNumber());
                 staffToGroup.setGroupNumber(targetGroupNumber);
                 model.setPerson(personToGroup, staffToGroup);
             } else if (personToGroup instanceof Participant) {
                 Participant participantToGroup = (Participant) personToGroup;
+                originalGroups.add(participantToGroup.getGroupNumber());
                 participantToGroup.setGroupNumber(targetGroupNumber);
                 model.setPerson(personToGroup, participantToGroup);
             }
+
+            randomGroups.add(targetGroupNumber);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+
+        model.addCommand(this);
+        return new CommandResult(String.format(MESSAGE_GROUP_RANDOM_SUCCESS));
+    }
+
+    @Override
+    public CommandResult undo (Model model) {
+        requireNonNull(model);
+
+        for (int i = 0; i < noSponsorList.size(); i++) {
+            Person groupedPerson = noSponsorList.get(i);
+            int originalGroupNumber = originalGroups.get(i);
+
+            model.groupPerson(groupedPerson, originalGroupNumber);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+
+        return new CommandResult(String.format(GroupRandomCommand.MESSAGE_SUCCESS_UNDO));
+    }
+
+    @Override
+    public CommandResult redo(Model model) throws CommandException {
+        requireNonNull(model);
+
+        for (int i = 0; i < noSponsorList.size(); i++) {
+            Person groupedPerson = noSponsorList.get(i);
+            int randomGroupNumber = randomGroups.get(i);
+
+            model.groupPerson(groupedPerson, randomGroupNumber);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
