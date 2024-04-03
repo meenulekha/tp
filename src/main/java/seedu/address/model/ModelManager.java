@@ -17,9 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.logic.commands.history.CommandHistoryManager;
 import seedu.address.logic.commands.history.ReversibleCommandHistory;
-import seedu.address.model.person.Participant;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Staff;
 
 /**
  * Represents the in-memory model of the address book data.

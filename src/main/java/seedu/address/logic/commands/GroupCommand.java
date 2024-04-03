@@ -1,17 +1,21 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Random;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
-
-import java.util.List;
-import java.util.Random;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Participant;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Sponsor;
+import seedu.address.model.person.Staff;
 
 /**
  * Changes the group of a person identified by the index number used in the displayed person list.
@@ -39,6 +43,10 @@ public class GroupCommand extends Command implements ReversibleCommand {
     private int originalGroupNumber;
     private Person groupedPerson;
 
+    /**
+     * Groups person with index {@code targetIndex} into random available groups.
+     * @param targetIndex of the person in the filtered person list to group.
+     */
     public GroupCommand(Index targetIndex) {
         Random random = new Random();
 
@@ -47,10 +55,15 @@ public class GroupCommand extends Command implements ReversibleCommand {
 
     }
 
+    /**
+     * Groups person with index {@code targetIndex} into {@code targetGroupNumber}.
+     * @param targetIndex of the person in the filtered person list to group
+     * @param targetGroupNumber number to group the person into
+     */
     public GroupCommand(Index targetIndex, int targetGroupNumber) {
         this.targetIndex = targetIndex;
         this.targetGroupNumber = targetGroupNumber;
-        Group.setTotalGroupNumber(targetGroupNumber);
+        Group.setTotalGroupNumber(Math.max(targetGroupNumber, Group.getTotalGroupNumber()));
     }
 
     @Override

@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +9,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Category;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Participant;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 /**
  * Sets randomly the group of every person displayed on the list.
@@ -57,6 +61,7 @@ public class GroupRandomCommand extends Command implements ReversibleCommand {
                 .collect(Collectors.toList());
 
         int numberOfGroup = (int) Math.ceil((double) noSponsorList.size() / maxGroupSize);
+        Group.setTotalGroupNumber(Math.max(numberOfGroup, Group.getTotalGroupNumber()));
 
         int[] groupSizes = new int[numberOfGroup];
         Arrays.fill(groupSizes, 0);
@@ -93,7 +98,7 @@ public class GroupRandomCommand extends Command implements ReversibleCommand {
     }
 
     @Override
-    public CommandResult undo (Model model) {
+    public CommandResult undo(Model model) {
         requireNonNull(model);
 
         for (int i = 0; i < noSponsorList.size(); i++) {

@@ -111,9 +111,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         if (target instanceof Staff) {
-            ((Staff) target).setGroupNumber(groupNumber);
+            Staff staff = (Staff) target;
+            staff.setGroupNumber(groupNumber);
         } else if (target instanceof Participant) {
-            ((Participant) target).setGroupNumber(groupNumber);
+            Participant participant = (Participant) target;
+            participant.setGroupNumber(groupNumber);
         }
 
         internalList.set(index, target);

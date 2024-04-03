@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -17,7 +17,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Category;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Participant;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonFactory;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Staff;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -112,7 +120,8 @@ public class EditCommand extends Command implements ReversibleCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) throws CommandException {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -156,7 +165,9 @@ public class EditCommand extends Command implements ReversibleCommand {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("index", index).add("editPersonDescriptor", editPersonDescriptor)
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
 

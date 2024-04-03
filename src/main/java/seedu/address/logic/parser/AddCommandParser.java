@@ -11,7 +11,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Category;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Participant;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonFactory;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Staff;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -47,7 +54,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             return new AddCommand(staff);
         } else if (argMultimap.getValue(PREFIX_GROUP).isPresent() && person instanceof Participant) {
             Participant participant = (Participant) person;
-            participant.setGroupNumber(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()).getGroupNumber());
+            participant.setGroupNumber(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get())
+                    .getGroupNumber());
             return new AddCommand(participant);
         }
 
