@@ -6,8 +6,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
 
-import java.util.Objects;
-
 /**
  * Redoes the most recent undone command that modifies the address book.
  */

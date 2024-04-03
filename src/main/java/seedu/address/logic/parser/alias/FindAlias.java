@@ -4,6 +4,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.FindCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents an alias for the "find" command.
+ */
 public class FindAlias extends Alias<FindCommand> {
     public static final String ALIAS_WORD = "f";
 
