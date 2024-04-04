@@ -92,6 +92,10 @@ public class EventCommandBox extends UiPart<Region> {
         commandTextField.positionCaret(result.length());
     }
 
+    private void saveCommandToHistory(String commandText) {
+        commandToHistorySaver.accept(commandText);
+    }
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -101,6 +105,8 @@ public class EventCommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
+
+        saveCommandToHistory(commandText);
 
         try {
             commandExecutor.execute(commandText);
