@@ -58,7 +58,10 @@ The Hackathon Participant Management Application is designed to help organizers 
    * `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
   
    * `Comment John Doe`
-  
+6. Navigate to the Event Window by clicking on Events in the menubar. You can also navigate back to the Main Window by clicking on Back to Main from the menubar.<br>
+    A GUI similar to the below should be shown when navigating to and from the Events window. Note how the app contains some sample data         for the events.<br>
+    ![Ui](images/Ui.png)
+
    * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
   
    * `deleteevent 8` : Deletes the 8th event shown in the list.
