@@ -9,11 +9,11 @@ The Hackathon Participant Management Application is designed to help organizers 
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
-    - [Editing a person](#editing-a-person--update)
-    - [Comment](#comment--comment)
-    - [Viewing comments](#view--view)
-    - [Locating persons by name](#locating-persons-by-name--find)
-    - [Exporting a selected group](#exporting-a-selected-group--link)
+    - [Editing a person](#editing-a-person--edit)
+    - [Comment](#commenting-a-person--comment)
+    - [Viewing comments](#viewing-comments--view)
+    - [Locating persons by keywords](#locating-persons-by-keywords--find)
+    - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--remove)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
@@ -133,7 +133,7 @@ Cautions / Warnings for Edit:
 * Updated information should be different from the original. 
 
 
-### Comment: `comment`
+### Commenting a person : `comment`
 Add notes or comments to contacts
 format `comment <id>, <notes>`
 
@@ -150,7 +150,7 @@ Precise expected outputs when the command succeeds:
 Precise expected outputs when the command fails:
 * Error: Invalid command format. (when note is not provided)
 
-## Viewing comments: `view`
+### Viewing comments : `view`
 view comments of a specific contact
 format `view <id>`
 
@@ -167,7 +167,7 @@ Precise expected outputs when the command fails:
 
 
 
-### Locating persons by name: `find`
+### Locating persons by keywords : `find`
 
 Finds persons who contain any of the given keywords.
 
@@ -186,7 +186,7 @@ Examples:
   ![result for 'find alex david'](images/findJohnDoe.png)
 * `find participant` returns all participants in the list
 
-### Exporting a selected group: `link`
+### Exporting selected participants : `link`
 Produce a csv file with selected participants' contact information to provide to sponsor.
 The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
