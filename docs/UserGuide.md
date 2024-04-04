@@ -1,4 +1,4 @@
-WELCOME TO HACKLINK!
+# WELCOME TO HACKLINK!
 
 HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can streamline the process of organizing and coordinating your hackathon event.
 
@@ -6,20 +6,29 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 1. [Quick start](#quick-start)
 2. [Features](#features)
+
+   2.1 [Main features](#main-features)
+
    - [Viewing help](#viewing-help--help)
    - [Adding a person](#adding-a-person--add)
    - [Listing all persons](#listing-all-persons--list)
    - [Editing a person](#editing-a-person--edit)
-   - [Comment](#commenting-a-person--comment)
+   - [Commenting a person](#commenting-a-person--comment)
    - [Viewing comments](#viewing-comments--view)
    - [Locating persons by keywords](#locating-persons-by-keywords--find)
    - [Exporting a selected participants](#exporting-selected-participants--link)
    - [Removing a person](#removing-a-person--remove)
    - [Clearing all entries](#clearing-all-entries--clear)
    - [Exiting the program](#exiting-the-program--exit)
+
+     2.2 [Utility features](#utility-features)
+
    - [Saving the data](#saving-the-data)
    - [Editing the data file](#editing-the-data-file)
-   - [Archiving data files (coming in v2.0)](#archiving-data-files-coming-in-v20)
+   - [Navigating to older commands](#navigating-to-older-commands)
+   - [Aliases](#aliases)
+   - [Shortcuts](#shortcuts)
+
 3. [FAQ](#faq)
 4. [Warnings](#warnings)
 5. [Known issues](#known-issues)
@@ -28,39 +37,38 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 ---
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `HackLink.jar` from [here](link to release).
+2. Download the latest `HackLink.jar` from [here](link to release).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your HakcLink application.
+3. Copy the file to the folder you want to use as the _home folder_ for your HakcLink application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
 
    - `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
 
-   - `Remove 3` : Deletes the 3rd person shown in the current list.
-   - `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
+   - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   - `Comment John Doe`
+   - `edit 2 p/23443596` : Updates the phone number of the person with ID 2 in the list
 
    - `clear` : Deletes all contact information.
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -78,8 +86,12 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+- Some commands have aliases. The aliases are shown in the command details. Please refer to [Aliases](#aliases) for more information.
+
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+## Main features
 
 ### Viewing help : `help`
 
@@ -200,7 +212,7 @@ Examples:
 Produce a csv file with selected participants' contact information to provide to sponsor.
 The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
-Format: `link id [MORE_ID]`
+Format: `link ID [MORE_ID]`
 
 - The number of ids is not limited
 - The order of the ids does not matter
@@ -218,23 +230,17 @@ Warning:
 - comma in the comment might cause the csv file to be corrupted.
   Do not open the list.csv file while the application is running.
 
-### Removing a person : `Remove`
+### Removing a person : `delete`
 
-Remove specific participants from the database.
+Deletes the person identified by the index shown in the displayed person list.
 
-Format: `remove <id>`
-Example:
-`remove 1`
-Acceptable values for each parameter
+Format: `delete ID`
 
-- `<id>`: the id of the contact in the list
+- The ID used must exist in the list.
 
-Precise expected outputs when the command succeeds
+Examples:
 
-- You have successfully deleted <category> <name>.
-  Example: You have successfully deleted participant John Doe.
-  Precise expected outputs when the command fails
-- Error: no contact with id <id>. (when name is not in the list)
+- `delete 1` deletes the first person in the list.
 
 ### Clearing all entries : `clear`
 
@@ -247,6 +253,8 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+## Utility features
 
 ### Saving the data
 
@@ -261,9 +269,22 @@ If your changes to the data file makes its format invalid, HackLink will discard
 Furthermore, certain edits can cause the HackLink to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Navigating to older commands
 
-_Details coming soon ..._
+HackLink allows you to navigate to older commands using the up and down arrow keys. This feature is useful when you want to repeat a command you have previously entered.
+
+### Aliases
+
+Aliases are shortcuts for commands. In each command, you can use the alias instead of the full command. Please refer to each command details for the alias.
+
+### Shortcuts
+
+Shortcuts are a way to quickly perform action from the keyboard. The available shortcuts are:
+
+- `F1` : Opens the help window
+- `F2` : Focus on the command box
+- `F3` : Focus on the result box (to scroll up and down in case of overflow)
+- `F4` : Focus on the list of contacts (to scroll up and down in case of overflow)
 
 ---
 
@@ -291,7 +312,7 @@ _Details coming soon ..._
 ## Tips
 
 1. **Use Descriptive Command Names**: You are encouraged to use descriptive names when adding, updating, or removing participants. This makes it easier to identify and manage individuals within the application.
-2. **Utilize Tags for Organization**: Using tags when adding participants to categorize them effectively. For instance, tags like "participant," "sponsor," or "staff" can help you quickly filter and manage different groups.
+2. **Utilize the utility features**: The application provides utility features such as navigating to older commands, aliases, and shortcuts. These features can help you manage your data more efficiently.
 
 ---
 
@@ -301,7 +322,7 @@ _Details coming soon ..._
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CATEGORY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend c/participant t/colleague` |
 | **Clear**   | `clear`                                                                                                                                                                                        |
-| **Remove**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
 | **Update**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
 | **List**    | `list`                                                                                                                                                                                         |
