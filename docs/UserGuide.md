@@ -95,7 +95,7 @@ Format: `help`
 
 Adds a person to HackLink.
 
-Format: `add nn/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
+Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
 
 <div markdown="span" class="alert alert-primary">:bulb:
 </div>
