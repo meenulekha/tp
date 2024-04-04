@@ -13,6 +13,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.UserInputHistory;
+import seedu.address.logic.inputhistory.UserInputHistoryManager;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.EventBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,6 +40,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private final EventBookParser eventBookParser;
+    private final UserInputHistory<String> userInputHistory;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -47,6 +50,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         eventBookParser = new EventBookParser();
+        userInputHistory = new UserInputHistoryManager();
     }
 
     @Override
@@ -123,5 +127,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public UserInputHistory<String> getUserInputHistory() {
+        return userInputHistory;
     }
 }
