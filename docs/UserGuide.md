@@ -10,6 +10,8 @@ The Hackathon Participant Management Application is designed to help organizers 
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
     - [Editing a person](#editing-a-person--edit)
+    - [Grouping a person](#grouping-a-person--group)
+    - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
     - [Comment](#commenting-a-person--comment)
     - [Viewing comments](#viewing-comments--view)
     - [Locating persons by keywords](#locating-persons-by-keywords--find)
@@ -131,6 +133,42 @@ Cautions / Warnings for Edit:
 * There should be no “/” in each parameter. 
 * There should be only one field rather than multiple fields. 
 * Updated information should be different from the original. 
+
+
+### Grouping a person : `group`
+
+Assigns a group to a participant or a staff.
+
+Format: `group <id> [<group number>]`
+
+* You can only randomly assign a person to an existing group.
+* The `<id>` refers to the identification number of the contact in the list
+* The `<group number>` can be any positive integer
+* You can only group staff and participant, sponsor cannot be grouped
+
+Examples:
+* `group 1`
+* `group 1 3`
+
+Tips for Group:
+* Not typing the group number will randomly assign the person into an existing group.
+
+Cautions / Warnings for Group:
+* When no group exist you cannot randomly assign a person into a group.
+
+
+### Grouping randomly listed persons : `grouprandom`
+
+Assigns a random group to each participant and staff that are currently listed.
+
+Format: `grouprandom <maximum group size>`
+
+* The `<maximum group size>` refers to the maximum number of people in a group
+* The `<maximum group size>` can be any positive integer
+* You can only group staff and participant, sponsor cannot be grouped
+
+Example:
+* `grouprandom 3`
 
 
 ### Commenting a person : `comment`
@@ -286,6 +324,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Remove** | `delete INDEX`<br> e.g., `delete 3`
 **Update** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Group** | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`
+**Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Comment** | `comment <name>, <notes>`
