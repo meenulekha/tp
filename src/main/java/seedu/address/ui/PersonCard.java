@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Category;
@@ -33,6 +35,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label comment;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -52,6 +56,12 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + "");
         name.setText(person.getName().fullName);
+        Image commentImage = new Image(getClass().getResourceAsStream("/images/comment_icon.png"));
+        ImageView commentImageView = new ImageView(commentImage);
+        commentImageView.setFitHeight(30);
+        commentImageView.setFitWidth(30);
+        comment.setGraphic(person.getComment().hasComment() ? commentImageView : null);
+        comment.setText(null);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         group.setText(getGroupNumber(person));

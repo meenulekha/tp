@@ -5,10 +5,13 @@ import java.nio.file.Path;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.inputhistory.UserInputHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,13 +20,13 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
-     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException   If an error occurs during parsing.
+     * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+    EventCommandResult executeEvent(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns the AddressBook.
@@ -49,9 +52,23 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
     /**
      * Returns the user input history.
      */
     UserInputHistory<String> getUserInputHistory();
+
+    /**
+     * Returns the EventBook.
+     *
+     * @see seedu.address.model.Model#getEventBook()
+     */
+    ReadOnlyEventBook getEventBook();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Event> getFilteredEventList();
+
+    /**
+     * Returns the user prefs' address book file path.
+     */
+    Path getEventBookFilePath();
 }

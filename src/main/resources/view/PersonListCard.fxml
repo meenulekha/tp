@@ -17,23 +17,26 @@
         <GridPane HBox.hgrow="ALWAYS" alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints percentWidth="8" fx:id="idColumn"/>
-                <ColumnConstraints percentWidth="20" fx:id="nameColumn"/>
-                <ColumnConstraints percentWidth="20" fx:id="emailColumn"/>
+                <ColumnConstraints percentWidth="17" fx:id="nameColumn"/>
+                <ColumnConstraints percentWidth="5" fx:id="commentColumn"/>
+                <ColumnConstraints percentWidth="18" fx:id="emailColumn"/>
                 <ColumnConstraints percentWidth="20" fx:id="phoneColumn"/>
                 <ColumnConstraints percentWidth="15" fx:id="categoryColumn"/>
                 <ColumnConstraints percentWidth="17" fx:id="groupColumn"/>
             </columnConstraints>
             <Label fx:id="id" styleClass="cell_small_label" GridPane.columnIndex="0" alignment="CENTER"
                    GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
-            <Label fx:id="name" styleClass="cell_small_label" text="\$first" GridPane.columnIndex="1" alignment="CENTER"
-                   GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
-            <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.columnIndex="2"
+            <Label fx:id="name" styleClass="cell_small_label" text="\$first" GridPane.columnIndex="1"
                    alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.columnIndex="3"
+            <Label fx:id="comment" styleClass="cell_small_label" text="\$comment" GridPane.columnIndex="2"
                    alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
-            <Label fx:id="category" styleClass="category-label" text="\$category" GridPane.columnIndex="4"
+            <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.columnIndex="3"
                    alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
-            <Label fx:id="group" styleClass="cell_small_label" text="\$group" GridPane.columnIndex="5"
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.columnIndex="4"
+                   alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
+            <Label fx:id="category" styleClass="category-label" text="\$category" GridPane.columnIndex="5"
+                   alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
+            <Label fx:id="group" styleClass="cell_small_label" text="\$group" GridPane.columnIndex="6"
                    alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER"/>
         </GridPane>
     </GridPane>

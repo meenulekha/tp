@@ -44,6 +44,10 @@ public class Comment {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean hasComment() {
+        return !value.equals(DEFAULT_COMMENT);
+    }
+
     @Override
     public String toString() {
         return value;
