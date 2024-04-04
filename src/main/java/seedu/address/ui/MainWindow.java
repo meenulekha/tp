@@ -17,6 +17,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.UserInputHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -122,7 +123,9 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        UserInputHistory<String> history = logic.getUserInputHistory();
+        CommandBox commandBox = new CommandBox(this::executeCommand, history::getPreviousChat, history::getNextChat,
+                history::addChatToHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -153,6 +156,8 @@ public class MainWindow extends UiPart<Stage> {
     void show() {
         primaryStage.show();
     }
+
+    /** Navigates to the Event Window */
     private void showEventWindow() throws IOException {
         // Close the current window
         primaryStage.close();
@@ -179,7 +184,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     void handleEvents() {
         primaryStage.getIcons();
-
         try {
             showEventWindow();
         } catch (Throwable e) {
@@ -213,9 +217,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            if (resultDisplay != null) {
                 resultDisplay.setFeedbackToUser(e.getMessage());
-            }
             throw e;
         }
     }
