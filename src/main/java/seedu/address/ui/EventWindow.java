@@ -1,4 +1,6 @@
 package seedu.address.ui;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,14 +13,15 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.io.IOException;
-import java.util.logging.Logger;
 
+/**
+ * The Event Window. Provides the basic application layout containing
+ * a menu bar and space where other JavaFX elements can be placed.
+ */
 public class EventWindow extends UiPart<Stage> {
     private static final String FXML = "EventWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -44,6 +47,13 @@ public class EventWindow extends UiPart<Stage> {
 
     private Logic logic;
 
+    /**
+     * Constructs an EventWindow with the specified primaryStage and logic.
+     *
+     * @param primaryStage The primary stage for the EventWindow.
+     * @param logic        The logic component responsible for handling application logic.
+     * @throws IllegalArgumentException if logic is null.
+     */
     public EventWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -62,6 +72,11 @@ public class EventWindow extends UiPart<Stage> {
         fillInnerParts();
 
     }
+    /**
+     * Handles the action event triggered when the user requests help.
+     * If the help window is not already showing, it will be shown.
+     * If the help window is already showing, it will be brought to focus.
+     */
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {

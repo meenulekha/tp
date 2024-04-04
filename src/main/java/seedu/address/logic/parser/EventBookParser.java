@@ -1,17 +1,25 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.EventCommand;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.EventCommand;
+import seedu.address.logic.commands.FindEventCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+
+/**
+ * Parses user input.
+ */
 public class EventBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);

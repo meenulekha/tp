@@ -1,24 +1,31 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Categories;
-import seedu.address.model.person.Category;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.event.EventName.MESSAGE_CONSTRAINTS;
 
+import seedu.address.model.person.Categories;
+import seedu.address.model.person.Category;
+
+/**
+ * Represents an Event's category in the address book.
+ */
 public class EventCategory {
     public final String value;
 
+    /**
+     * Constructs an EventCategory object with the specified category value.
+     *
+     * @param eventCategory The category value of the event.
+     * @throws NullPointerException If the given category value is null.
+     * @throws IllegalArgumentException If the given category value is invalid.
+     *                                  The error message will contain details about the constraints.
+     */
     public EventCategory(String eventCategory) {
         requireNonNull(eventCategory);
         checkArgument(isValidCategory(eventCategory), MESSAGE_CONSTRAINTS);
         value = eventCategory;
     }
-
-//    public String getCategory() {
-//        return this.value;
-//    }
 
     /**
      * Returns true if a given string is a valid Category.

@@ -1,10 +1,11 @@
-package seedu.address.logic;
+package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Represents an event command with hidden internal logic and the ability to be executed.
+ */
 public abstract class EventCommand {
     /**
      * Executes the command and returns the result message.

@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.EventCommand;
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.model.Model;
+
+/**
+ * Lists all events in the event book to the user.
+ */
 public class ListEventCommand extends EventCommand {
     public static final String COMMAND_WORD = "listevent";
 

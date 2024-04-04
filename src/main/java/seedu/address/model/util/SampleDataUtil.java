@@ -1,10 +1,14 @@
 package seedu.address.model.util;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.event.*;
 import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventCategory;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventFactory;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -68,7 +72,7 @@ public class SampleDataUtil {
                         new EventCategory("STAFF"))
         };
 
-        }
+    }
 
     public static ReadOnlyEventBook getSampleEventBook() {
         EventBook sampleEb = new EventBook();
@@ -77,7 +81,7 @@ public class SampleDataUtil {
         }
         return sampleEb;
 
-        }
     }
+}
 
 

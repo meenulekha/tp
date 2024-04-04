@@ -1,20 +1,22 @@
 package seedu.address.storage;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyEventBook;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.ReadOnlyEventBook;
 
+/**
+ * A class to access EventBook data stored as a json file on the hard disk.
+ */
 public class JsonEventBookStorage implements EventBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonEventBookStorage.class);
     private Path filePath;
@@ -36,7 +38,7 @@ public class JsonEventBookStorage implements EventBookStorage {
     public Optional<ReadOnlyEventBook> readEventBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableEventBook> jsonEventBook= JsonUtil.readJsonFile(
+        Optional<JsonSerializableEventBook> jsonEventBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableEventBook.class);
         if (!jsonEventBook.isPresent()) {
             return Optional.empty();

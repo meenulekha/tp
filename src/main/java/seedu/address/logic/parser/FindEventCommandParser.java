@@ -1,14 +1,17 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Arrays;
+
 import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 
-import java.util.Arrays;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-public class FindEventCommandParser implements EventParser<FindEventCommand>{
+/**
+ * Parses input arguments and creates a new FindEventCommand object
+ */
+public class FindEventCommandParser implements EventParser<FindEventCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.

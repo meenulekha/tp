@@ -226,13 +226,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredEventList(Predicate<Event> predicate){
+    public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
 
     @Override
-    public ObservableList<Event> getFilteredEventList(){
+    public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
     }
 

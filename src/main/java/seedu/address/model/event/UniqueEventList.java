@@ -1,17 +1,28 @@
 package seedu.address.model.event;
 
-import seedu.address.model.event.Exceptions.EventNotFoundException;
-import seedu.address.model.event.Exceptions.DuplicateEventException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
-public class UniqueEventList implements Iterable<Event>{
+/**
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
+ * An event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
+ * events uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
+ * unique in terms of identity in the UniqueEventList. However, the removal of a event uses Event#isSameEvent(Event) so
+ * as to ensure that the event with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Event#isSameEvent(Event)
+ */
+public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);

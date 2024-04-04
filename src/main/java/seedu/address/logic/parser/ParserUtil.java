@@ -97,6 +97,15 @@ public class ParserUtil {
     }
 
 
+    /**
+     * Parses a string representation of an event name into an EventName object.
+     *
+     * @param eventname A string representing the name to be parsed.
+     * @return The parsed EventName object.
+     * @throws ParseException If the given name string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input name string is null.
+     */
     public static EventName parseEventName(String eventname) throws ParseException {
         requireNonNull(eventname);
         String trimmedName = eventname.trim();
@@ -107,16 +116,34 @@ public class ParserUtil {
     }
 
 
-    public static EventDate parseEventDate(String date) throws ParseException{
+    /**
+     * Parses a string representation of an event date into an EventDate object.
+     *
+     * @param date A string representing the date to be parsed.
+     * @return The parsed EventDate object.
+     * @throws ParseException If the given date string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input date string is null.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if(!EventDate.isValidDate(trimmedDate)){
+        if (!EventDate.isValidDate(trimmedDate)) {
             throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
         }
         return new EventDate((trimmedDate));
     }
 
-    public static EventCategory parseEventCategory(String eventcategory) throws ParseException{
+    /**
+     * Parses a string representation of an event category into an EventCategory object.
+     *
+     * @param eventcategory A string representing the category to be parsed.
+     * @return The parsed EventCategory object.
+     * @throws ParseException If the given category string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input category string is null.
+     */
+    public static EventCategory parseEventCategory(String eventcategory) throws ParseException {
         requireNonNull(eventcategory);
         String trimmedCategory = eventcategory.trim().toUpperCase();
         if (!Category.isValidCategory(trimmedCategory)) {

@@ -1,11 +1,14 @@
 package seedu.address.model.event;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Tests that a {@code Event}'s {@code Name} matches any of the keywords given.
+ */
 public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
     public EventNameContainsKeywordsPredicate(List<String> keywords) {
@@ -28,7 +31,8 @@ public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
             return false;
         }
 
-        EventNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (EventNameContainsKeywordsPredicate) other;
+        EventNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (EventNameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

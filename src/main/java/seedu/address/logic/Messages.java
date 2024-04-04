@@ -51,6 +51,12 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code Event} for display to the user.
+     *
+     * @param toAdd The event to be formatted.
+     * @return A string representation of the event, including its name and category.
+     */
     public static String formatEvent(Event toAdd) {
         final StringBuilder builder = new StringBuilder();
         builder.append(toAdd.getEventName())

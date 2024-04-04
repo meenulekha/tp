@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.EventCommand;
-import seedu.address.logic.Messages;
-import seedu.address.model.event.EventNameContainsKeywordsPredicate;
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+
+/**
+ * Finds and lists all events in event book whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class FindEventCommand extends EventCommand {
     public static final String COMMAND_WORD = "findevent";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "

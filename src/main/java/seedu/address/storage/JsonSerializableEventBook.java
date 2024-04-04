@@ -1,16 +1,22 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Event;
-import seedu.address.model.EventBook;
-import seedu.address.model.ReadOnlyEventBook;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.EventBook;
+import seedu.address.model.ReadOnlyEventBook;
+import seedu.address.model.event.Event;
+
+
+/**
+ * An Immutable EventBook that is serializable to JSON format.
+ */
 @JsonRootName(value = "eventbook")
 public class JsonSerializableEventBook {
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";

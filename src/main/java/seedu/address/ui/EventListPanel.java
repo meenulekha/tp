@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -7,9 +9,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 
-import java.util.logging.Logger;
-
-public class EventListPanel extends UiPart<Region>{
+/**
+ * Panel containing the list of events.
+ */
+public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 

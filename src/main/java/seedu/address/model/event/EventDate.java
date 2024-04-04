@@ -5,6 +5,10 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a date for an Event in the event book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ */
 public class EventDate {
 
     public static final String MESSAGE_CONSTRAINTS =

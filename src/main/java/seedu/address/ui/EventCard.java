@@ -7,7 +7,10 @@ import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventCategory;
 
-public class EventCard extends UiPart<Region>{
+/**
+ * An UI component that displays information of a {@code Event}.
+ */
+public class EventCard extends UiPart<Region> {
     private static final String FXML = "EventListCard.fxml";
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved

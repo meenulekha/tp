@@ -2,11 +2,22 @@ package seedu.address.model.event;
 
 import java.util.Objects;
 
+/**
+ * Represents a Event in the event book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Event {
     private final EventName eventName;
     private final EventCategory eventCategory;
     private final EventDate eventDate;
 
+    /**
+     * Constructs an Event object with the specified name, date, and category.
+     *
+     * @param eventName The name of the event.
+     * @param eventDate The date of the event.
+     * @param eventCategory The category of the event.
+     */
     public Event(EventName eventName, EventDate eventDate, EventCategory eventCategory) {
         this.eventName = eventName;
         this.eventCategory = eventCategory;
@@ -20,7 +31,10 @@ public class Event {
     public EventCategory getEventCategory() {
         return this.eventCategory;
     }
-    public EventDate getEventDate() { return this.eventDate; }
+
+    public EventDate getEventDate() {
+        return this.eventDate;
+    }
 
     /**
      * Returns true if both events have the same event name and event category.
@@ -64,10 +78,12 @@ public class Event {
 
     @Override
     public String toString() {
-        return "event{" +
-                "eventName=" + eventName +
-                ", eventCategory=" + eventCategory +
-                '}';
+        return "event{"
+                + "eventName="
+                + eventName
+                + ", eventCategory="
+                + eventCategory
+                + '}';
     }
 
 

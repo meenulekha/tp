@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents the result of a command execution.
+ */
 public class EventCommandResult {
     private final String feedbackToUser;
 
@@ -24,7 +27,7 @@ public class EventCommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.back= back;
+        this.back = back;
     }
 
     /**

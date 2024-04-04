@@ -1,16 +1,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENTCATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENTNAME;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.EventCommand;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-public class AddEventCommand extends EventCommand implements ReversibleCommand{
+
+/**
+ * Adds an event to the event book.
+ */
+public class AddEventCommand extends EventCommand implements ReversibleCommand {
     public static final String COMMAND_WORD = "addevent";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
             + "Parameters: "
@@ -18,14 +23,16 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand{
             + PREFIX_EVENTDATE + "EVENT_DATE "
             + PREFIX_EVENTCATEGORY + "EVENT_CATEGORY\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENTNAME + "Meeting" + PREFIX_EVENTDATE + "2024-10-10 " + PREFIX_EVENTCATEGORY + "staff" ;
-    public static final String MESSAGE_SUCCESS = "New event added: %1$s";
+            + PREFIX_EVENTNAME + "Meeting" + PREFIX_EVENTDATE + "2024-10-10 " + PREFIX_EVENTCATEGORY + "staff";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
-
-    private final Event toAdd;
+    public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_SUCCESS_UNDO = "event deleted: %1$s";
     public static final String MESSAGE_UNDO_NONEXISTENT_EVENT = "Undo failed:"
             + "Person does not exist in the address book";
+
+    private final Event toAdd;
+
+
 
     /**
      * Creates an AddEventCommand to add the specified {@code event}
