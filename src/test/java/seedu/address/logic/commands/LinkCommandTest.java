@@ -13,7 +13,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class LinkCommandTest {
-
     @Test
     public void execute_linkCommand_success() {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventBook(), new UserPrefs());
