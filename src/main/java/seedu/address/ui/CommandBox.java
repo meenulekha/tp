@@ -33,11 +33,9 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        // calls #setStyleToDefault() whenever there is a change to the text of the
-        // command box.
+        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
-
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor} and 2
      * suppliers for the previous and next command.
@@ -49,7 +47,7 @@ public class CommandBox extends UiPart<Region> {
      *                                history.
      */
     public CommandBox(CommandExecutor commandExecutor, Supplier<String> previousCommandSupplier,
-            Supplier<String> nextCommandSupplier, Consumer<String> commandToHistorySaver) {
+                      Supplier<String> nextCommandSupplier, Consumer<String> commandToHistorySaver) {
         this(commandExecutor);
         setArrowKeyHandler(previousCommandSupplier, nextCommandSupplier);
         this.commandToHistorySaver = commandToHistorySaver;
@@ -75,7 +73,6 @@ public class CommandBox extends UiPart<Region> {
             }
         });
     }
-
     /**
      * Sets the user input to the given supplier's result if it is not null.
      *
@@ -99,6 +96,8 @@ public class CommandBox extends UiPart<Region> {
         commandToHistorySaver.accept(commandText);
     }
 
+
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -109,6 +108,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
         saveCommandToHistory(commandText);
+
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");

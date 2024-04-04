@@ -65,8 +65,8 @@ public class UiPartTest {
 
     @Test
     public void constructor_missingFileName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH));
-        assertThrows(NullPointerException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH, new Object()));
+        assertThrows(IllegalArgumentException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH));
+        assertThrows(IllegalArgumentException.class, () -> new TestUiPart<Object>(MISSING_FILE_PATH, new Object()));
     }
 
     @Test
@@ -74,6 +74,7 @@ public class UiPartTest {
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH));
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
     }
+
 
     private URL getTestFileUrl(String testFilePath) {
         String testFilePathInView = "/view/" + testFilePath;

@@ -7,6 +7,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventCategory;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
@@ -93,6 +96,61 @@ public class ParserUtil {
         return new Category(trimmedCategory);
     }
 
+
+    /**
+     * Parses a string representation of an event name into an EventName object.
+     *
+     * @param eventname A string representing the name to be parsed.
+     * @return The parsed EventName object.
+     * @throws ParseException If the given name string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input name string is null.
+     */
+    public static EventName parseEventName(String eventname) throws ParseException {
+        requireNonNull(eventname);
+        String trimmedName = eventname.trim();
+        if (!EventName.isValidName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+
+    /**
+     * Parses a string representation of an event date into an EventDate object.
+     *
+     * @param date A string representing the date to be parsed.
+     * @return The parsed EventDate object.
+     * @throws ParseException If the given date string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input date string is null.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate((trimmedDate));
+    }
+
+    /**
+     * Parses a string representation of an event category into an EventCategory object.
+     *
+     * @param eventcategory A string representing the category to be parsed.
+     * @return The parsed EventCategory object.
+     * @throws ParseException If the given category string is invalid or cannot be parsed.
+     *                        The error message will contain details about the parsing constraints.
+     * @throws NullPointerException If the input category string is null.
+     */
+    public static EventCategory parseEventCategory(String eventcategory) throws ParseException {
+        requireNonNull(eventcategory);
+        String trimmedCategory = eventcategory.trim().toUpperCase();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+        }
+        return new EventCategory(trimmedCategory);
+    }
     /**
      * Parses a {@code String group} into a {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
