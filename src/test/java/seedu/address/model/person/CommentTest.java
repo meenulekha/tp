@@ -41,4 +41,12 @@ public class CommentTest {
         // valid comment -> returns true
         assertTrue(Comment.isValidComment("Test comment"));
     }
+
+    @Test
+    public void hasComment() {
+        Comment comment = new Comment("Test comment");
+        assertTrue(comment.hasComment());
+        Comment noComment = new Comment("No comment provided.");
+        assertFalse(noComment.hasComment());
+    }
 }
