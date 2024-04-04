@@ -16,6 +16,10 @@ The Hackathon Participant Management Application is designed to help organizers 
     - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--remove)
     - [Clearing all entries](#clearing-all-entries--clear)
+    - [Adding an event](#adding-an-event--addevent)
+    - [Listing all events](#listing-all-events--listevent)
+    - [Removing an event](#removing-an-event--deleteevent)
+    - [Locating events by keywords](#locating-events-by-keywords--findevent)
     - [Exiting the program](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
@@ -52,6 +56,14 @@ The Hackathon Participant Management Application is designed to help organizers 
    * `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
   
    * `Comment John Doe`
+  
+   * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
+  
+   * `deleteevent 8` : Deletes the 8th event shown in the list.
+     
+   * `findevent meeting` : Finds events which names contain "meeting".
+  
+   * `listevent` : Lists all events.
 
    * `clear` : Deletes all contact information.
 
@@ -76,7 +88,7 @@ The Hackathon Participant Management Application is designed to help organizers 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `listevent`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -222,6 +234,68 @@ Example: You have successfully deleted participant John Doe.
 Precise expected outputs when the command fails
 * Error: no contact with id <id>. (when name is not in the list)
 
+### Adding an event: `addevent`
+
+Adds an event to HackLink.
+
+Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
+
+<div markdown="span" class="alert alert-primary">:bulb:
+</div>
+
+Examples:
+* `add addevent en/meeting ed/11-06-2024 ec/staff`
+* `add addevent en/conference ed/22-06-2024 ec/participant`
+
+Cautions / Warnings for Addevent:
+* There should be no <span style="color:yellow">“/”</span> in each parameter.
+* Category should be one of Participant, Sponsor, and Staff.
+
+### Listing all events : `listevent`
+
+Shows a list of all events in HackLink. 
+Example: `Total: <total number of data>`
+         The table will show all the data
+
+Format: `listevent`
+
+### Removing an event : `deleteevent`
+
+Remove specific events from the database.
+
+Format: `deleteevent <id>`
+Example:
+`deleteevent 1`
+Acceptable values for each parameter
+* `<id>`: the id of the event in the list
+
+Precise expected outputs when the command succeeds
+* You have successfully deleted <category> <name>.
+Example: You have successfully deleted event meeting.
+Precise expected outputs when the command fails
+* Error: no event with id <id>. (when event is not in the list)
+
+### Locating events by keywords : `findevent`
+
+Finds events which contain any of the given keywords.
+
+Format: `findevent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecutre`
+* Full text of a event is searched.
+* Only full words will be matched e.g. `Seminar` will not match `Seminars`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Lecture 1` will return `Lecture 2`, `Lecture 3`
+
+Examples:
+* `findevent meeting` returns `meeting 1` and `meeting 2`
+* `findevent lecture` returns `AI lecture`, `OS lecture`<br>
+* `findevent participant` returns all events for participants in the list
+
+### Exporting selected participants : `link`
+Produce a csv file with selected participants' contact information to provide to sponsor.
+The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
 ### Clearing all entries : `clear`
 
@@ -289,4 +363,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Comment** | `comment <name>, <notes>`
+**AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
+**ListEvent** | `listevent`
+**DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
+**FindEvent** | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`
 **Help** | `help`
