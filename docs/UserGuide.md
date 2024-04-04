@@ -461,8 +461,8 @@ Action | Format, Examples
 **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Link** | `link INDEX [MORE_INDEXES]`<br> e.g., `link 1 2 3`
-**Comment** | `comment INDEX NOTES`
+**Link** | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`
+**Comment** | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`
 **View** | `view <id>`
 **AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
 **ListEvent** | `listevent`
