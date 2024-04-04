@@ -120,6 +120,13 @@ Adds a person to HackLink.
 
 Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
 
+Aliases:
+
+- `ap`: add participant
+- `as`: add sponsor
+- `at`: add staff
+  You can skip the category parameter and the application will automatically assign the category based on the alias used.
+
 <div markdown="span" class="alert alert-primary">:bulb:
 </div>
 
@@ -127,6 +134,7 @@ Examples:
 
 - `add n/John Doe e/johnd@example.com p/98765432 c/participant g/1`
 - `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/sponsor g/3`
+- `ap n/John Doe e/johnd@example.com p/98765432`
 
 Cautions / Warnings for Add:
 
@@ -153,7 +161,13 @@ Acceptable values for each parameter
 - `<field>`: name, email, phone, category, group.
 - `<new value>`: follow the format of its field.
 
+Aliases: `ed`
+
 Cautions / Warnings for Edit:
+
+- There should be no “/” in each parameter.
+- There should be only one field rather than multiple fields.
+- Updated information should be different from the original.
 
 ### Grouping a person : `group`
 
@@ -192,10 +206,6 @@ Format: `grouprandom <maximum group size>`
 Example:
 
 - `grouprandom 3`
-
-* There should be no “/” in each parameter.
-* There should be only one field rather than multiple fields.
-* Updated information should be different from the original.
 
 ### Commenting a person : `comment`
 
@@ -251,6 +261,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+Aliases: `f`
+
 Examples:
 
 - `find John` returns `john` and `John Doe`
@@ -288,6 +300,8 @@ Deletes the person identified by the index shown in the displayed person list.
 Format: `delete ID`
 
 - The ID used must exist in the list.
+
+Aliases: `d`
 
 Examples:
 
@@ -356,11 +370,6 @@ Examples:
 - `findevent meeting` returns `meeting 1` and `meeting 2`
 - `findevent lecture` returns `AI lecture`, `OS lecture`<br>
 - `findevent participant` returns all events for participants in the list
-
-### Exporting selected participants : `link`
-
-Produce a csv file with selected participants' contact information to provide to sponsor.
-The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
 ### Clearing all entries : `clear`
 
