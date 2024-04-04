@@ -51,13 +51,13 @@ The Hackathon Participant Management Application is designed to help organizers 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
+   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant g/1` : Adds a person named `John Doe` to HackLink.
 
-   * `Remove 3` : Deletes the 3rd person shown in the current list.
+   * `delete 3` : Deletes the 3rd person shown in the current list.
      
-   * `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
+   * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
   
-   * `Comment John Doe`
+   * `Comment 1 He is good at Java`
   
    * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
   
@@ -185,7 +185,7 @@ Example:
 
 ### Commenting a person : `comment`
 Add notes or comments to contacts
-format `comment <id>, <notes>`
+format `comment <id> <notes>`
 
 Example:
 * `comment 1, Allergic to peanuts`
@@ -402,7 +402,8 @@ Action | Format, Examples
 **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Comment** | `comment <name>, <notes>`
+**Link** | `link INDEX [MORE_INDEXES]`<br> e.g., `link 1 2 3`
+**Comment** | `comment <name> <notes>`
 **AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
 **ListEvent** | `listevent`
 **DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
