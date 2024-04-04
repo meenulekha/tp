@@ -120,4 +120,14 @@ public abstract class Person {
     public String toCsvString() {
         return name + "," + phone + "," + email + "," + comment + "\n";
     }
+    /**
+     * Returns a string representation of the person's details for display.
+     */
+    public String getInformation() {
+        return "Name: " + name + "\n"
+                + "Phone: " + phone + "\n"
+                + "Email: " + email + "\n"
+                + "Category: " + category + "\n"
+                + "Comment: " + comment + "\n";
+    }
 }
