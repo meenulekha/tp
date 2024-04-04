@@ -463,7 +463,7 @@ Action | Format, Examples
 **List** | `list`
 **Link** | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`
 **Comment** | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`
-**View** | `view <id>`
+**View** | `view <id>` <br> e.g., `view 1`
 **AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
 **ListEvent** | `listevent`
 **DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
