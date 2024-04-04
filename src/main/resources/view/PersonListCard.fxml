@@ -18,8 +18,8 @@
             <columnConstraints>
                 <ColumnConstraints percentWidth="8" fx:id="idColumn"/>
                 <ColumnConstraints percentWidth="17" fx:id="nameColumn"/>
-                <ColumnConstraints percentWidth="5" fx:id="commentColumn"/>
-                <ColumnConstraints percentWidth="18" fx:id="emailColumn"/>
+                <ColumnConstraints percentWidth="3" fx:id="commentColumn"/>
+                <ColumnConstraints percentWidth="20" fx:id="emailColumn"/>
                 <ColumnConstraints percentWidth="20" fx:id="phoneColumn"/>
                 <ColumnConstraints percentWidth="15" fx:id="categoryColumn"/>
                 <ColumnConstraints percentWidth="17" fx:id="groupColumn"/>
