@@ -107,6 +107,7 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
+        saveCommandToHistory(commandText);
 
         try {
             commandExecutor.execute(commandText);
