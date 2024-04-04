@@ -403,7 +403,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Link** | `link INDEX [MORE_INDEXES]`<br> e.g., `link 1 2 3`
-**Comment** | `comment <name> <notes>`
+**Comment** | `comment <id> <notes>`
+**View** | `view <id>`
 **AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
 **ListEvent** | `listevent`
 **DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
