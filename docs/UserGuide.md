@@ -62,6 +62,7 @@ The Hackathon Participant Management Application is designed to help organizers 
     A GUI similar to the below should be shown when navigating to and from the Events window. Note how the app contains some sample data         for the events.<br>
     ![Ui](images/toEventsWindow.png)
     ![Ui](images/backToMain.png)
+7. Type the commands in the comman box and press Enter to execute them.
 
    * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
   
