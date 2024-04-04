@@ -11,8 +11,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 1. [Quick start](#quick-start)
 2. [Features](#features)
-
-2.1 [Main features](#main-features)
+3. [Main features](#main-features)
 
 - [Viewing help](#viewing-help--help)
 - [Adding a person](#adding-a-person--add)
@@ -32,23 +31,25 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - [Locating events by keywords](#locating-events-by-keywords--findevent)
 - [Exiting the program](#exiting-the-program--exit)
 
-  2.2 [Utility features](#utility-features)
+4 [Utility features](#utility-features)
 
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [Navigating to older commands](#navigating-to-older-commands)
 - [Aliases](#aliases)
 - [Shortcuts](#shortcuts)
+- [Undo](#undo)
+- [Redo](#redo)
 
-3. [FAQ](#faq)
-4. [Warnings](#warnings)
-5. [Known issues](#known-issues)
-6. [Tips](#tips)
-7. [Command summary](#command-summary)
+5. [FAQ](#faq)
+6. [Warnings](#warnings)
+7. [Known issues](#known-issues)
+8. [Tips](#tips)
+9. [Command summary](#command-summary)
 
 ---
 
-# Quick start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -88,7 +89,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 ---
 
-# Features
+## Features
 
 <div markdown="block" class="alert alert-info">
 
