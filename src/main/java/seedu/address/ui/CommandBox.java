@@ -77,6 +77,13 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Focuses on the command box.
+     */
+    public void focus() {
+        commandTextField.requestFocus();
+    }
+
+    /**
      * Sets the user input to the given supplier's result if it is not null.
      *
      * @param supplier The supplier to get the user input from.

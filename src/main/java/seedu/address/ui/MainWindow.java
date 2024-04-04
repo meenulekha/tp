@@ -114,9 +114,23 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        // set focus trigger for person list panel to F4
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCombination.valueOf("F4").match(event)) {
+                personListPanel.focus();
+                event.consume();
+            }
+        });
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        // set focus trigger for result display to F3
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCombination.valueOf("F3").match(event)) {
+                resultDisplay.focus();
+                event.consume();
+            }
+        });
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -125,6 +139,13 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, history::getPreviousChat, history::getNextChat,
                 history::addChatToHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        // set focus trigger for command box to F2
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (KeyCombination.valueOf("F2").match(event)) {
+                commandBox.focus();
+                event.consume();
+            }
+        });
     }
 
     /**

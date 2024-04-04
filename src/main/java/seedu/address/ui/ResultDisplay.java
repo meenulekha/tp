@@ -20,6 +20,13 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Focuses on the result display.
+     */
+    public void focus() {
+        resultDisplay.requestFocus();
+    }
+
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
