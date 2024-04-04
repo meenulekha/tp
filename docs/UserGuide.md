@@ -1,4 +1,9 @@
-# WELCOME TO HACKLINK!
+---
+layout: page
+title: User Guide
+---
+
+WELCOME TO HACKLINK!
 
 HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can streamline the process of organizing and coordinating your hackathon event.
 
@@ -7,33 +12,33 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 1. [Quick start](#quick-start)
 2. [Features](#features)
 
-   2.1 [Main features](#main-features)
+2.1 [Main features](#main-features)
 
-   - [Viewing help](#viewing-help--help)
-   - [Adding a person](#adding-a-person--add)
-   - [Listing all persons](#listing-all-persons--list)
-   - [Editing a person](#editing-a-person--edit)
-   - [Grouping a person](#grouping-a-person--group)
-   - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
-   - [Commenting a person](#commenting-a-person--comment)
-   - [Viewing comments](#viewing-comments--view)
-   - [Locating persons by keywords](#locating-persons-by-keywords--find)
-   - [Exporting a selected participants](#exporting-selected-participants--link)
-   - [Removing a person](#removing-a-person--remove)
-   - [Clearing all entries](#clearing-all-entries--clear)
-   - [Adding an event](#adding-an-event--addevent)
-   - [Listing all events](#listing-all-events--listevent)
-   - [Removing an event](#removing-an-event--deleteevent)
-   - [Locating events by keywords](#locating-events-by-keywords--findevent)
-   - [Exiting the program](#exiting-the-program--exit)
+- [Viewing help](#viewing-help--help)
+- [Adding a person](#adding-a-person--add)
+- [Listing all persons](#listing-all-persons--list)
+- [Editing a person](#editing-a-person--edit)
+- [Grouping a person](#grouping-a-person--group)
+- [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
+- [Commenting a person](#commenting-a-person--comment)
+- [Viewing comments](#viewing-comments--view)
+- [Locating persons by keywords](#locating-persons-by-keywords--find)
+- [Exporting a selected participants](#exporting-selected-participants--link)
+- [Removing a person](#removing-a-person--remove)
+- [Clearing all entries](#clearing-all-entries--clear)
+- [Adding an event](#adding-an-event--addevent)
+- [Listing all events](#listing-all-events--listevent)
+- [Removing an event](#removing-an-event--deleteevent)
+- [Locating events by keywords](#locating-events-by-keywords--findevent)
+- [Exiting the program](#exiting-the-program--exit)
 
-     2.2 [Utility features](#utility-features)
+  2.2 [Utility features](#utility-features)
 
-   - [Saving the data](#saving-the-data)
-   - [Editing the data file](#editing-the-data-file)
-   - [Navigating to older commands](#navigating-to-older-commands)
-   - [Aliases](#aliases)
-   - [Shortcuts](#shortcuts)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [Navigating to older commands](#navigating-to-older-commands)
+- [Aliases](#aliases)
+- [Shortcuts](#shortcuts)
 
 3. [FAQ](#faq)
 4. [Warnings](#warnings)
@@ -47,7 +52,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `HackLink.jar` from [here](link to release).
+2. Download the latest `HackLink.jar` from [here](https://github.com/AY2324S2-CS2103T-F12-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your HakcLink application.
 
@@ -64,13 +69,11 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-
    * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant g/1` : Adds a person named `John Doe` to HackLink.
 
    * `delete 3` : Deletes the 3rd person shown in the current list.
-     
    * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
-  
+
    * `Comment 1 He is good at Java`
    * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
@@ -129,6 +132,7 @@ Aliases:
 - `ap`: add participant
 - `as`: add sponsor
 - `at`: add staff
+
   You can skip the category parameter and the application will automatically assign the category based on the alias used.
 
 <div markdown="span" class="alert alert-primary">:bulb:
@@ -363,7 +367,7 @@ Finds events which contain any of the given keywords.
 Format: `findevent KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g `meeting` will match `Meeting`
-- The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecutre`
+- The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecture`
 - Full text of a event is searched.
 - Only full words will be matched e.g. `Seminar` will not match `Seminars`
 - Events matching at least one keyword will be returned (i.e. `OR` search).
@@ -387,6 +391,8 @@ Exits the program.
 
 Format: `exit`
 
+Aliases: `ex`
+
 ## Utility features
 
 ### Saving the data
@@ -401,6 +407,22 @@ HackLink data are saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, HackLink will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the HackLink to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Undo
+
+You can undo the last command by using `undo` command. This will revert the last command that changed the data.
+
+Format: `undo`
+
+Aliases: `ud`
+
+### Redo
+
+You can redo the last command by using `redo` command. This will redo the last command that was undone.
+
+Format: `redo`
+
+Aliases: `rd`
 
 ### Navigating to older commands
 
@@ -451,22 +473,21 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3`
-**Clear** | `clear`
-**Remove** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Group** | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`
-**Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Link** | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`
-**Comment** | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`
-**View** | `view <id>` <br> e.g., `view 1`
-**AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
-**ListEvent** | `listevent`
-**DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
-**FindEvent** | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`
-**Help** | `help`                                                                                                                      |
-
+| Action             | Format, Examples                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
+| **Clear**          | `clear`                                                                                                                                         |
+| **Remove**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`            |
+| **Group**          | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                              |
+| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                          |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
+| **List**           | `list`                                                                                                                                          |
+| **Link**           | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`                                                                                                |
+| **Comment**        | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`                                                                                 |
+| **View**           | `view <id>` <br> e.g., `view 1`                                                                                                                 |
+| **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                                   |
+| **ListEvent**      | `listevent`                                                                                                                                     |
+| **DeletEvent**     | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
+| **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                               |
+| **Help**           | `help`                                                                                                                                          |
