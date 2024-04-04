@@ -58,6 +58,11 @@ The Hackathon Participant Management Application is designed to help organizers 
    * `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
   
    * `Comment John Doe`
+     
+   * `clear` : Deletes all contact information.
+
+   * `exit` : Exits the app.
+
 6. Navigate to the Event Window by clicking on Events in the menubar. You can also navigate back to the Main Window by clicking on Back to Main from the menubar.<br>
     A GUI similar to the below should be shown when navigating to and from the Events window. Note how the app contains some sample data         for the events.<br>
     ![Ui](images/toEventsWindow.png)
@@ -71,10 +76,6 @@ The Hackathon Participant Management Application is designed to help organizers 
    * `findevent meeting` : Finds events which names contain "meeting".
   
    * `listevent` : Lists all events.
-
-   * `clear` : Deletes all contact information.
-
-   * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
