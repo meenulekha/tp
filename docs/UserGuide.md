@@ -1,32 +1,32 @@
-
 WELCOME TO HACKLINK!
 
-The Hackathon Participant Management Application is designed to help organizers efficiently manage participant information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can streamline the process of organizing and coordinating your hackathon event.
+HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can streamline the process of organizing and coordinating your hackathon event.
 
-* Table of Contents
+- Table of Contents
+
 1. [Quick start](#quick-start)
 2. [Features](#features)
-    - [Viewing help](#viewing-help--help)
-    - [Adding a person](#adding-a-person--add)
-    - [Listing all persons](#listing-all-persons--list)
-    - [Editing a person](#editing-a-person--edit)
-    - [Comment](#commenting-a-person--comment)
-    - [Viewing comments](#viewing-comments--view)
-    - [Locating persons by keywords](#locating-persons-by-keywords--find)
-    - [Exporting a selected participants](#exporting-selected-participants--link)
-    - [Removing a person](#removing-a-person--remove)
-    - [Clearing all entries](#clearing-all-entries--clear)
-    - [Exiting the program](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files (coming in v2.0)](#archiving-data-files-coming-in-v20)
+   - [Viewing help](#viewing-help--help)
+   - [Adding a person](#adding-a-person--add)
+   - [Listing all persons](#listing-all-persons--list)
+   - [Editing a person](#editing-a-person--edit)
+   - [Comment](#commenting-a-person--comment)
+   - [Viewing comments](#viewing-comments--view)
+   - [Locating persons by keywords](#locating-persons-by-keywords--find)
+   - [Exporting a selected participants](#exporting-selected-participants--link)
+   - [Removing a person](#removing-a-person--remove)
+   - [Clearing all entries](#clearing-all-entries--clear)
+   - [Exiting the program](#exiting-the-program--exit)
+   - [Saving the data](#saving-the-data)
+   - [Editing the data file](#editing-the-data-file)
+   - [Archiving data files (coming in v2.0)](#archiving-data-files-coming-in-v20)
 3. [FAQ](#faq)
 4. [Warnings](#warnings)
 5. [Known issues](#known-issues)
 6. [Tips](#tips)
 7. [Command summary](#command-summary)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -43,23 +43,22 @@ The Hackathon Participant Management Application is designed to help organizers 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   - `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
+   - `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
 
-   * `Remove 3` : Deletes the 3rd person shown in the current list.
-     
-   * `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
-  
-   * `Comment John Doe`
+   - `Remove 3` : Deletes the 3rd person shown in the current list.
+   - `Update update John Dow /number 89898989` : Updates the information of the person named "John Doe"
 
-   * `clear` : Deletes all contact information.
+   - `Comment John Doe`
 
-   * `exit` : Exits the app.
+   - `clear` : Deletes all contact information.
+
+   - `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -67,19 +66,19 @@ The Hackathon Participant Management Application is designed to help organizers 
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+- Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[c/CATEGORY]…​` can be used as ` ` (i.e. 0 times), `c/staff`, `c/sponsor` etc.
 
-* Parameters can be in any order.<br>
+- Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help : `help`
@@ -89,7 +88,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessageHackLink.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -101,19 +99,21 @@ Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
 </div>
 
 Examples:
-* `add n/John Doe e/johnd@example.com p/98765432 c/participant g/1`
-* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/sponsor g/3`
+
+- `add n/John Doe e/johnd@example.com p/98765432 c/participant g/1`
+- `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/sponsor g/3`
 
 Cautions / Warnings for Add:
-* There should be no <span style="color:yellow">“/”</span> in each parameter.
-* There should be no contacts with the same information.
-* Category should be one of Participant, Sponsor, and Staff.
+
+- There should be no <span style="color:yellow">“/”</span> in each parameter.
+- There should be no contacts with the same information.
+- Category should be one of Participant, Sponsor, and Staff.
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in HackLink. 
+Shows a list of all persons in HackLink.
 Example: `Total: <total number of data>`
-         The table will show all the data
+The table will show all the data
 
 Format: `list`
 
@@ -123,49 +123,57 @@ Update and edit participant contact details.
 
 Format: `edit <id> /<field that needs update> <new value>`
 Acceptable values for each parameter
-* `<id>`: the id of the contact in the list.
-* `<field>`: name, email, phone, category, group.
-* `<new value>`: follow the format of its field.
+
+- `<id>`: the id of the contact in the list.
+- `<field>`: name, email, phone, category, group.
+- `<new value>`: follow the format of its field.
 
 Cautions / Warnings for Edit:
-* There should be no “/” in each parameter. 
-* There should be only one field rather than multiple fields. 
-* Updated information should be different from the original. 
 
+- There should be no “/” in each parameter.
+- There should be only one field rather than multiple fields.
+- Updated information should be different from the original.
 
 ### Commenting a person : `comment`
+
 Add notes or comments to contacts
 format `comment <id>, <notes>`
 
 Example:
-* `comment 1, Allergic to peanuts`
+
+- `comment 1, Allergic to peanuts`
 
 Acceptable values for each parameter:
-* `<id>`: the id of the contact in the list
-* `<note>`: any string
+
+- `<id>`: the id of the contact in the list
+- `<note>`: any string
 
 Precise expected outputs when the command succeeds:
-* Commented person: <name> <phone> <email> <category>
+
+- Commented person: <name> <phone> <email> <category>
 
 Precise expected outputs when the command fails:
-* Error: Invalid command format. (when note is not provided)
+
+- Error: Invalid command format. (when note is not provided)
 
 ### Viewing comments : `view`
+
 view comments of a specific contact
 format `view <id>`
 
 Example:`view 1`
 
 Acceptable values for each parameter:
-* `<id>`: the id of the contact in the list
+
+- `<id>`: the id of the contact in the list
 
 Precise expected outputs when the command succeeds:
-* Viewing comments of Person: <name> <phone> <email> <category>
+
+- Viewing comments of Person: <name> <phone> <email> <category>
 
 Precise expected outputs when the command fails:
-* Error: Invalid command format. (when id is not provided)
 
-
+- Error: Invalid command format. (when id is not provided)
 
 ### Locating persons by keywords : `find`
 
@@ -173,38 +181,42 @@ Finds persons who contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Full text of a person is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Full text of a person is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+- `find John` returns `john` and `John Doe`
+- `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findJohnDoe.png)
-* `find participant` returns all participants in the list
+- `find participant` returns all participants in the list
 
 ### Exporting selected participants : `link`
+
 Produce a csv file with selected participants' contact information to provide to sponsor.
 The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
 Format: `link id [MORE_ID]`
 
-* The number of ids is not limited
-* The order of the ids does not matter
-* The ids should be valid and in the list
-* The ids should be separated by a space
+- The number of ids is not limited
+- The order of the ids does not matter
+- The ids should be valid and in the list
+- The ids should be separated by a space
 
 Examples:
-* `link 1 2 3` returns a csv file with the contact information of participants 1, 2, and 3
-* `link 1` returns a csv file with the contact information of participant 1
-* `link 1 2 3 4 5` returns a csv file with the contact information of participants 1, 2, 3, 4, and 5
+
+- `link 1 2 3` returns a csv file with the contact information of participants 1, 2, and 3
+- `link 1` returns a csv file with the contact information of participant 1
+- `link 1 2 3 4 5` returns a csv file with the contact information of participants 1, 2, 3, 4, and 5
 
 Warning:
-* comma in the comment might cause the csv file to be corrupted.
-Do not open the list.csv file while the application is running.
+
+- comma in the comment might cause the csv file to be corrupted.
+  Do not open the list.csv file while the application is running.
 
 ### Removing a person : `Remove`
 
@@ -214,14 +226,15 @@ Format: `remove <id>`
 Example:
 `remove 1`
 Acceptable values for each parameter
-* `<id>`: the id of the contact in the list
+
+- `<id>`: the id of the contact in the list
 
 Precise expected outputs when the command succeeds
-* You have successfully deleted <category> <name>.
-Example: You have successfully deleted participant John Doe.
-Precise expected outputs when the command fails
-* Error: no contact with id <id>. (when name is not in the list)
 
+- You have successfully deleted <category> <name>.
+  Example: You have successfully deleted participant John Doe.
+  Precise expected outputs when the command fails
+- Error: no contact with id <id>. (when name is not in the list)
 
 ### Clearing all entries : `clear`
 
@@ -252,41 +265,45 @@ Furthermore, certain edits can cause the HackLink to behave in unexpected ways (
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Warnings
+
 1. **Invalid Command** : When a command format is incorrect or parameters are missing, the application will prompt the user with a warning message.
 2. **Command Failure** : If the person specified for editing or removing does not exist in the database, the application should display a warning message indicating the failure.
 3. **Invalid input for update** : If the input for editing a person's information is invalid, the application should display a warning message indicating the failure and provide guidance on the correct format.
-   
---------------------------------------------------------------------------------------------------------------------
+
+---
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 ## Tips
+
 1. **Use Descriptive Command Names**: You are encouraged to use descriptive names when adding, updating, or removing participants. This makes it easier to identify and manage individuals within the application.
 2. **Utilize Tags for Organization**: Using tags when adding participants to categorize them effectively. For instance, tags like "participant," "sponsor," or "staff" can help you quickly filter and manage different groups.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CATEGORY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend c/participant t/colleague`
-**Clear** | `clear`
-**Remove** | `delete INDEX`<br> e.g., `delete 3`
-**Update** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Comment** | `comment <name>, <notes>`
-**Help** | `help`
+| Action      | Format, Examples                                                                                                                                                                               |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CATEGORY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend c/participant t/colleague` |
+| **Clear**   | `clear`                                                                                                                                                                                        |
+| **Remove**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Update**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
+| **List**    | `list`                                                                                                                                                                                         |
+| **Comment** | `comment <name>, <notes>`                                                                                                                                                                      |
+| **Help**    | `help`                                                                                                                                                                                         |
