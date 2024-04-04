@@ -12,33 +12,33 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 1. [Quick start](#quick-start)
 2. [Main features](#main-features)
 
-- [Viewing help](#viewing-help--help)
-- [Adding a person](#adding-a-person--add)
-- [Listing all persons](#listing-all-persons--list)
-- [Editing a person](#editing-a-person--edit)
-- [Grouping a person](#grouping-a-person--group)
-- [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
-- [Commenting a person](#commenting-a-person--comment)
-- [Viewing comments](#viewing-comments--view)
-- [Locating persons by keywords](#locating-persons-by-keywords--find)
-- [Exporting a selected participants](#exporting-selected-participants--link)
-- [Removing a person](#removing-a-person--remove)
-- [Clearing all entries](#clearing-all-entries--clear)
-- [Adding an event](#adding-an-event--addevent)
-- [Listing all events](#listing-all-events--listevent)
-- [Removing an event](#removing-an-event--deleteevent)
-- [Locating events by keywords](#locating-events-by-keywords--findevent)
-- [Exiting the program](#exiting-the-program--exit)
+   - [Viewing help](#viewing-help--help)
+   - [Adding a person](#adding-a-person--add)
+   - [Listing all persons](#listing-all-persons--list)
+   - [Editing a person](#editing-a-person--edit)
+   - [Grouping a person](#grouping-a-person--group)
+   - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
+   - [Commenting a person](#commenting-a-person--comment)
+   - [Viewing comments](#viewing-comments--view)
+   - [Locating persons by keywords](#locating-persons-by-keywords--find)
+   - [Exporting a selected participants](#exporting-selected-participants--link)
+   - [Removing a person](#removing-a-person--remove)
+   - [Clearing all entries](#clearing-all-entries--clear)
+   - [Adding an event](#adding-an-event--addevent)
+   - [Listing all events](#listing-all-events--listevent)
+   - [Removing an event](#removing-an-event--deleteevent)
+   - [Locating events by keywords](#locating-events-by-keywords--findevent)
+   - [Exiting the program](#exiting-the-program--exit)
 
 3. [Utility features](#utility-features)
 
-- [Saving the data](#saving-the-data)
-- [Editing the data file](#editing-the-data-file)
-- [Navigating to older commands](#navigating-to-older-commands)
-- [Aliases](#aliases)
-- [Shortcuts](#shortcuts)
-- [Undo](#undo)
-- [Redo](#redo)
+   - [Saving the data](#saving-the-data)
+   - [Editing the data file](#editing-the-data-file)
+   - [Navigating to older commands](#navigating-to-older-commands)
+   - [Aliases](#aliases)
+   - [Shortcuts](#shortcuts)
+   - [Undo](#undo)
+   - [Redo](#redo)
 
 4. [Event window](#event-window)
 5. [FAQ](#faq)
@@ -70,22 +70,20 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant g/1` : Adds a person named `John Doe` to HackLink.
+   - `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
 
-   * `delete 3` : Deletes the 3rd person shown in the current list.
-   * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
-
-   * `Comment 1 He is good at Java`
+   - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
 
    - `exit` : Exits the app.
 
-6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event Window](#event-window) section for more details.
+6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section for more details.
 
 7. Type the commands in the comman box and press Enter to execute them.
 
    - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
    - `deleteevent 8` : Deletes the 8th event shown in the list.
+
    - `findevent meeting` : Finds events which names contain "meeting".
 
    - `listevent` : Lists all events.
