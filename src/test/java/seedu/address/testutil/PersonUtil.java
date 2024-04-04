@@ -27,10 +27,22 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
+        sb.append(getPersonDetailNoCategory(person));
+        sb.append(PREFIX_CATEGORY + person.getCategory().value + " ");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details, excluding that person's category.
+     *
+     * @param person The person to get details
+     * @return Person details without category
+     */
+    public static String getPersonDetailNoCategory(Person person) {
+        StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_CATEGORY + person.getCategory().value + " ");
         return sb.toString();
     }
 
