@@ -9,9 +9,11 @@ The Hackathon Participant Management Application is designed to help organizers 
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
-    - [Editing a person](#editing-a-person--update)
-    - [Comment](#comment--comment)
-    - [Locating persons by name](#locating-persons-by-name--find)
+    - [Editing a person](#editing-a-person--edit)
+    - [Comment](#commenting-a-person--comment)
+    - [Viewing comments](#viewing-comments--view)
+    - [Locating persons by keywords](#locating-persons-by-keywords--find)
+    - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--remove)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
@@ -93,19 +95,19 @@ Format: `help`
 
 Adds a person to HackLink.
 
-Format: `add n/<name>, e/<email>, p/<phone>, a/<address>, c/<category>`
+Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
 
 <div markdown="span" class="alert alert-primary">:bulb:
 </div>
 
 Examples:
-* `add n/John Doe e/johnd@example.com p/98765432, a/Kent Ridge c/participant`
-* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567, a/Clementi ,c/sponsor`
+* `add n/John Doe e/johnd@example.com p/98765432 c/participant g/1`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/sponsor g/3`
 
-<span style="color:orange; font-weight:bold">Cautions / Warnings for Add:</span>
+Cautions / Warnings for Add:
 * There should be no <span style="color:yellow">“/”</span> in each parameter.
-* There should be no contacts with the <span style="color:yellow">same information</span>.
-* Category should be one of <span style="color:yellow">Participant, Sponsor, and Staff</span>.
+* There should be no contacts with the same information.
+* Category should be one of Participant, Sponsor, and Staff.
 
 ### Listing all persons : `list`
 
@@ -115,45 +117,65 @@ Example: `Total: <total number of data>`
 
 Format: `list`
 
-### Editing a person : `update`
+### Editing a person : `edit`
 
 Update and edit participant contact details.
 
-Format: `update <name> /<field that needs update> <new value>`
+Format: `edit <id> /<field that needs update> <new value>`
 Acceptable values for each parameter
-* `<name>`: case insensitive alphabetic characters, spaces.
-* `<field>`: name, email, phone, category.
+* `<id>`: the id of the contact in the list.
+* `<field>`: name, email, phone, category, group.
 * `<new value>`: follow the format of its field.
 
-<span style="color:orange; font-weight:bold">Cautions / Warnings for Edit:</span>
-* There should be no <span style="color:yellow">“/”</span> in each parameter. 
-* There should be only <span style="color:yellow">one field</span> rather than multiple fields. 
-* Updated information should be <span style="color:yellow">different</span> from the original. 
+Cautions / Warnings for Edit:
+* There should be no “/” in each parameter. 
+* There should be only one field rather than multiple fields. 
+* Updated information should be different from the original. 
 
 
-### Comment: `comment`
+### Commenting a person : `comment`
 Add notes or comments to contacts
-format `comment <name>, <notes>`
+format `comment <id>, <notes>`
+
 Example:
-`comment John, Allergic to peanuts`
-Acceptable values for each parameter
-`<name>`: case insensitive alphabetic characters, spaces.
-`<note>`: any string
-Precise expected outputs when the command succeeds
-* Your comment “<note>” on <name> is successfully added.
-Precise expected outputs when the command fails
-* Error: please provide a note to the participant. (when note is not provided)
+* `comment 1, Allergic to peanuts`
+
+Acceptable values for each parameter:
+* `<id>`: the id of the contact in the list
+* `<note>`: any string
+
+Precise expected outputs when the command succeeds:
+* Commented person: <name> <phone> <email> <category>
+
+Precise expected outputs when the command fails:
+* Error: Invalid command format. (when note is not provided)
+
+### Viewing comments : `view`
+view comments of a specific contact
+format `view <id>`
+
+Example:`view 1`
+
+Acceptable values for each parameter:
+* `<id>`: the id of the contact in the list
+
+Precise expected outputs when the command succeeds:
+* Viewing comments of Person: <name> <phone> <email> <category>
+
+Precise expected outputs when the command fails:
+* Error: Invalid command format. (when id is not provided)
 
 
-### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+### Locating persons by keywords : `find`
+
+Finds persons who contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Full text of a person is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -162,6 +184,27 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findJohnDoe.png)
+* `find participant` returns all participants in the list
+
+### Exporting selected participants : `link`
+Produce a csv file with selected participants' contact information to provide to sponsor.
+The csv file will be saved in the selectedParticipants folder with the name list.csv.
+
+Format: `link id [MORE_ID]`
+
+* The number of ids is not limited
+* The order of the ids does not matter
+* The ids should be valid and in the list
+* The ids should be separated by a space
+
+Examples:
+* `link 1 2 3` returns a csv file with the contact information of participants 1, 2, and 3
+* `link 1` returns a csv file with the contact information of participant 1
+* `link 1 2 3 4 5` returns a csv file with the contact information of participants 1, 2, 3, 4, and 5
+
+Warning:
+* comma in the comment might cause the csv file to be corrupted.
+Do not open the list.csv file while the application is running.
 
 ### Removing a person : `Remove`
 
@@ -218,7 +261,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Warnings 
+## Warnings
 1. **Invalid Command** : When a command format is incorrect or parameters are missing, the application will prompt the user with a warning message.
 2. **Command Failure** : If the person specified for editing or removing does not exist in the database, the application should display a warning message indicating the failure.
 3. **Invalid input for update** : If the input for editing a person's information is invalid, the application should display a warning message indicating the failure and provide guidance on the correct format.
@@ -229,7 +272,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
-## Tips 
+## Tips
 1. **Use Descriptive Command Names**: You are encouraged to use descriptive names when adding, updating, or removing participants. This makes it easier to identify and manage individuals within the application.
 2. **Utilize Tags for Organization**: Using tags when adding participants to categorize them effectively. For instance, tags like "participant," "sponsor," or "staff" can help you quickly filter and manage different groups.
 
