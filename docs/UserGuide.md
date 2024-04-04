@@ -59,7 +59,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![UI of the app](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -136,9 +136,6 @@ Aliases:
 - `at`: add staff
 
   You can skip the category parameter and the application will automatically assign the category based on the alias used.
-
-<div markdown="span" class="alert alert-primary">:bulb:
-</div>
 
 Examples:
 
@@ -277,7 +274,7 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findJohnDoe.png)
+  ![result for 'find john doe'](images/findJohnDoeResult.png)
 - `find participant` returns all participants in the list
 
 ### Exporting selected participants : `link`
@@ -324,9 +321,6 @@ Examples:
 Adds an event to HackLink.
 
 Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
-
-<div markdown="span" class="alert alert-primary">:bulb:
-</div>
 
 Examples:
 
