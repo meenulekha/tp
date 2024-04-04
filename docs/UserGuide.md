@@ -274,7 +274,7 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find john doe'](images/findJohnDoeResult.png)
+  ![result for 'find john doe'](images/findJohnDoe.png)
 - `find participant` returns all participants in the list
 
 ### Exporting selected participants : `link`
