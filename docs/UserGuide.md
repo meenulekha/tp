@@ -10,8 +10,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - Table of Contents
 
 1. [Quick start](#quick-start)
-2. [Features](#features)
-3. [Main features](#main-features)
+2. [Main features](#main-features)
 
 - [Viewing help](#viewing-help--help)
 - [Adding a person](#adding-a-person--add)
@@ -31,7 +30,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - [Locating events by keywords](#locating-events-by-keywords--findevent)
 - [Exiting the program](#exiting-the-program--exit)
 
-4 [Utility features](#utility-features)
+3. [Utility features](#utility-features)
 
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
@@ -41,6 +40,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - [Undo](#undo)
 - [Redo](#redo)
 
+4. [Event window](#event-window)
 5. [FAQ](#faq)
 6. [Warnings](#warnings)
 7. [Known issues](#known-issues)
@@ -76,27 +76,25 @@ HackLink is a Hackathon Participant Management Application, designed to help org
    * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
 
    * `Comment 1 He is good at Java`
-  
+
    - `exit` : Exits the app.
-6. Navigate to the Event Window by clicking on Events in the menubar. You can also navigate back to the Main Window by clicking on Back to Main from the menubar.<br>
-    A GUI similar to the below should be shown when navigating to and from the Events window. Note how the app contains some sample data         for the events.<br>
-    ![Ui](images/toEventsWindow.png)
-    ![Ui](images/backToMain.png)
+
+6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event Window](#event-window) section for more details.
+
 7. Type the commands in the comman box and press Enter to execute them.
 
-   * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
-  
-   * `deleteevent 8` : Deletes the 8th event shown in the list.
-     
-   * `findevent meeting` : Finds events which names contain "meeting".
-  
-   * `listevent` : Lists all events.
+   - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
-6. Refer to the [Features](#features) below for details of each command.
+   - `deleteevent 8` : Deletes the 8th event shown in the list.
+   - `findevent meeting` : Finds events which names contain "meeting".
+
+   - `listevent` : Lists all events.
+
+8. Refer to the [Features](#features) below for details of each command.
 
 ---
 
-## Features
+## Main features
 
 <div markdown="block" class="alert alert-info">
 
@@ -118,8 +116,6 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
-
-## Main features
 
 ### Viewing help : `help`
 
@@ -325,6 +321,8 @@ Examples:
 
 ### Adding an event: `addevent`
 
+**Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar. Refer to the [Event Window](#event-window) section for more details.
+
 Adds an event to HackLink.
 
 Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
@@ -448,6 +446,18 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 - `F2` : Focus on the command box
 - `F3` : Focus on the result box (to scroll up and down in case of overflow)
 - `F4` : Focus on the list of contacts (to scroll up and down in case of overflow)
+
+---
+
+## Event window
+
+Events are shown in a separate window. You can navigate to the event window by clicking on the Events menu in the menubar.
+
+An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how the app contains some sample data for the events.<br>
+![Ui](images/toEventsWindow.png)
+
+You can get back to the main window by clicking on the Back to Main on the menubar.<br>
+![Ui](images/backToMain.png)
 
 ---
 
