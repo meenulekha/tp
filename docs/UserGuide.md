@@ -10,45 +10,46 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - Table of Contents
 
 1. [Quick start](#quick-start)
-2. [Features](#features)
+2. [Main features](#main-features)
 
-2.1 [Main features](#main-features)
+   - [Viewing help](#viewing-help--help)
+   - [Adding a person](#adding-a-person--add)
+   - [Listing all persons](#listing-all-persons--list)
+   - [Editing a person](#editing-a-person--edit)
+   - [Grouping a person](#grouping-a-person--group)
+   - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
+   - [Commenting a person](#commenting-a-person--comment)
+   - [Viewing comments](#viewing-comments--view)
+   - [Locating persons by keywords](#locating-persons-by-keywords--find)
+   - [Exporting a selected participants](#exporting-selected-participants--link)
+   - [Removing a person](#removing-a-person--remove)
+   - [Clearing all entries](#clearing-all-entries--clear)
+   - [Adding an event](#adding-an-event--addevent)
+   - [Listing all events](#listing-all-events--listevent)
+   - [Removing an event](#removing-an-event--deleteevent)
+   - [Locating events by keywords](#locating-events-by-keywords--findevent)
+   - [Exiting the program](#exiting-the-program--exit)
 
-- [Viewing help](#viewing-help--help)
-- [Adding a person](#adding-a-person--add)
-- [Listing all persons](#listing-all-persons--list)
-- [Editing a person](#editing-a-person--edit)
-- [Grouping a person](#grouping-a-person--group)
-- [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
-- [Commenting a person](#commenting-a-person--comment)
-- [Viewing comments](#viewing-comments--view)
-- [Locating persons by keywords](#locating-persons-by-keywords--find)
-- [Exporting a selected participants](#exporting-selected-participants--link)
-- [Removing a person](#removing-a-person--remove)
-- [Clearing all entries](#clearing-all-entries--clear)
-- [Adding an event](#adding-an-event--addevent)
-- [Listing all events](#listing-all-events--listevent)
-- [Removing an event](#removing-an-event--deleteevent)
-- [Locating events by keywords](#locating-events-by-keywords--findevent)
-- [Exiting the program](#exiting-the-program--exit)
+3. [Utility features](#utility-features)
 
-  2.2 [Utility features](#utility-features)
+   - [Saving the data](#saving-the-data)
+   - [Editing the data file](#editing-the-data-file)
+   - [Navigating to older commands](#navigating-to-older-commands)
+   - [Aliases](#aliases)
+   - [Shortcuts](#shortcuts)
+   - [Undo](#undo)
+   - [Redo](#redo)
 
-- [Saving the data](#saving-the-data)
-- [Editing the data file](#editing-the-data-file)
-- [Navigating to older commands](#navigating-to-older-commands)
-- [Aliases](#aliases)
-- [Shortcuts](#shortcuts)
-
-3. [FAQ](#faq)
-4. [Warnings](#warnings)
-5. [Known issues](#known-issues)
-6. [Tips](#tips)
-7. [Command summary](#command-summary)
+4. [Event window](#event-window)
+5. [FAQ](#faq)
+6. [Warnings](#warnings)
+7. [Known issues](#known-issues)
+8. [Tips](#tips)
+9. [Command summary](#command-summary)
 
 ---
 
-# Quick start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -58,7 +59,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![UI of the app](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -69,33 +70,29 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant g/1` : Adds a person named `John Doe` to HackLink.
+   - `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
 
-   * `delete 3` : Deletes the 3rd person shown in the current list.
-   * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
+   - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
 
-   * `Comment 1 He is good at Java`
-  
    - `exit` : Exits the app.
-6. Navigate to the Event Window by clicking on Events in the menubar. You can also navigate back to the Main Window by clicking on Back to Main from the menubar.<br>
-    A GUI similar to the below should be shown when navigating to and from the Events window. Note how the app contains some sample data         for the events.<br>
-    ![Ui](images/toEventsWindow.png)
-    ![Ui](images/backToMain.png)
+
+6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section for more details.
+
 7. Type the commands in the comman box and press Enter to execute them.
 
-   * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
-  
-   * `deleteevent 8` : Deletes the 8th event shown in the list.
-     
-   * `findevent meeting` : Finds events which names contain "meeting".
-  
-   * `listevent` : Lists all events.
+   - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
-6. Refer to the [Features](#features) below for details of each command.
+   - `deleteevent 8` : Deletes the 8th event shown in the list.
+
+   - `findevent meeting` : Finds events which names contain "meeting".
+
+   - `listevent` : Lists all events.
+
+8. Refer to the [Features](#features) below for details of each command.
 
 ---
 
-# Features
+## Main features
 
 <div markdown="block" class="alert alert-info">
 
@@ -118,8 +115,6 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-## Main features
-
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -141,9 +136,6 @@ Aliases:
 - `at`: add staff
 
   You can skip the category parameter and the application will automatically assign the category based on the alias used.
-
-<div markdown="span" class="alert alert-primary">:bulb:
-</div>
 
 Examples:
 
@@ -282,7 +274,7 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findJohnDoe.png)
+  ![result for 'find john doe'](images/findJohnDoe.png)
 - `find participant` returns all participants in the list
 
 ### Exporting selected participants : `link`
@@ -324,12 +316,11 @@ Examples:
 
 ### Adding an event: `addevent`
 
+**Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar. Refer to the [Event Window](#event-window) section for more details.
+
 Adds an event to HackLink.
 
 Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
-
-<div markdown="span" class="alert alert-primary">:bulb:
-</div>
 
 Examples:
 
@@ -447,6 +438,18 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 - `F2` : Focus on the command box
 - `F3` : Focus on the result box (to scroll up and down in case of overflow)
 - `F4` : Focus on the list of contacts (to scroll up and down in case of overflow)
+
+---
+
+## Event window
+
+Events are shown in a separate window. You can navigate to the event window by clicking on the Events menu in the menubar.
+
+An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how the app contains some sample data for the events.<br>
+![Ui](images/toEventsWindow.png)
+
+You can get back to the main window by clicking on the Back to Main on the menubar.<br>
+![Ui](images/backToMain.png)
 
 ---
 
