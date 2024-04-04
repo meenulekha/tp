@@ -27,6 +27,14 @@ public class EventListPanel extends UiPart<Region> {
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListPanel.EventListViewCell());
     }
+
+    /**
+     * Focuses on the event list.
+     */
+    public void focus() {
+        eventListView.requestFocus();
+    }
+
     class EventListViewCell extends ListCell<Event> {
         @Override
         protected void updateItem(Event event, boolean empty) {
