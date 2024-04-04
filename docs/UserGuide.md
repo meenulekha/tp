@@ -69,10 +69,14 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   - `edit 2 p/23443596` : Updates the phone number of the person with ID 2 in the list
 
-   - `clear` : Deletes all contact information.
+   * `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant g/1` : Adds a person named `John Doe` to HackLink.
 
+   * `delete 3` : Deletes the 3rd person shown in the current list.
+     
+   * `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
+  
+   * `Comment 1 He is good at Java`
    * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
    * `deleteevent 8` : Deletes the 8th event shown in the list.
@@ -216,7 +220,7 @@ Example:
 ### Commenting a person : `comment`
 
 Add notes or comments to contacts
-format `comment <id>, <notes>`
+format `comment <id> <notes>`
 
 Example:
 
@@ -471,19 +475,22 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
-| **Clear**          | `clear`                                                                                                                                         |
-| **Remove**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`            |
-| **Group**          | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                              |
-| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                          |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
-| **List**           | `list`                                                                                                                                          |
-| **Comment**        | `comment <name>, <notes>`                                                                                                                       |
-| **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                                   |
-| **ListEvent**      | `listevent`                                                                                                                                     |
-| **DeletEvent**     | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
-| **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                               |
-| **Help**           | `help`                                                                                                                                          |
+Action | Format, Examples
+--------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3`
+**Clear** | `clear`
+**Remove** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Group** | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`
+**Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
+**Link** | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`
+**Comment** | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`
+**View** | `view <id>` <br> e.g., `view 1`
+**AddEvent** | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`
+**ListEvent** | `listevent`
+**DeletEvent** | `deleteevent INDEX`<br> e.g., `deleteevent 8`
+**FindEvent** | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`
+**Help** | `help`                                                                                                                      |
+
