@@ -13,12 +13,18 @@ HackLink is a Hackathon Participant Management Application, designed to help org
    - [Adding a person](#adding-a-person--add)
    - [Listing all persons](#listing-all-persons--list)
    - [Editing a person](#editing-a-person--edit)
+   - [Grouping a person](#grouping-a-person--group)
+   - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
    - [Commenting a person](#commenting-a-person--comment)
    - [Viewing comments](#viewing-comments--view)
    - [Locating persons by keywords](#locating-persons-by-keywords--find)
    - [Exporting a selected participants](#exporting-selected-participants--link)
    - [Removing a person](#removing-a-person--remove)
    - [Clearing all entries](#clearing-all-entries--clear)
+   - [Adding an event](#adding-an-event--addevent)
+   - [Listing all events](#listing-all-events--listevent)
+   - [Removing an event](#removing-an-event--deleteevent)
+   - [Locating events by keywords](#locating-events-by-keywords--findevent)
    - [Exiting the program](#exiting-the-program--exit)
 
      2.2 [Utility features](#utility-features)
@@ -61,6 +67,13 @@ HackLink is a Hackathon Participant Management Application, designed to help org
    - `edit 2 p/23443596` : Updates the phone number of the person with ID 2 in the list
 
    - `clear` : Deletes all contact information.
+
+   * `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
+
+   * `deleteevent 8` : Deletes the 8th event shown in the list.
+   * `findevent meeting` : Finds events which names contain "meeting".
+
+   * `listevent` : Lists all events.
 
    - `exit` : Exits the app.
 
@@ -142,9 +155,47 @@ Acceptable values for each parameter
 
 Cautions / Warnings for Edit:
 
-- There should be no “/” in each parameter.
-- There should be only one field rather than multiple fields.
-- Updated information should be different from the original.
+### Grouping a person : `group`
+
+Assigns a group to a participant or a staff.
+
+Format: `group <id> [<group number>]`
+
+- You can only randomly assign a person to an existing group.
+- The `<id>` refers to the identification number of the contact in the list
+- The `<group number>` can be any positive integer
+- You can only group staff and participant, sponsor cannot be grouped
+
+Examples:
+
+- `group 1`
+- `group 1 3`
+
+Tips for Group:
+
+- Not typing the group number will randomly assign the person into an existing group.
+
+Cautions / Warnings for Group:
+
+- When no group exist you cannot randomly assign a person into a group.
+
+### Grouping randomly listed persons : `grouprandom`
+
+Assigns a random group to each participant and staff that are currently listed.
+
+Format: `grouprandom <maximum group size>`
+
+- The `<maximum group size>` refers to the maximum number of people in a group
+- The `<maximum group size>` can be any positive integer
+- You can only group staff and participant, sponsor cannot be grouped
+
+Example:
+
+- `grouprandom 3`
+
+* There should be no “/” in each parameter.
+* There should be only one field rather than multiple fields.
+* Updated information should be different from the original.
 
 ### Commenting a person : `comment`
 
@@ -242,6 +293,75 @@ Examples:
 
 - `delete 1` deletes the first person in the list.
 
+### Adding an event: `addevent`
+
+Adds an event to HackLink.
+
+Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
+
+<div markdown="span" class="alert alert-primary">:bulb:
+</div>
+
+Examples:
+
+- `add addevent en/meeting ed/11-06-2024 ec/staff`
+- `add addevent en/conference ed/22-06-2024 ec/participant`
+
+Cautions / Warnings for Addevent:
+
+- There should be no <span style="color:yellow">“/”</span> in each parameter.
+- Category should be one of Participant, Sponsor, and Staff.
+
+### Listing all events : `listevent`
+
+Shows a list of all events in HackLink.
+Example: `Total: <total number of data>`
+The table will show all the data
+
+Format: `listevent`
+
+### Removing an event : `deleteevent`
+
+Remove specific events from the database.
+
+Format: `deleteevent <id>`
+Example:
+`deleteevent 1`
+Acceptable values for each parameter
+
+- `<id>`: the id of the event in the list
+
+Precise expected outputs when the command succeeds
+
+- You have successfully deleted <category> <name>.
+  Example: You have successfully deleted event meeting.
+  Precise expected outputs when the command fails
+- Error: no event with id <id>. (when event is not in the list)
+
+### Locating events by keywords : `findevent`
+
+Finds events which contain any of the given keywords.
+
+Format: `findevent KEYWORD [MORE_KEYWORDS]`
+
+- The search is case-insensitive. e.g `meeting` will match `Meeting`
+- The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecutre`
+- Full text of a event is searched.
+- Only full words will be matched e.g. `Seminar` will not match `Seminars`
+- Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Lecture 1` will return `Lecture 2`, `Lecture 3`
+
+Examples:
+
+- `findevent meeting` returns `meeting 1` and `meeting 2`
+- `findevent lecture` returns `AI lecture`, `OS lecture`<br>
+- `findevent participant` returns all events for participants in the list
+
+### Exporting selected participants : `link`
+
+Produce a csv file with selected participants' contact information to provide to sponsor.
+The csv file will be saved in the selectedParticipants folder with the name list.csv.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the database.
@@ -318,13 +438,19 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                                                                                               |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CATEGORY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend c/participant t/colleague` |
-| **Clear**   | `clear`                                                                                                                                                                                        |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
-| **Update**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
-| **List**    | `list`                                                                                                                                                                                         |
-| **Comment** | `comment <name>, <notes>`                                                                                                                                                                      |
-| **Help**    | `help`                                                                                                                                                                                         |
+| Action             | Format, Examples                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
+| **Clear**          | `clear`                                                                                                                                         |
+| **Remove**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`            |
+| **Group**          | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                              |
+| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                          |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
+| **List**           | `list`                                                                                                                                          |
+| **Comment**        | `comment <name>, <notes>`                                                                                                                       |
+| **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                                   |
+| **ListEvent**      | `listevent`                                                                                                                                     |
+| **DeletEvent**     | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
+| **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                               |
+| **Help**           | `help`                                                                                                                                          |
