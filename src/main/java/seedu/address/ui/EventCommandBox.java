@@ -1,22 +1,30 @@
 package seedu.address.ui;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The UI component that is responsible for receiving user command inputs in event window.
+ * The UI component that is responsible for receiving user command inputs in
+ * event window.
  */
 public class EventCommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private final seedu.address.ui.EventCommandBox.CommandExecutor commandExecutor;
+    private final CommandExecutor commandExecutor;
+
+    private Consumer<String> commandToHistorySaver = (commandText) -> {
+    };
 
     @javafx.fxml.FXML
     private TextField commandTextField;
@@ -24,11 +32,68 @@ public class EventCommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public EventCommandBox(seedu.address.ui.EventCommandBox.CommandExecutor commandExecutor) {
+    public EventCommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        // calls #setStyleToDefault() whenever there is a change to the text of the
+        // command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+    }
+
+    /**
+     * Creates a {@code CommandBox} with the given {@code CommandExecutor} and 2
+     * suppliers for the previous and next command.
+     *
+     * @param commandExecutor         The command executor.
+     * @param previousCommandSupplier The supplier for the previous command.
+     * @param nextCommandSupplier     The supplier for the next command.
+     * @param commandToHistorySaver   The consumer for saving the command to
+     *                                history.
+     */
+    public EventCommandBox(CommandExecutor commandExecutor, Supplier<String> previousCommandSupplier,
+            Supplier<String> nextCommandSupplier, Consumer<String> commandToHistorySaver) {
+        this(commandExecutor);
+        setArrowKeyHandler(previousCommandSupplier, nextCommandSupplier);
+        this.commandToHistorySaver = commandToHistorySaver;
+    }
+
+    /**
+     * Sets the action handler for arrow key events. This handler will cycle through
+     * the command history.
+     */
+    private void setArrowKeyHandler(Supplier<String> previousCommandSupplier, Supplier<String> nextCommandSupplier) {
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            switch (event.getCode()) {
+            case UP:
+                setNullableUserInput(previousCommandSupplier);
+                event.consume();
+                break;
+            case DOWN:
+                setNullableUserInput(nextCommandSupplier);
+                event.consume();
+                break;
+            default:
+                // let the event pass
+            }
+        });
+    }
+
+    /**
+     * Sets the user input to the given supplier's result if it is not null.
+     *
+     * @param supplier The supplier to get the user input from.
+     */
+    private void setNullableUserInput(Supplier<String> supplier) {
+        String result = supplier.get();
+        if (result == null) {
+            return;
+        }
+        commandTextField.setText(result);
+        commandTextField.positionCaret(result.length());
+    }
+
+    private void saveCommandToHistory(String commandText) {
+        commandToHistorySaver.accept(commandText);
     }
 
     /**
@@ -40,6 +105,8 @@ public class EventCommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
+
+        saveCommandToHistory(commandText);
 
         try {
             commandExecutor.execute(commandText);
@@ -54,6 +121,13 @@ public class EventCommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Focuses on the command box.
+     */
+    public void focus() {
+        commandTextField.requestFocus();
     }
 
     /**

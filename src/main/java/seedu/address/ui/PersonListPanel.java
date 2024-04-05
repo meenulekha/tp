@@ -30,7 +30,24 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Focuses on the first row of the person list.
+     */
+    public void focusOnFirstRow() {
+        personListView.getSelectionModel().clearSelection();
+        personListView.getSelectionModel().select(0);
+        personListView.getFocusModel().focus(0);
+    }
+
+    /**
+     * Focuses on the person list panel.
+     */
+    public void focus() {
+        personListView.requestFocus();
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using
+     * a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
         @Override

@@ -1,8 +1,12 @@
 package seedu.address.ui;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -15,12 +19,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.EventCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.inputhistory.UserInputHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
 /**
- * The Event Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Event Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class EventWindow extends UiPart<Stage> {
     private static final String FXML = "EventWindow.fxml";
@@ -47,11 +51,14 @@ public class EventWindow extends UiPart<Stage> {
 
     private Logic logic;
 
+    private List<EventHandler<KeyEvent>> keyPressHandlers;
+
     /**
      * Constructs an EventWindow with the specified primaryStage and logic.
      *
      * @param primaryStage The primary stage for the EventWindow.
-     * @param logic        The logic component responsible for handling application logic.
+     * @param logic        The logic component responsible for handling application
+     *                     logic.
      * @throws IllegalArgumentException if logic is null.
      */
     public EventWindow(Stage primaryStage, Logic logic) {
@@ -59,23 +66,24 @@ public class EventWindow extends UiPart<Stage> {
 
         this.primaryStage = primaryStage;
 
+        this.keyPressHandlers = new ArrayList<>();
+
         if (logic == null) {
             throw new IllegalArgumentException("Logic cannot be null");
         }
         this.logic = logic;
-        this.helpWindow = new HelpWindow();
+        this.helpWindow = HelpWindow.get();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-        fillInnerParts();
-
     }
+
     /**
-     * Handles the action event triggered when the user requests help.
-     * If the help window is not already showing, it will be shown.
-     * If the help window is already showing, it will be brought to focus.
+     * Handles the action event triggered when the user requests help. If the help
+     * window is not already showing, it will be shown. If the help window is
+     * already showing, it will be brought to focus.
      */
     @FXML
     public void handleHelp() {
@@ -85,6 +93,7 @@ public class EventWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
@@ -96,7 +105,6 @@ public class EventWindow extends UiPart<Stage> {
 
     @FXML
     private void handleBack() {
-
         try {
             primaryStage.close();
             showMainWindow();
@@ -109,23 +117,28 @@ public class EventWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void clearAccelerators() {
+        helpMenuItem.setAccelerator(null);
+        backMenuItem.setAccelerator(null);
+    }
+
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later version of
+         * SDK.
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will not
+         * work when the focus is in them because the key event is consumed by the
+         * TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * help window purposely so to support accelerators even when focus is in
+         * CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -135,20 +148,70 @@ public class EventWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Sets the key press handler for the given key combination. This is a
+     * workaround for the bug reported here
+     * https://bugs.openjdk.java.net/browse/JDK-8131666.
+     *
+     * According to the bug report, TextInputControl (TextField, TextArea) will
+     * consume function-key events. Because CommandBox contains a TextField, and
+     * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will not
+     * work when the focus is in them because the key event is consumed by the
+     * TextInputControl(s).
+     *
+     * For now, we add following event filter to capture such key events and open
+     * help window purposely so to support accelerators even when focus is in
+     * CommandBox or ResultDisplay.
+     *
+     * @param func    the function to be executed when the key combination is
+     *                pressed
+     * @param keyComb the key combination
+     */
+    private void setKeyPressHandler(Runnable func, KeyCombination keyComb) {
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (keyComb.match(event)) {
+                if (event.getTarget() instanceof TextInputControl) {
+                    event.consume();
+                }
+                func.run();
+            }
+        });
+    }
+
+    private void clearKeyPressHandlers() {
+        keyPressHandlers.forEach(handler -> getRoot().removeEventFilter(KeyEvent.KEY_PRESSED, handler));
+        keyPressHandlers.clear();
+    }
 
     void fillInnerParts() {
         EventListPanel eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        // set focus trigger on the event list panel to F4
+        setKeyPressHandler(eventListPanel::focus, KeyCombination.keyCombination("F4"));
+
         if (eventResultDisplay == null) {
             eventResultDisplay = new ResultDisplay();
             eventResultDisplayPlaceholder.getChildren().add(eventResultDisplay.getRoot());
         }
+        // set focus trigger on the event result display to F3
+        setKeyPressHandler(eventResultDisplay::focus, KeyCombination.keyCombination("F3"));
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        EventCommandBox commandBox = new EventCommandBox(this::executeCommand);
+        UserInputHistory<String> history = logic.getUserInputHistory();
+        EventCommandBox commandBox = new EventCommandBox(this::executeCommand, history::getPreviousChat,
+                history::getNextChat, history::addChatToHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        // set focus trigger on the command box to F2
+        setKeyPressHandler(commandBox::focus, KeyCombination.keyCombination("F2"));
+    }
+
+    private void clearInnerParts() {
+        eventListPanelPlaceholder.getChildren().clear();
+        eventResultDisplayPlaceholder.getChildren().clear();
+        statusbarPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().clear();
     }
 
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -160,11 +223,17 @@ public class EventWindow extends UiPart<Stage> {
         }
 
     }
+
     void show() {
         primaryStage.show();
     }
 
     private void showMainWindow() throws IOException {
+        // Clean up the current window
+        clearAccelerators();
+        clearKeyPressHandlers();
+        clearInnerParts();
+
         // Close the current window
         primaryStage.close();
 
@@ -179,6 +248,7 @@ public class EventWindow extends UiPart<Stage> {
     public EventListPanel getEventListPanel() {
         return eventListPanel;
     }
+
     private EventCommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             if (logic == null) {
