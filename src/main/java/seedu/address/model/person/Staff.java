@@ -73,12 +73,6 @@ public class Staff extends Person {
                 .add("group", group);
     }
 
-
-    @Override
-    public String toCsvLine() {
-        return super.toCsvLine() + "," + group;
-    }
-
     @Override
     public String getInformation() {
         return super.getInformation()

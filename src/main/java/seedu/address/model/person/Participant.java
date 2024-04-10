@@ -76,11 +76,6 @@ public class Participant extends Person {
     }
 
     @Override
-    public String toCsvLine() {
-        return super.toCsvLine() + "," + group;
-    }
-
-    @Override
     public String getInformation() {
         return super.getInformation()
                 + "Group: " + group + "\n";

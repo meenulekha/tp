@@ -6,6 +6,8 @@ import seedu.address.model.person.exceptions.GroupSponsorException;
  * Represents a sponsor in the hackathon.
  */
 public class Sponsor extends Person {
+    public static final int INVALID_GROUP_NUMBER = -1;
+
     /**
      * Constructs a sponsor. Every field must be present and not null.
      */
@@ -44,10 +46,10 @@ public class Sponsor extends Person {
     }
 
     /**
-     * Returns -1.
+     * Returns invalid group number.
      */
     public int getGroupNumber() {
-        return -1;
+        return INVALID_GROUP_NUMBER;
     }
 
     @Override
