@@ -13,12 +13,11 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Participant;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonFactory;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -47,20 +46,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Person person = PersonFactory.createPerson(name, phone, email, category);
+        Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).orElse(null));
 
-        if (argMultimap.getValue(PREFIX_GROUP).isPresent() && person instanceof Staff) {
-            Staff staff = (Staff) person;
-            staff.setGroupNumber(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()).getGroupNumber());
-            return new AddCommand(staff);
-        } else if (argMultimap.getValue(PREFIX_GROUP).isPresent() && person instanceof Participant) {
-            Participant participant = (Participant) person;
-            participant.setGroupNumber(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get())
-                    .getGroupNumber());
-            return new AddCommand(participant);
-        }
-
-
-        return new AddCommand(person);
+        return new AddCommand(person, group);
     }
 
     /**

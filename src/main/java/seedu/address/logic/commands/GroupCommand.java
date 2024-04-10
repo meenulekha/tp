@@ -12,10 +12,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Group;
-import seedu.address.model.person.Participant;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Sponsor;
-import seedu.address.model.person.Staff;
 
 /**
  * Changes the group of a person identified by the index number used in the displayed person list.
@@ -80,23 +78,11 @@ public class GroupCommand extends Command implements ReversibleCommand {
         if (personToGroup instanceof Sponsor) {
             throw new CommandException(MESSAGE_PERSON_WITHOUT_GROUP);
 
-        } else if (personToGroup instanceof Staff) {
-            Staff staffToGroup = (Staff) personToGroup;
-
-            originalGroupNumber = staffToGroup.getGroupNumber();
-            groupedPerson = staffToGroup;
-
-            staffToGroup.setGroupNumber(targetGroupNumber);
-            model.setPerson(personToGroup, staffToGroup);
-
-        } else if (personToGroup instanceof Participant) {
-            Participant participantToGroup = (Participant) personToGroup;
-
-            originalGroupNumber = participantToGroup.getGroupNumber();
-            groupedPerson = participantToGroup;
-
-            participantToGroup.setGroupNumber(targetGroupNumber);
-            model.setPerson(personToGroup, participantToGroup);
+        } else {
+            originalGroupNumber = personToGroup.getGroupNumber();
+            groupedPerson = personToGroup;
+            groupedPerson.setGroupNumber(targetGroupNumber);
+            model.setPerson(personToGroup, groupedPerson);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
