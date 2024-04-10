@@ -30,7 +30,7 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid Group.
+     * Returns true if a given integer is a valid Group.
      */
     public static boolean isValidGroup(int test) {
         return test >= 0;

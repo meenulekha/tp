@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Represents a staff in the hackathon.
  */
@@ -22,8 +24,25 @@ public class Staff extends Person {
     }
 
     /**
+     * Sets the group of the staff.
+     */
+    @Override
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    /**
+     * Returns the group of the staff.
+     */
+    @Override
+    public Group getGroup() {
+        return group;
+    }
+
+    /**
      * Sets the group number of the staff.
      */
+    @Override
     public void setGroupNumber(int groupNumber) {
         this.group = new Group(groupNumber);
     }
@@ -31,6 +50,7 @@ public class Staff extends Person {
     /**
      * Returns the group number of the staff.
      */
+    @Override
     public int getGroupNumber() {
         return group.getGroupNumber();
     }
@@ -45,5 +65,23 @@ public class Staff extends Person {
         }
 
         return super.isSamePerson(other);
+    }
+
+    @Override
+    public ToStringBuilder toStringBuilder() {
+        return super.toStringBuilder()
+                .add("group", group);
+    }
+
+
+    @Override
+    public String toCsvLine() {
+        return super.toCsvLine() + "," + group;
+    }
+
+    @Override
+    public String getInformation() {
+        return super.getInformation()
+                + "Group: " + group + "\n";
     }
 }

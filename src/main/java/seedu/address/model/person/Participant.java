@@ -1,4 +1,7 @@
 package seedu.address.model.person;
+
+import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Represents a participants in hackathon.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -22,8 +25,25 @@ public class Participant extends Person {
     }
 
     /**
+     * Sets the group of the participant.
+     */
+    @Override
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    /**
+     * Returns the group of the participant.
+     */
+    @Override
+    public Group getGroup() {
+        return group;
+    }
+
+    /**
      * Sets the group number of the participant.
      */
+    @Override
     public void setGroupNumber(int groupNumber) {
         this.group = new Group(groupNumber);
     }
@@ -31,6 +51,7 @@ public class Participant extends Person {
     /**
      * Returns the group number of the participant.
      */
+    @Override
     public int getGroupNumber() {
         return group.getGroupNumber();
     }
@@ -46,5 +67,22 @@ public class Participant extends Person {
         }
 
         return super.isSamePerson(other);
+    }
+
+    @Override
+    public ToStringBuilder toStringBuilder() {
+        return super.toStringBuilder()
+                .add("group", group);
+    }
+
+    @Override
+    public String toCsvLine() {
+        return super.toCsvLine() + "," + group;
+    }
+
+    @Override
+    public String getInformation() {
+        return super.getInformation()
+                + "Group: " + group + "\n";
     }
 }

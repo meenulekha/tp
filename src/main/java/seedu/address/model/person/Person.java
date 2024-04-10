@@ -64,6 +64,14 @@ public abstract class Person {
         return comment;
     }
 
+    public abstract Group getGroup();
+
+    public abstract void setGroup(Group group);
+
+    public abstract int getGroupNumber();
+
+    public abstract void setGroupNumber(int groupNumber);
+
 
     /**
      * Returns true if both persons have the same name.
@@ -108,18 +116,26 @@ public abstract class Person {
 
     @Override
     public String toString() {
+        return toStringBuilder().toString();
+    }
+
+    public ToStringBuilder toStringBuilder() {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("category", category)
-                .add("comment", comment)
-                .toString();
+                .add("comment", comment);
     }
 
     public String toCsvString() {
-        return name + "," + phone + "," + email + "," + comment + "\n";
+        return toCsvLine() + "\n";
     }
+
+    public String toCsvLine() {
+        return name + "," + phone + "," + email + "," + comment;
+    }
+
     /**
      * Returns a string representation of the person's details for display.
      */
