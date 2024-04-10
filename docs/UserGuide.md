@@ -173,7 +173,7 @@ Aliases: `ed`
 Cautions / Warnings for Edit:
 
 - There should be no “/” in each parameter.
-- There should be only one field rather than multiple fields.
+- There should be at least one field to edit.
 - Updated information should be different from the original.
 
 ### Grouping a person : `group`
