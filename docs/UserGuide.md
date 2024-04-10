@@ -164,6 +164,9 @@ Format: `list`
 Update and edit participant contact details.
 
 Format: `edit <id> <short name for field that needs update>/ <new value>`
+
+Example: `edit 1 n/John Doe p/98765432`
+
 Acceptable values for each parameter
 
 - `<id>`: the id of the contact in the list. It should be a positive integer smaller than 2147483648.
@@ -227,7 +230,7 @@ format `comment <id> <notes>`
 
 Example:
 
-- `comment 1, Allergic to peanuts`
+- `comment 1 Allergic to peanuts`
 
 Acceptable values for each parameter:
 
@@ -236,7 +239,8 @@ Acceptable values for each parameter:
 
 Precise expected outputs when the command succeeds:
 
-- Commented person: <name> <phone> <email> <category>
+- 'Commented Person: name; phone; email; category;
+- e.g. Commented Person: Alex Yeoh; Phone: 12345678; Email: edited@example.com; Category: PARTICIPANT
 
 Precise expected outputs when the command fails:
 
@@ -290,10 +294,11 @@ The csv file will be saved in the selectedParticipants folder with the name list
 
 Format: `link ID [MORE_ID]`
 
-- The number of ids is not limited
-- The order of the ids does not matter
-- The ids should be valid and in the list
-- The ids should be separated by a space
+- The number of ids is not limited.
+- The order of the ids does not matter.
+- The ids should be valid and in the list.
+- The ids should be separated by a space.
+- There should be no duplicate ids.
 
 Examples:
 
