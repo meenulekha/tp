@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import seedu.address.commons.core.index.Index;
@@ -32,13 +33,16 @@ public class GroupCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_GROUP_PERSON_SUCCESS = "Grouped Person: %1$s";
 
     public static final String MESSAGE_PERSON_WITHOUT_GROUP = "Sponsor doesn't have a group";
+    public static final String MESSAGE_NO_EXISTING_GROUP =
+            "Cannot group without a group number when there is no existing group";
     public static final String MESSAGE_SUCCESS_UNDO = "Changes reverted: %1$s";
 
     private final Index targetIndex;
 
-    private final int targetGroupNumber;
+    private final Optional<Integer> targetGroupNumber;
 
     private int originalGroupNumber;
+    private int finalGroupNumber;
     private Person groupedPerson;
 
     /**
@@ -46,10 +50,8 @@ public class GroupCommand extends Command implements ReversibleCommand {
      * @param targetIndex of the person in the filtered person list to group.
      */
     public GroupCommand(Index targetIndex) {
-        Random random = new Random();
-
         this.targetIndex = targetIndex;
-        this.targetGroupNumber = random.nextInt(Group.getTotalGroupNumber()) + 1;
+        this.targetGroupNumber = Optional.empty();
 
     }
 
@@ -60,7 +62,8 @@ public class GroupCommand extends Command implements ReversibleCommand {
      */
     public GroupCommand(Index targetIndex, int targetGroupNumber) {
         this.targetIndex = targetIndex;
-        this.targetGroupNumber = targetGroupNumber;
+        this.targetGroupNumber = Optional.of(targetGroupNumber);
+        finalGroupNumber = targetGroupNumber;
         Group.setTotalGroupNumber(Math.max(targetGroupNumber, Group.getTotalGroupNumber()));
     }
 
@@ -78,12 +81,22 @@ public class GroupCommand extends Command implements ReversibleCommand {
         if (personToGroup instanceof Sponsor) {
             throw new CommandException(MESSAGE_PERSON_WITHOUT_GROUP);
 
-        } else {
-            originalGroupNumber = personToGroup.getGroupNumber();
-            groupedPerson = personToGroup;
-            groupedPerson.setGroupNumber(targetGroupNumber);
-            model.setPerson(personToGroup, groupedPerson);
         }
+
+        originalGroupNumber = personToGroup.getGroupNumber();
+        groupedPerson = personToGroup;
+
+        if (targetGroupNumber.isPresent()) {
+            groupedPerson.setGroupNumber(targetGroupNumber.get());
+        } else if (Group.getTotalGroupNumber() <= 0) {
+            throw new CommandException(MESSAGE_NO_EXISTING_GROUP);
+        } else {
+            Random random = new Random();
+            finalGroupNumber = random.nextInt(Group.getTotalGroupNumber()) + 1;
+            groupedPerson.setGroupNumber(finalGroupNumber);
+        }
+
+        model.setPerson(personToGroup, groupedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.addCommand(this);
@@ -104,7 +117,7 @@ public class GroupCommand extends Command implements ReversibleCommand {
     public CommandResult redo(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.groupPerson(groupedPerson, targetGroupNumber);
+        model.groupPerson(groupedPerson, finalGroupNumber);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_GROUP_PERSON_SUCCESS, Messages.format(groupedPerson)));
@@ -121,14 +134,14 @@ public class GroupCommand extends Command implements ReversibleCommand {
 
         GroupCommand otherGroupCommand = (GroupCommand) other;
         return targetIndex.equals(otherGroupCommand.targetIndex)
-                && (targetGroupNumber == otherGroupCommand.targetGroupNumber);
+                && (targetGroupNumber.equals(otherGroupCommand.targetGroupNumber));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
-                .add("targetGroup", targetGroupNumber)
+                .add("targetGroup", finalGroupNumber)
                 .toString();
     }
 }
