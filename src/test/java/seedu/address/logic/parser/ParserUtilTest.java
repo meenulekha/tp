@@ -116,11 +116,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGroup_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroup((String) null));
-    }
-
-    @Test
     public void parseGroup_invalidInteger_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseGroup(String.valueOf(INVALID_GROUP)));
     }

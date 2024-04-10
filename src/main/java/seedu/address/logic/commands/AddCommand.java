@@ -7,12 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Optional;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Sponsor;
+import seedu.address.model.person.exceptions.GroupSponsorException;
 
 /**
  * Adds a person to the address book.
@@ -41,6 +46,7 @@ public class AddCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private final Optional<Group> group;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -48,6 +54,16 @@ public class AddCommand extends Command implements ReversibleCommand {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        group = Optional.empty();
+    }
+
+    /**
+     * Creates an AddCommand to add the specified {@code Person} with specified {@code group}
+     */
+    public AddCommand(Person person, Group group) {
+        requireNonNull(person);
+        toAdd = person;
+        this.group = Optional.ofNullable(group);
     }
 
     @Override
@@ -56,6 +72,16 @@ public class AddCommand extends Command implements ReversibleCommand {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (group.isPresent()) {
+            try {
+                toAdd.setGroup(group.get());
+            } catch (GroupSponsorException e) {
+                throw new CommandException(e.getMessage());
+            }
+        } else if (!(toAdd instanceof Sponsor)) {
+            toAdd.setGroupNumber(0);
         }
 
         model.addPerson(toAdd);
