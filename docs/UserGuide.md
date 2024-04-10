@@ -161,11 +161,11 @@ Format: `list`
 
 Update and edit participant contact details.
 
-Format: `edit <id> /<field that needs update> <new value>`
+Format: `edit <id> <short name for field that needs update>/ <new value>`
 Acceptable values for each parameter
 
 - `<id>`: the id of the contact in the list.
-- `<field>`: name, email, phone, category, group.
+- `<short field name>`: n(for name), p(for phone), e(for email), g(for group).
 - `<new value>`: follow the format of its field.
 
 Aliases: `ed`
@@ -175,6 +175,7 @@ Cautions / Warnings for Edit:
 - There should be no “/” in each parameter.
 - There should be at least one field to edit.
 - Updated information should be different from the original.
+- The edit command only supports editing name, phone, email, and group.
 
 ### Grouping a person : `group`
 
