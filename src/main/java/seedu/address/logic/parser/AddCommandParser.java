@@ -15,11 +15,9 @@ import seedu.address.model.person.Category;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Participant;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonFactory;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
 
 /**
  * Parses input arguments and creates a new AddCommand object

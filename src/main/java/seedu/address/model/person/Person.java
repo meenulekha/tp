@@ -119,6 +119,9 @@ public abstract class Person {
         return toStringBuilder().toString();
     }
 
+    /**
+     * Returns a ToStringBuilder representation of the person's details as a toString() method helper.
+     */
     public ToStringBuilder toStringBuilder() {
         return new ToStringBuilder(this)
                 .add("name", name)
@@ -132,6 +135,9 @@ public abstract class Person {
         return toCsvLine() + "\n";
     }
 
+    /**
+     * Returns a string representation of the person's details as a toCsvString() method helper.
+     */
     public String toCsvLine() {
         return name + "," + phone + "," + email + "," + comment;
     }
