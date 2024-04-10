@@ -19,7 +19,8 @@ public class DeleteEventCommand extends EventCommand implements ReversibleComman
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer smaller than 2147483648)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event: %1$s";
     public static final String MESSAGE_SUCCESS_UNDO = "Undo deleting: event added: %1$s";
