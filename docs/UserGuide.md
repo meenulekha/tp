@@ -225,7 +225,7 @@ Example:
 
 ### Commenting a person : `comment`
 
-Add notes or comments to contacts
+Add notes or comments to contacts. New comment will replace the old comment.
 format `comment <id> <notes>`
 
 Example:
