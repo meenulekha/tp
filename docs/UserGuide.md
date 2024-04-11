@@ -74,7 +74,7 @@ streamline the process of organizing and coordinating your hackathon event.
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   - `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
+   - `edit 1 p/89898989` : Updates the information of the person at index 1.
 
    - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
 
