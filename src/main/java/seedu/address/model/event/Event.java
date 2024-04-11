@@ -46,12 +46,13 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName())
-                && otherEvent.getEventCategory().equals(getEventCategory());
+                || otherEvent.getEventName().equals(getEventName())
+                || otherEvent.getEventDate().equals(getEventDate())
+                || otherEvent.getEventCategory().equals(getEventCategory());
     }
 
     /**
-     * Returns true if both events have the same event name and event category.
+     * Returns true if both events have the same event name, event date and event category.
      * This defines a stronger notion of equality between two events.
      */
     @Override
@@ -67,13 +68,14 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return eventName.equals(otherEvent.eventName)
-                && eventCategory.equals(otherEvent.eventCategory);
+                || eventDate.equals(otherEvent.eventDate)
+                || eventCategory.equals(otherEvent.eventCategory);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(eventName, eventCategory);
+        return Objects.hash(eventName, eventDate, eventCategory);
     }
 
     @Override
@@ -81,6 +83,8 @@ public class Event {
         return "event{"
                 + "eventName="
                 + eventName
+                + ", eventDate="
+                + eventDate
                 + ", eventCategory="
                 + eventCategory
                 + '}';
