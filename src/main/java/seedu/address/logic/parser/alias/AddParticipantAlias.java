@@ -3,6 +3,7 @@ package seedu.address.logic.parser.alias;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -20,7 +21,7 @@ public class AddParticipantAlias extends Alias<AddCommand> {
     public static final String MESSAGE_USAGE = ALIAS_WORD + ": Adds a participant to the address book. \n"
             + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL \n" + "Example: "
             + ALIAS_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
-            + "johndoe@example.com";
+            + "johndoe@example.com " + "[" + PREFIX_GROUP + "GROUP]\n";
 
     private String toAddCommandInput(String input) {
         String paramCategory = PREFIX_CATEGORY + "participant";
