@@ -25,7 +25,7 @@ public class GroupCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Changes the group of a person identified by the index number used in the displayed person list."
             + "Existing values will be overwritten by the input values. \n"
-            + "Parameters: INDEX (must be a positive integer smaller than 2147483648) "
+            + "Parameters: INDEX (must be a positive integer) "
             + "NEW_GROUP (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2" + " 3";
 

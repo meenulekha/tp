@@ -28,7 +28,7 @@ public class CommentCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the comment of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer smaller than 2147483648) " + "COMMENT\n"
+            + "Parameters: INDEX (must be a positive integer) " + "COMMENT\n"
             + "Example: " + COMMAND_WORD + " 1 " + "This is a comment.";
 
     public static final String MESSAGE_COMMENT_PERSON_SUCCESS = "Commented Person: %1$s";

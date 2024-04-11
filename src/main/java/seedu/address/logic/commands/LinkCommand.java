@@ -22,7 +22,7 @@ public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links all selected participants to the event. "
-            + "Parameters: multiple index (must be a positive integer smaller than 2147483648)\n"
+            + "Parameters: multiple index (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_SUCCESS = "Exported all selected participants";

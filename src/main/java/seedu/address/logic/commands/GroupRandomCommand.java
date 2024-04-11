@@ -28,7 +28,7 @@ public class GroupRandomCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets randomly the group of every person displayed on the list."
             + "Existing values will be overwritten by the input values. \n"
-            + "Parameters: MAX_GROUP_SIZE (must be a positive integer smaller than 2147483648)\n"
+            + "Parameters: MAX_GROUP_SIZE (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 4";
 
     public static final String MESSAGE_GROUP_RANDOM_SUCCESS = "Grouped every person on the list";
