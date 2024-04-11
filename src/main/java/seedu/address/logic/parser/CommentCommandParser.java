@@ -29,8 +29,8 @@ public class CommentCommandParser implements Parser<CommentCommand> {
         }
         try {
             Index index = ParserUtil.parseIndex(splitArgs[0]);
-            String comment = splitArgs[1];
-            return new CommentCommand(index, new Comment(comment));
+            Comment comment = ParserUtil.parseComment(splitArgs[1]);
+            return new CommentCommand(index, comment);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE), pe);

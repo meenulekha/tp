@@ -11,6 +11,7 @@ import seedu.address.model.event.EventCategory;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Category;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
@@ -96,6 +97,21 @@ public class ParserUtil {
         return new Category(trimmedCategory);
     }
 
+    /**
+     * Parses a {@code String comment} into a {@code Comment}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Commas will be removed.
+     * throws ParseException if the given {@code comment} is invalid.
+     */
+    public static Comment parseComment(String comment) throws ParseException {
+        requireNonNull(comment);
+        String trimmedComment = comment.trim();
+        if (!Comment.isValidComment(trimmedComment)) {
+            throw new ParseException(Comment.MESSAGE_CONSTRAINTS);
+        }
+        String result = trimmedComment.replace(",", "");
+        return new Comment(result);
+    }
 
     /**
      * Parses a string representation of an event name into an EventName object.
