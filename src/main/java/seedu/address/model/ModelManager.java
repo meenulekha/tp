@@ -40,7 +40,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEventBook eventBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with data file: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.eventBook = new EventBook(eventBook);
@@ -217,7 +217,6 @@ public class ModelManager implements Model {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
-
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
@@ -251,11 +250,10 @@ public class ModelManager implements Model {
         requireNonNull(eventBookFilePath);
         userPrefs.setEventBookFilePath(eventBookFilePath);
     }
+
     @Override
     public void setEventBook(ReadOnlyEventBook eventBook) {
         this.eventBook.resetData(eventBook);
     }
-
-
 
 }

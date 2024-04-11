@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddStaffAlias extends Alias<AddCommand> {
     public static final String ALIAS_WORD = "at";
 
-    public static final String MESSAGE_USAGE = ALIAS_WORD + ": Adds a staff to the address book. \n" + "Parameters: "
+    public static final String MESSAGE_USAGE = ALIAS_WORD + ": Adds a staff to the contact list. \n" + "Parameters: "
             + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + "[" + PREFIX_GROUP
             + "GROUP]\n" + "Example: " + ALIAS_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johndoe@example.com ";
