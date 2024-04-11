@@ -215,9 +215,8 @@ Assigns a random group to each participant and staff that are currently listed.
 Format: `grouprandom <maximum group size>`
 
 - The `<maximum group size>` refers to the maximum number of people in a group.
-- The `<maximum group size>` can be any positive integer smaller than 2147483647.
+- The `<maximum group size>` can be any positive integer smaller than 2147483648.
 - You can only group staff and participant, sponsor cannot be grouped.
-- As the maximum number of entries in the contact list is 2147483647, the maximum group size should be a positive integer smaller than 2147483648.
 
 Example:
 
