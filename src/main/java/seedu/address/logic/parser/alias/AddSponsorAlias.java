@@ -19,7 +19,7 @@ public class AddSponsorAlias extends Alias<AddCommand> {
     public static final String ALIAS_WORD = "as";
 
     public static final String MESSAGE_USAGE = ALIAS_WORD + ": Adds a sponsor to the address book. \n" + "Parameters: "
-            + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL \n" + "[" + PREFIX_GROUP
+            + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + "[" + PREFIX_GROUP
             + "GROUP]\n" + "Example: " + ALIAS_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

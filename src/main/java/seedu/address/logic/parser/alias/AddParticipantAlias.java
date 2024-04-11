@@ -19,9 +19,9 @@ public class AddParticipantAlias extends Alias<AddCommand> {
     public static final String ALIAS_WORD = "ap";
 
     public static final String MESSAGE_USAGE = ALIAS_WORD + ": Adds a participant to the address book. \n"
-            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL \n" + "Example: "
-            + ALIAS_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL
-            + "johndoe@example.com " + "[" + PREFIX_GROUP + "GROUP]\n";
+            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL " + "["
+            + PREFIX_GROUP + "GROUP]\n" + "Example: " + ALIAS_WORD + " " + PREFIX_NAME + "John Doe " + PREFIX_PHONE
+            + "98765432 " + PREFIX_EMAIL + "johndoe@example.com ";
 
     private String toAddCommandInput(String input) {
         String paramCategory = PREFIX_CATEGORY + "participant";
