@@ -148,7 +148,7 @@ Cautions / Warnings for Add:
 - There should be no <span style="color:yellow">“/”</span> in each parameter.
 - There should be no contacts with the same information.
 - Category should be one of Participant, Sponsor, and Staff.
-- This app is designed for small event. You can add a person up to 2147483648. 
+- This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the contact list is 2147483647. 
 Please delete some contacts to add a new person if you reach the limit.
 
 ### Listing all persons : `list`
@@ -163,13 +163,13 @@ Format: `list`
 
 Update and edit participant contact details.
 
-Format: `edit <id> <short name for field that needs update>/ <new value>`
+Format: `edit <id> [n/<new_name>] [p/<new_phone>] [e/<new_email>] [g/<new_group>]`
 
 Example: `edit 1 n/John Doe p/98765432`
 
 Acceptable values for each parameter
 
-- `<id>`: the id of the contact in the list. It should be a positive integer smaller than 2147483648.
+- `<id>`: the index of the contact in the list. It should be a positive integer smaller than 2147483648.
 - `<short field name>`: n(for name), p(for phone), e(for email), g(for group).
 - `<new value>`: follow the format of its field.
 
@@ -181,7 +181,7 @@ Cautions / Warnings for Edit:
 - There should be at least one field to edit.
 - Updated information should be different from the original.
 - The edit command only supports editing name, phone, email, and group.
-- This app is designed for small hackathons. The id should be a positive integer smaller than 2147483648. 
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648. 
 
 ### Grouping a person : `group`
 
@@ -190,10 +190,10 @@ Assigns a group to a participant or a staff.
 Format: `group <id> [<group number>]`
 
 - You can only randomly assign a person to an existing group.
-- The `<id>` refers to the identification number of the contact in the list.
+- The `<id>` refers to the index number of the contact in the list.
 - The `<group number>` can be any positive integer.
 - You can only group staff and participant, sponsor cannot be grouped.
-- This app is designed for small hackathons. The id should be a positive integer smaller than 2147483648.
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
 
 Examples:
 
@@ -215,9 +215,9 @@ Assigns a random group to each participant and staff that are currently listed.
 Format: `grouprandom <maximum group size>`
 
 - The `<maximum group size>` refers to the maximum number of people in a group.
-- The `<maximum group size>` can be any positive integer.
+- The `<maximum group size>` can be any positive integer smaller than 2147483647.
 - You can only group staff and participant, sponsor cannot be grouped.
-- This app is designed for small hackathons. The maximum group size should be a positive integer smaller than 2147483648.
+- As the maximum number of entries in the contact list is 2147483647, the maximum group size should be a positive integer smaller than 2147483648.
 
 Example:
 
@@ -226,6 +226,7 @@ Example:
 ### Commenting a person : `comment`
 
 Add notes or comments to contacts. New comment will replace the old comment.
+Comma in the comment might cause the csv file to be corrupted, so they are removed from your input.
 format `comment <id> <notes>`
 
 Example:
@@ -255,7 +256,7 @@ Example:`view 1`
 
 Acceptable values for each parameter:
 
-- `<id>`: the id of the contact in the list
+- `<id>`: the index of the contact in the list
 
 Precise expected outputs when the command succeeds:
 
@@ -292,7 +293,7 @@ Examples:
 Produce a csv file with selected participants' contact information to provide to sponsor.
 The csv file will be saved in the selectedParticipants folder with the name list.csv.
 
-Format: `link ID [MORE_ID]`
+Format: `link ID [MORE_ID...]`
 
 - The number of ids is not limited.
 - The order of the ids does not matter.
@@ -308,9 +309,9 @@ Examples:
 
 Warning:
 
-- comma in the comment might cause the csv file to be corrupted.
-  Do not open the list.csv file while the application is running.
-- This app is designed for small hackathons. The id should be a positive integer smaller than 2147483648.
+- comma in the comment might cause the csv file to be corrupted, so they are removed from your input. Avoid using comma.
+- Do not open the list.csv file while the application is running.
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
 
 ### Removing a person : `delete`
 
@@ -343,7 +344,7 @@ Cautions / Warnings for Addevent:
 
 - There should be no <span style="color:yellow">“/”</span> in each parameter.
 - Category should be one of Participant, Sponsor, and Staff.
-- This app is designed for small hackathons. The maximum number of events is 2147483648. Please delete some events to add a new event if you reach the limit.
+- This app is designed for small hackathons. However, the maximum number of events entries is 2147483647. Please delete some events to add a new event if you reach the limit.
 
 ### Listing all events : `listevent`
 
