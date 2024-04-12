@@ -61,6 +61,6 @@ public class Sponsor extends Person {
         if (!(other instanceof Sponsor)) {
             return false;
         }
-        return super.isSamePerson(other);
+        return super.isSamePersonBase(other);
     }
 }
