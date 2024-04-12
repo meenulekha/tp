@@ -178,22 +178,20 @@ Format: `list`
 
 Update and edit participant contact details.
 
-Format: `edit <id> [n/<new_name>] [p/<new_phone>] [e/<new_email>] [g/<new_group>]`
+Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP]`
 
 Example: `edit 1 n/John Doe p/98765432`
 
 Acceptable values for each parameter
 
-- `<id>`: the index of the contact in the list. It should be a positive integer smaller than 2147483648.
-- `<short field name>`: n(for name), p(for phone), e(for email), g(for group).
-- `<new value>`: follow the format of its field.
+- `ID`: the index of the contact in the list. It should be a positive integer smaller than 2147483648.
 
 Aliases: `ed`
 
 Cautions / Warnings for Edit:
 
 - There should be no “/” in each parameter.
-- There should be at least one field to edit.
+- There should be at least one field to edit. (`edit 1` is invalid, `edit 1 n/John Doe` is valid)
 - Updated information should be different from the original.
 - The edit command only supports editing name, phone, email, and group.
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
@@ -203,11 +201,11 @@ Cautions / Warnings for Edit:
 
 Assigns a group to a participant or a staff.
 
-Format: `group <id> [<group number>]`
+Format: `group ID [GROUP_NUMBER]`
 
 - You can only randomly assign a person to an existing group.
-- The `<id>` refers to the index number of the contact in the list.
-- The `<group number>` can be any positive integer.
+- The `ID` refers to the index number of the contact in the list.
+- The `GROUP_NUMBER` can be any positive integer.
 - You can only group staff and participant, sponsor cannot be grouped.
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
@@ -229,10 +227,10 @@ Cautions / Warnings for Group:
 
 Assigns a random group to each participant and staff that are currently listed.
 
-Format: `grouprandom <maximum group size>`
+Format: `grouprandom MAXIMUM_GROUP_SIZE`
 
-- The `<maximum group size>` refers to the maximum number of people in a group.
-- The `<maximum group size>` can be any positive integer smaller than 2147483648.
+- The `MAXIMUM_GROUP_SIZE` refers to the maximum number of people in a group.
+- The `MAXIMUM_GROUP_SIZE` can be any positive integer smaller than 2147483648.
 - You can only group staff and participant, sponsor cannot be grouped.
 
 Example:
@@ -243,7 +241,8 @@ Example:
 
 Add notes or comments to contacts. New comment will replace the old comment.
 Comma in the comment might cause the csv file to be corrupted, so they are removed from your input.
-format `comment <id> <notes>`
+
+Format `comment ID NOTES`
 
 Example:
 
@@ -251,8 +250,8 @@ Example:
 
 Acceptable values for each parameter:
 
-- `<id>`: the id of the contact in the list
-- `<note>`: any string
+- `ID`: the id of the contact in the list
+- `NOTES`: any string
 
 Precise expected outputs when the command succeeds:
 
@@ -266,13 +265,14 @@ Precise expected outputs when the command fails:
 ### Viewing comments : `view`
 
 view comments of a specific contact
-format `view <id>`
+
+Format `view ID`
 
 Example:`view 1`
 
 Acceptable values for each parameter:
 
-- `<id>`: the index of the contact in the list
+- `ID`: the index of the contact in the list
 
 Precise expected outputs when the command succeeds:
 
@@ -377,12 +377,12 @@ Format: `listevent`
 
 Remove specific events from the database.
 
-Format: `deleteevent <id>`
+Format: `deleteevent ID`
 Example:
 `deleteevent 1`
 Acceptable values for each parameter
 
-- `<id>`: the id of the event in the list(positive integer smaller than 2147483648)
+- `ID`: the id of the event in the list(positive integer smaller than 2147483648)
 
 Precise expected outputs when the command succeeds
 
