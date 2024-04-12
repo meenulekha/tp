@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing HackLink ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -73,9 +73,11 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address
+     * book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if
+     * {@code storage}'s address book is not found, or an empty address book will be
+     * used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
@@ -91,10 +93,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty data file.");
             initialData = new AddressBook();
         }
-        //read only event book
+        // read only event book
         logger.info("Using data file : " + storage.getEventBookFilePath());
 
         Optional<ReadOnlyEventBook> eventBookOptional;
@@ -149,7 +151,8 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -159,9 +162,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs
+     * file path, or a new {@code UserPrefs} with default configuration if errors
+     * occur when reading from the file.
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
@@ -175,12 +178,13 @@ public class MainApp extends Application {
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
-            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+            logger.warning(
+                    "Preference file at " + prefsFilePath + " could not be loaded." + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
@@ -192,13 +196,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting HackLink " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping HackLink ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
