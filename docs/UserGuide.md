@@ -309,7 +309,7 @@ Examples:
 Produce a csv file with selected participants' contact information to provide to sponsor.
 The csv file will be saved in the `selectedParticipants` folder with the name `list.csv`.
 
-Format: `link ID [MORE_ID...]`
+Format: `link ID [MORE_ID]...`
 
 - The number of ids is not limited.
 - The order of the ids does not matter.
@@ -539,24 +539,24 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                |
-|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
-| **Clear**          | `clear`                                                                                                                                         |
-| **Remove**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP_NUMBER]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`            |
-| **Group**          | `group INDEX [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                              |
-| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                          |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
-| **List**           | `list`                                                                                                                                          |
-| **Link**           | `link INDEX [INDEXES]...`<br> e.g., `link 1 2 3`                                                                                                |
-| **Comment**        | `comment INDEX NOTES`<br> e.g., `comment 1 Allergic to peanuts`                                                                                 |
-| **View**           | `view <id>` <br> e.g., `view 1`                                                                                                                 |
-| **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                                   |
-| **ListEvent**      | `listevent`                                                                                                                                     |
-| **DeleteEvent**    | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
-| **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                               |
-| **Help**           | `help`                                                                                                                                          |
-| **Exit**           | `exit`                                                                                                                                          | 
-| **Undo**           | `undo`                                                                                                                                          |
-| **Redo**           | `redo`                                                                                                                                          |
+| Action             | Format, Examples                                                                                                                         |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
+| **Clear**          | `clear`                                                                                                                                  |
+| **Remove**         | `delete ID`<br> e.g., `delete 3`                                                                                                         |
+| **Edit**           | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`               |
+| **Group**          | `group ID [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                          |
+| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                   |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                               |
+| **List**           | `list`                                                                                                                                   |
+| **Link**           | `link ID [MORE_ID]...`<br> e.g., `link 1 2 3`                                                                                            |
+| **Comment**        | `comment ID NOTES`<br> e.g., `comment 1 Allergic to peanuts`                                                                             |
+| **View**           | `view ID` <br> e.g., `view 1`                                                                                                            |
+| **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                            |
+| **ListEvent**      | `listevent`                                                                                                                              |
+| **DeleteEvent**    | `deleteevent ID`<br> e.g., `deleteevent 8`                                                                                               |
+| **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                        |
+| **Help**           | `help`                                                                                                                                   |
+| **Exit**           | `exit`                                                                                                                                   | 
+| **Undo**           | `undo`                                                                                                                                   |
+| **Redo**           | `redo`                                                                                                                                   |
