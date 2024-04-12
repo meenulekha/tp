@@ -14,33 +14,33 @@ streamline the process of organizing and coordinating your hackathon event.
 1. [Quick start](#quick-start)
 2. [Main features](#main-features)
 
-   - [Viewing help](#viewing-help--help)
-   - [Adding a person](#adding-a-person--add)
-   - [Listing all persons](#listing-all-persons--list)
-   - [Editing a person](#editing-a-person--edit)
-   - [Grouping a person](#grouping-a-person--group)
-   - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
-   - [Commenting a person](#commenting-a-person--comment)
-   - [Viewing comments](#viewing-comments--view)
-   - [Locating persons by keywords](#locating-persons-by-keywords--find)
-   - [Exporting a selected participants](#exporting-selected-participants--link)
-   - [Removing a person](#removing-a-person--delete)
-   - [Clearing all entries](#clearing-all-entries--clear)
-   - [Adding an event](#adding-an-event--addevent)
-   - [Listing all events](#listing-all-events--listevent)
-   - [Removing an event](#removing-an-event--deleteevent)
-   - [Locating events by keywords](#locating-events-by-keywords--findevent)
-   - [Exiting the program](#exiting-the-program--exit)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a person](#adding-a-person--add)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Grouping a person](#grouping-a-person--group)
+    - [Grouping randomly listed persons](#grouping-randomly-listed-persons--grouprandom)
+    - [Commenting a person](#commenting-a-person--comment)
+    - [Viewing comments](#viewing-comments--view)
+    - [Locating persons by keywords](#locating-persons-by-keywords--find)
+    - [Exporting a selected participants](#exporting-selected-participants--link)
+    - [Removing a person](#removing-a-person--delete)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Adding an event](#adding-an-event--addevent)
+    - [Listing all events](#listing-all-events--listevent)
+    - [Removing an event](#removing-an-event--deleteevent)
+    - [Locating events by keywords](#locating-events-by-keywords--findevent)
+    - [Exiting the program](#exiting-the-program--exit)
 
 3. [Utility features](#utility-features)
 
-   - [Saving the data](#saving-the-data)
-   - [Editing the data file](#editing-the-data-file)
-   - [Navigating to older commands](#navigating-to-older-commands)
-   - [Aliases](#aliases)
-   - [Shortcuts](#shortcuts)
-   - [Undo](#undo)
-   - [Redo](#redo)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Navigating to older commands](#navigating-to-older-commands)
+    - [Aliases](#aliases)
+    - [Shortcuts](#shortcuts)
+    - [Undo](#undo)
+    - [Redo](#redo)
 
 4. [Event window](#event-window)
 5. [FAQ](#faq)
@@ -68,30 +68,30 @@ streamline the process of organizing and coordinating your hackathon event.
    open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
+    - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
+    - `add n/John Doe p/98765432 e/johndoe@gmail.com c/participant` : Adds a person named `John Doe` to HackLink.
 
-   - `delete 3` : Deletes the 3rd person shown in the current list.
+    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   - `edit 1 p/89898989` : Updates the information of the person at index 1.
+    - `edit 1 p/89898989` : Updates the information of the person at index 1.
 
-   - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
+    - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
 
-   - `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section
    for more details.
 
 7. Type the commands in the comman box and press Enter to execute them.
 
-   - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
+    - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
-   - `deleteevent 8` : Deletes the 8th event shown in the list.
+    - `deleteevent 8` : Deletes the 8th event shown in the list.
 
-   - `findevent meeting` : Finds events which names contain "meeting".
+    - `findevent meeting` : Finds events which names contain "meeting".
 
-   - `listevent` : Lists all events.
+    - `listevent` : Lists all events.
 
 8. Refer to the [Main features](#main-features) below for details of each command.
 
@@ -144,7 +144,7 @@ Aliases:
 - `as`: add sponsor
 - `at`: add staff
 
-  You can skip the category parameter and the application will automatically assign the category based on the alias
+  You can skip the `CATEGORY` parameter and the application will automatically assign the category based on the alias
   used.
 
 Examples:
@@ -155,9 +155,10 @@ Examples:
 
 Cautions / Warnings for Add:
 
-- There should be no <span style="color:yellow">“/”</span> in each parameter.
-- There should be no contacts with the same information.
-- Category should be one of Participant, Sponsor, and Staff.
+- There should be no “/” in each parameter.
+- There should be no contacts with the same information. 2 contacts are considered the same if they have the same
+  **name**, **phone number** and **category**.
+- Category should be either Participant, Sponsor, or Staff.
 - This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the
   contact list is 2147483647.
   Please delete some contacts to add a new person if you reach the limit.
@@ -192,7 +193,8 @@ Cautions / Warnings for Edit:
 - There should be at least one field to edit.
 - Updated information should be different from the original.
 - The edit command only supports editing name, phone, email, and group.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
 
 ### Grouping a person : `group`
 
@@ -204,7 +206,8 @@ Format: `group <id> [<group number>]`
 - The `<id>` refers to the index number of the contact in the list.
 - The `<group number>` can be any positive integer.
 - You can only group staff and participant, sponsor cannot be grouped.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
 
 Examples:
 
@@ -321,7 +324,8 @@ Warning:
 
 - comma in the comment might cause the csv file to be corrupted, so they are removed from your input. Avoid using comma.
 - Do not open the list.csv file while the application is running.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
 
 ### Removing a person : `delete`
 
@@ -524,7 +528,7 @@ the data of your previous AddressBook home folder.
 ## Command summary
 
 | Action             | Format, Examples                                                                                                                                |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP_NUMBER]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
 | **Clear**          | `clear`                                                                                                                                         |
 | **Remove**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
