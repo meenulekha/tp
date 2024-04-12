@@ -14,8 +14,7 @@ import java.time.format.DateTimeParseException;
 public class EventDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates of events should be in DD-MM-YYYY format, and it should not be blank. "
-                    + "Ensure that the date is in the future.";
+            "Dates of events should be in DD-MM-YYYY format, and it should not be blank. ";
 
     public static final String VALIDATION_REGEX = "^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$";
     public final String eventDate;
