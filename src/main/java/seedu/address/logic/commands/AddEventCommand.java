@@ -21,7 +21,7 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand {
             + "Parameters: "
             + PREFIX_EVENTNAME + "EVENT_NAME "
             + PREFIX_EVENTDATE + "EVENT_DATE "
-            + PREFIX_EVENTCATEGORY + " EVENT_CATEGORY\n"
+            + PREFIX_EVENTCATEGORY + "EVENT_CATEGORY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENTNAME + "Meeting " + PREFIX_EVENTDATE + "10-10-2024 " + PREFIX_EVENTCATEGORY + "staff";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
