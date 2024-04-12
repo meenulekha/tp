@@ -106,10 +106,11 @@ streamline the process of organizing and coordinating your hackathon event.
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
--
+- Items in square brackets `[]` are optional.<br>
+  e.g. `n/NAME [g/GROUP]` can be used as `n/John Doe g/1` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/CATEGORY…​]` can be used as ` ` (i.e. 0 times), `c/staff`, `c/sponsor` etc.
+  e.g. `[c/CATEGORY​]…` can be used as ` ` (i.e. 0 times), `c/staff`, `c/sponsor` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -118,7 +119,7 @@ streamline the process of organizing and coordinating your hackathon event.
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Some commands have aliases. The aliases are shown in the command details. Please refer to [Aliases](#aliases) for more
+- Some commands have aliases. Please refer to [Aliases](#aliases) for more
   information.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
