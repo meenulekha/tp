@@ -25,11 +25,11 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Locating persons by keywords](#locating-persons-by-keywords--find)
     - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--delete)
-    - [Clearing all entries](#clearing-all-entries--clear)
     - [Adding an event](#adding-an-event--addevent)
     - [Listing all events](#listing-all-events--listevent)
     - [Removing an event](#removing-an-event--deleteevent)
     - [Locating events by keywords](#locating-events-by-keywords--findevent)
+    - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
 
 3. [Utility features](#utility-features)
@@ -57,7 +57,7 @@ streamline the process of organizing and coordinating your hackathon event.
 
 2. Download the latest `HackLink.jar` from [here](https://github.com/AY2324S2-CS2103T-F12-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your HakcLink application.
+3. Copy the file to the folder you want to use as the _home folder_ for your HackLink application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command
    to run the application.<br>
@@ -106,8 +106,10 @@ streamline the process of organizing and coordinating your hackathon event.
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+-
+
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/CATEGORY]…​` can be used as ` ` (i.e. 0 times), `c/staff`, `c/sponsor` etc.
+  e.g. `[c/CATEGORY…​]` can be used as ` ` (i.e. 0 times), `c/staff`, `c/sponsor` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -166,7 +168,7 @@ Cautions / Warnings for Add:
 ### Listing all persons : `list`
 
 Shows a list of all persons in HackLink.
-Example: `Total: <total number of data>`
+
 The table will show all the data
 
 Format: `list`
@@ -304,7 +306,7 @@ Examples:
 ### Exporting selected participants : `link`
 
 Produce a csv file with selected participants' contact information to provide to sponsor.
-The csv file will be saved in the selectedParticipants folder with the name list.csv.
+The csv file will be saved in the `selectedParticipants` folder with the name `list.csv`.
 
 Format: `link ID [MORE_ID...]`
 
@@ -542,6 +544,9 @@ the data of your previous AddressBook home folder.
 | **View**           | `view <id>` <br> e.g., `view 1`                                                                                                                 |
 | **AddEvent**       | `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`<br> e.g., `addevent en/meeting3 ed/11-06-2024 ec/staff`                                   |
 | **ListEvent**      | `listevent`                                                                                                                                     |
-| **DeletEvent**     | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
+| **DeleteEvent**    | `deleteevent INDEX`<br> e.g., `deleteevent 8`                                                                                                   |
 | **FindEvent**      | `findevent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findevent meeting`                                                                               |
 | **Help**           | `help`                                                                                                                                          |
+| **Exit**           | `exit`                                                                                                                                          | 
+| **Undo**           | `undo`                                                                                                                                          |
+| **Redo**           | `redo`                                                                                                                                          |
