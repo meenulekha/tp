@@ -52,7 +52,10 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand {
 
         model.addEvent(toAdd);
         model.addCommand(this);
+        //String formattedMessage = String.format(MESSAGE_SUCCESS, toAdd.getEventName(), toAdd.getEventDate(),
+        //      toAdd.getEventCategory());
         return new EventCommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
+        //return new EventCommandResult(formattedMessage);
     }
 
     @Override
@@ -68,6 +71,11 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand {
 
     @Override
     public CommandResult redo(Model model) throws UndoException, CommandException {
+        requireNonNull(model);
+
+        if (model.hasEvent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
         model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
@@ -79,7 +87,7 @@ public class AddEventCommand extends EventCommand implements ReversibleCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddEventCommand)) {
             return false;
         }
 

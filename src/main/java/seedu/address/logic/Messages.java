@@ -59,10 +59,11 @@ public class Messages {
      */
     public static String formatEvent(Event toAdd) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(toAdd.getEventName())
-                .append("; Date: ")
+        builder.append("eventName=")
+                .append(toAdd.getEventName())
+                .append(", eventDate=")
                 .append(toAdd.getEventDate())
-                .append(" ; Category: ")
+                .append(", eventCategory=")
                 .append(toAdd.getEventCategory());
         return builder.toString();
     }

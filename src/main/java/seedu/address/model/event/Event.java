@@ -67,9 +67,10 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return eventName.equals(otherEvent.eventName)
-                || eventDate.equals(otherEvent.eventDate)
-                || eventCategory.equals(otherEvent.eventCategory);
+        return otherEvent != null
+                && (eventName.equals(otherEvent.eventName)
+                && eventDate.equals(otherEvent.eventDate)
+                && eventCategory.equals(otherEvent.eventCategory));
     }
 
     @Override
@@ -80,14 +81,12 @@ public class Event {
 
     @Override
     public String toString() {
-        return "event{"
-                + "eventName="
+        return "eventName="
                 + eventName
                 + ", eventDate="
                 + eventDate
                 + ", eventCategory="
-                + eventCategory
-                + '}';
+                + eventCategory;
     }
 
 
