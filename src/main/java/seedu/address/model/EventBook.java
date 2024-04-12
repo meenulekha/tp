@@ -116,7 +116,7 @@ public class EventBook implements ReadOnlyEventBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof EventBook)) {
             return false;
         }
 
