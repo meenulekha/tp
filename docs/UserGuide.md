@@ -464,8 +464,17 @@ to repeat a command you have previously entered.
 
 ### Aliases
 
-Aliases are shortcuts for commands. In each command, you can use the alias instead of the full command. Please refer to
-each command details for the alias.
+Aliases are shortcuts for commands. In each command, you can use the alias in place of the command word, unless
+specified otherwise by the command. Please refer to each command details for the alias.<br>
+
+Example:
+
+- [Delete command](#removing-a-person--delete) has command word `delete` and alias `d`. `d 1` and `delete 1` both
+  deletes the person at index 1.
+- [Adding command](#adding-a-person--add) has command word `add` and alias `ap` for adding participant. You don't need
+  to include participant parameter when using this alias for `add` command.<br>
+  `add n/John e/john@mail.com p/84831193 c/participant` and `ap n/John e/john@mail.com p/84831193` both adds new contact
+  named "John" with given information to the contact list.
 
 ### Shortcuts
 
