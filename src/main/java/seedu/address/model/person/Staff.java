@@ -7,6 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Staff extends Person {
     private Group group;
+
     /**
      * Constructs staff. Every field must be present and not null.
      */
@@ -54,6 +55,7 @@ public class Staff extends Person {
     public int getGroupNumber() {
         return group.getGroupNumber();
     }
+
     @Override
     public boolean isSamePerson(Person other) {
         if (other == this) {
@@ -64,18 +66,16 @@ public class Staff extends Person {
             return false;
         }
 
-        return super.isSamePerson(other);
+        return super.isSamePersonBase(other);
     }
 
     @Override
     public ToStringBuilder toStringBuilder() {
-        return super.toStringBuilder()
-                .add("group", group);
+        return super.toStringBuilder().add("group", group);
     }
 
     @Override
     public String getInformation() {
-        return super.getInformation()
-                + "Group: " + group + "\n";
+        return super.getInformation() + "Group: " + group + "\n";
     }
 }

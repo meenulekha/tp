@@ -7,8 +7,8 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Person in the address book. Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public abstract class Person {
 
@@ -32,6 +32,7 @@ public abstract class Person {
         this.category = category;
         this.comment = new Comment();
     }
+
     /**
      * Constructs person with comment. Every field must be present and not null.
      */
@@ -72,23 +73,31 @@ public abstract class Person {
 
     public abstract void setGroupNumber(int groupNumber);
 
+    /**
+     * Returns true if both persons have the same category and data, as specified by the {@code isSamePersonBase}
+     * method.
+     *
+     * @param otherPerson Person to compare with.
+     * @return True if both persons have the same category and data.
+     */
+    public abstract boolean isSamePerson(Person otherPerson);
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same name and phone number. This defines a weaker notion of equality
+     * between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    protected boolean isSamePersonBase(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. This defines a stronger notion of equality
+     * between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -123,12 +132,8 @@ public abstract class Person {
      * Returns a ToStringBuilder representation of the person's details as a toString() method helper.
      */
     public ToStringBuilder toStringBuilder() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("category", category)
-                .add("comment", comment);
+        return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                .add("category", category).add("comment", comment);
     }
 
     public String toCsvString() {

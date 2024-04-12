@@ -48,7 +48,7 @@ public class EditCommand extends Command implements ReversibleCommand {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contact list.";
     public static final String MESSAGE_SPONSOR_HAS_NO_GROUP = "A sponsor doesn't have a group.";
     public static final String MESSAGE_SUCCESS_UNDO = "Changes reverted: %1$s";
 
@@ -117,8 +117,8 @@ public class EditCommand extends Command implements ReversibleCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
@@ -137,7 +137,8 @@ public class EditCommand extends Command implements ReversibleCommand {
             return editedStaff;
         } else if (editedPerson instanceof Participant) {
             Participant editedParticipant = (Participant) editedPerson;
-            Group updatedGroup = editPersonDescriptor.getGroup().orElse(new Group(editedParticipant.getGroupNumber()));
+            Group updatedGroup = editPersonDescriptor.getGroup()
+                                                     .orElse(new Group(editedParticipant.getGroupNumber()));
             editedParticipant.setGroupNumber(updatedGroup.getGroupNumber());
             return editedParticipant;
         } else if (editPersonDescriptor.getGroup().isPresent()) {
@@ -165,15 +166,13 @@ public class EditCommand extends Command implements ReversibleCommand {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+        return new ToStringBuilder(this).add("index", index).add("editPersonDescriptor", editPersonDescriptor)
+                                        .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
+     * of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -243,7 +242,6 @@ public class EditCommand extends Command implements ReversibleCommand {
             return Optional.ofNullable(group);
         }
 
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -264,12 +262,8 @@ public class EditCommand extends Command implements ReversibleCommand {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("group", group)
-                    .toString();
+            return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
+                                            .add("group", group).toString();
         }
     }
 }
