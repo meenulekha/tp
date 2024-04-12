@@ -25,7 +25,7 @@ import seedu.address.model.person.exceptions.GroupSponsorException;
 public class AddCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the contact list. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -42,8 +42,8 @@ public class AddCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_UNDO = "Person deleted: %1$s";
     public static final String MESSAGE_UNDO_NONEXISTENT_PERSON = "Undo failed:"
-            + "Person does not exist in the address book";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+            + "Person does not exist in the contact list";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contact list";
 
     private final Person toAdd;
     private final Optional<Group> group;
