@@ -26,10 +26,18 @@ public class AddCommand extends Command implements ReversibleCommand {
 
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the contact list. \n"
-            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_CATEGORY + "CATEGORY " + "[" + PREFIX_GROUP + "GROUP]\n" + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_CATEGORY + "participant " + PREFIX_GROUP + "3 ";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_CATEGORY + "CATEGORY "
+            + "[" + PREFIX_GROUP + "GROUP]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_CATEGORY + "participant "
+            + PREFIX_GROUP + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_UNDO = "Person deleted: %1$s";
@@ -50,8 +58,7 @@ public class AddCommand extends Command implements ReversibleCommand {
     }
 
     /**
-     * Creates an AddCommand to add the specified {@code Person} with specified
-     * {@code group}
+     * Creates an AddCommand to add the specified {@code Person} with specified {@code group}
      */
     public AddCommand(Person person, Group group) {
         requireNonNull(person);

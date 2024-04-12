@@ -37,9 +37,14 @@ public class EditCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
-            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_GROUP + "GROUP]\n" + "Example: "
-            + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GROUP + "GROUP]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -112,8 +117,8 @@ public class EditCommand extends Command implements ReversibleCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
+     * {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
@@ -133,7 +138,7 @@ public class EditCommand extends Command implements ReversibleCommand {
         } else if (editedPerson instanceof Participant) {
             Participant editedParticipant = (Participant) editedPerson;
             Group updatedGroup = editPersonDescriptor.getGroup()
-                    .orElse(new Group(editedParticipant.getGroupNumber()));
+                                                     .orElse(new Group(editedParticipant.getGroupNumber()));
             editedParticipant.setGroupNumber(updatedGroup.getGroupNumber());
             return editedParticipant;
         } else if (editPersonDescriptor.getGroup().isPresent()) {
@@ -162,12 +167,12 @@ public class EditCommand extends Command implements ReversibleCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("index", index).add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+                                        .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
+     * of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -258,7 +263,7 @@ public class EditCommand extends Command implements ReversibleCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
-                    .add("group", group).toString();
+                                            .add("group", group).toString();
         }
     }
 }
