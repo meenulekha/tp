@@ -46,9 +46,9 @@ public class Event {
         }
 
         return otherEvent != null
-                || otherEvent.getEventName().equals(getEventName())
+                && (otherEvent.getEventName().equals(getEventName())
                 || otherEvent.getEventDate().equals(getEventDate())
-                || otherEvent.getEventCategory().equals(getEventCategory());
+                || otherEvent.getEventCategory().equals(getEventCategory()));
     }
 
     /**
