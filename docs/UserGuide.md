@@ -287,7 +287,7 @@ Finds persons who contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Full text of a person is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -396,9 +396,9 @@ Finds events which contain any of the given keywords.
 
 Format: `findevent KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `meeting` will match `Meeting`
+- The search is case-insensitive. e.g. `meeting` will match `Meeting`
 - The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecture`
-- Full text of a event is searched.
+- Full text of an event is searched.
 - Only full words will be matched e.g. `Seminar` will not match `Seminars`
 - Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Lecture 1` will return `Lecture 2`, `Lecture 3`
@@ -437,7 +437,7 @@ welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HackLink will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HackLink to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the HackLink to behave in unexpected ways (e.g., if the value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Undo
