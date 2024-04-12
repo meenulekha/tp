@@ -5,7 +5,9 @@ title: User Guide
 
 WELCOME TO HACKLINK!
 
-HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can streamline the process of organizing and coordinating your hackathon event.
+HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant
+information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can
+streamline the process of organizing and coordinating your hackathon event.
 
 - Table of Contents
 
@@ -22,7 +24,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
    - [Viewing comments](#viewing-comments--view)
    - [Locating persons by keywords](#locating-persons-by-keywords--find)
    - [Exporting a selected participants](#exporting-selected-participants--link)
-   - [Removing a person](#removing-a-person--remove)
+   - [Removing a person](#removing-a-person--delete)
    - [Clearing all entries](#clearing-all-entries--clear)
    - [Adding an event](#adding-an-event--addevent)
    - [Listing all events](#listing-all-events--listevent)
@@ -57,11 +59,13 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
 3. Copy the file to the folder you want to use as the _home folder_ for your HakcLink application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command
+   to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![UI of the app](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -70,13 +74,14 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `delete 3` : Deletes the 3rd person shown in the current list.
 
-   - `edit 1 /p 89898989` : Updates the information of the person named "John Doe"
+   - `edit 1 p/89898989` : Updates the information of the person at index 1.
 
    - `comment 1 He is good at Java`: Adds a comment to the person at index 1.
 
    - `exit` : Exits the app.
 
-6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section for more details.
+6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section
+   for more details.
 
 7. Type the commands in the comman box and press Enter to execute them.
 
@@ -88,7 +93,7 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 
    - `listevent` : Lists all events.
 
-8. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Main features](#main-features) below for details of each command.
 
 ---
 
@@ -107,23 +112,27 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Some commands have aliases. The aliases are shown in the command details. Please refer to [Aliases](#aliases) for more information.
+- Some commands have aliases. The aliases are shown in the command details. Please refer to [Aliases](#aliases) for more
+  information.
 
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessageHackLink.png)
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to HackLink.
 
@@ -135,7 +144,8 @@ Aliases:
 - `as`: add sponsor
 - `at`: add staff
 
-  You can skip the category parameter and the application will automatically assign the category based on the alias used.
+  You can skip the category parameter and the application will automatically assign the category based on the alias
+  used.
 
 Examples:
 
@@ -148,8 +158,9 @@ Cautions / Warnings for Add:
 - There should be no <span style="color:yellow">“/”</span> in each parameter.
 - There should be no contacts with the same information.
 - Category should be one of Participant, Sponsor, and Staff.
-- This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the contact list is 2147483647. 
-Please delete some contacts to add a new person if you reach the limit.
+- This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the
+  contact list is 2147483647.
+  Please delete some contacts to add a new person if you reach the limit.
 
 ### Listing all persons : `list`
 
@@ -181,7 +192,7 @@ Cautions / Warnings for Edit:
 - There should be at least one field to edit.
 - Updated information should be different from the original.
 - The edit command only supports editing name, phone, email, and group.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648. 
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than 2147483648.
 
 ### Grouping a person : `group`
 
@@ -326,9 +337,10 @@ Examples:
 
 - `delete 1` deletes the first person in the list.
 
-### Adding an event: `addevent`
+### Adding an event : `addevent`
 
-**Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar. Refer to the [Event Window](#event-window) section for more details.
+**Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar.
+Refer to the [Event Window](#event-window) section for more details.
 
 Adds an event to HackLink.
 
@@ -343,7 +355,8 @@ Cautions / Warnings for Addevent:
 
 - There should be no <span style="color:yellow">“/”</span> in each parameter.
 - Category should be one of Participant, Sponsor, and Staff.
-- This app is designed for small hackathons. However, the maximum number of events entries is 2147483647. Please delete some events to add a new event if you reach the limit.
+- This app is designed for small hackathons. However, the maximum number of events entries is 2147483647. Please delete
+  some events to add a new event if you reach the limit.
 
 ### Listing all events : `listevent`
 
@@ -408,11 +421,13 @@ Aliases: `ex`
 
 ### Saving the data
 
-HackLink data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HackLink data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+manually.
 
 ### Editing the data file
 
-HackLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HackLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HackLink will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -437,11 +452,13 @@ Aliases: `rd`
 
 ### Navigating to older commands
 
-HackLink allows you to navigate to older commands using the up and down arrow keys. This feature is useful when you want to repeat a command you have previously entered.
+HackLink allows you to navigate to older commands using the up and down arrow keys. This feature is useful when you want
+to repeat a command you have previously entered.
 
 ### Aliases
 
-Aliases are shortcuts for commands. In each command, you can use the alias instead of the full command. Please refer to each command details for the alias.
+Aliases are shortcuts for commands. In each command, you can use the alias instead of the full command. Please refer to
+each command details for the alias.
 
 ### Shortcuts
 
@@ -456,9 +473,11 @@ Shortcuts are a way to quickly perform action from the keyboard. The available s
 
 ## Event window
 
-Events are shown in a separate window. You can navigate to the event window by clicking on the Events menu in the menubar.
+Events are shown in a separate window. You can navigate to the event window by clicking on the Events menu in the
+menubar.
 
-An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how the app contains some sample data for the events.<br>
+An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how
+the app contains some sample data for the events.<br>
 ![Ui](images/toEventsWindow.png)
 
 You can get back to the main window by clicking on the Back to Main on the menubar.<br>
@@ -469,28 +488,36 @@ You can get back to the main window by clicking on the Back to Main on the menub
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AddressBook home folder.
 
 ---
 
 ## Warnings
 
-1. **Invalid Command** : When a command format is incorrect or parameters are missing, the application will prompt the user with a warning message.
-2. **Command Failure** : If the person specified for editing or removing does not exist in the database, the application should display a warning message indicating the failure.
-3. **Invalid input for update** : If the input for editing a person's information is invalid, the application should display a warning message indicating the failure and provide guidance on the correct format.
+1. **Invalid Command** : When a command format is incorrect or parameters are missing, the application will prompt the
+   user with a warning message.
+2. **Command Failure** : If the person specified for editing or removing does not exist in the database, the application
+   should display a warning message indicating the failure.
+3. **Invalid input for update** : If the input for editing a person's information is invalid, the application should
+   display a warning message indicating the failure and provide guidance on the correct format.
 
 ---
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
+   application before running the application again.
 
 ---
 
 ## Tips
 
-1. **Use Descriptive Command Names**: You are encouraged to use descriptive names when adding, updating, or removing participants. This makes it easier to identify and manage individuals within the application.
-2. **Utilize the utility features**: The application provides utility features such as navigating to older commands, aliases, and shortcuts. These features can help you manage your data more efficiently.
+1. **Use Descriptive Command Names**: You are encouraged to use descriptive names when adding, updating, or removing
+   participants. This makes it easier to identify and manage individuals within the application.
+2. **Utilize the utility features**: The application provides utility features such as navigating to older commands,
+   aliases, and shortcuts. These features can help you manage your data more efficiently.
 
 ---
 
