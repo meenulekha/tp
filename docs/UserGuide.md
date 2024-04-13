@@ -530,8 +530,11 @@ the data of your previous AddressBook home folder.
    ![img.png](images/knownIssues_undo_pic1.png)
     - `delete 2` deletes the person with ID 2 ("Bernice Yu") in the contact list
       ![img.png](images/knownIssues_undo_pic2.png)
-    - `undo` re-adds this person back to the list, but possibly with a different ID
-    - `delete 2` does not guarantee to delete the same person again
+    - `undo` re-adds this person back to the list, but with a different ID (4 instead of 2)
+      ![img.png](images/knownIssues_undo_pic3.png)
+    - `delete 2` does not guarantee to delete the same person again <br>
+      The suggested workaround is to use [`redo` command](#redo) to delete the same person again, or to search for that
+      exact person using [`find` command](#locating-persons-by-keywords--find) and delete them.
 
 ---
 
