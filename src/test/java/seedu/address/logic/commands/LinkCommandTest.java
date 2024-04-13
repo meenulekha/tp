@@ -21,7 +21,7 @@ public class LinkCommandTest {
         LinkCommand linkCommand = new LinkCommand(indexes);
         try {
             linkCommand.execute(model);
-            assertEquals("Exported all selected participants", LinkCommand.MESSAGE_SUCCESS);
+            assertEquals("Exported all selected people", LinkCommand.MESSAGE_SUCCESS);
         } catch (CommandException e) {
             fail();
         }
