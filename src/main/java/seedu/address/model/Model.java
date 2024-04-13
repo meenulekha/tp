@@ -149,5 +149,4 @@ public interface Model {
     Path getEventBookFilePath();
     public void setEventBook(ReadOnlyEventBook eventBook);
     public void setEventBookFilePath(Path eventBookFilePath);
-
 }

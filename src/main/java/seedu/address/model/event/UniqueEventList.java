@@ -72,8 +72,13 @@ public class UniqueEventList implements Iterable<Event> {
      * The person must exist in the list.
      */
     public void remove(Event toRemove) {
+        //requireNonNull(toRemove);
+        //if (!internalList.remove(toRemove)) {
+        //    throw new EventNotFoundException();
+        //}
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        final boolean eventWasRemoved = internalList.removeIf(toRemove::isSameEvent);
+        if (!eventWasRemoved) {
             throw new EventNotFoundException();
         }
     }
