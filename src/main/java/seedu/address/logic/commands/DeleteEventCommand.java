@@ -8,13 +8,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.UndoException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
  * Deletes an event identified using it's displayed index from the event book.
  */
-public class DeleteEventCommand extends EventCommand implements ReversibleCommand {
+public class DeleteEventCommand extends EventCommand implements ReversibleCommand{
     public static final String COMMAND_WORD = "deleteevent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -66,7 +67,7 @@ public class DeleteEventCommand extends EventCommand implements ReversibleComman
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteEventCommand)) {
             return false;
         }
 
