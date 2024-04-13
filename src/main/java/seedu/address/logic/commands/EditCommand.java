@@ -82,7 +82,7 @@ public class EditCommand extends Command implements ReversibleCommand {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.isSameIdentity(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -262,8 +262,10 @@ public class EditCommand extends Command implements ReversibleCommand {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
-                                            .add("group", group).toString();
+            return new ToStringBuilder(this).add("name", name)
+                                                    .add("phone", phone)
+                                                    .add("email", email)
+                                                    .add("group", group).toString();
         }
     }
 }

@@ -4,6 +4,8 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a staff in the hackathon.
+ * Inherits interface Identifiable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Staff extends Person {
     private Group group;
@@ -54,19 +56,6 @@ public class Staff extends Person {
     @Override
     public int getGroupNumber() {
         return group.getGroupNumber();
-    }
-
-    @Override
-    public boolean isSamePerson(Person other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Staff)) {
-            return false;
-        }
-
-        return super.isSamePersonBase(other);
     }
 
     @Override
