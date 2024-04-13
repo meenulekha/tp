@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -20,17 +25,51 @@ public class ViewCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Creates a ViewCommand to view the comment of the person at the specified {@code Index}.
+     *
+     * @param index of the person in the filtered person list to view
+     */
     public ViewCommand(Index index) {
+        requireNonNull(index);
         this.index = index;
     }
 
+    /**
+     * Executes the ViewCommand to view the comment of the person at the specified {@code Index}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the CommandResult of the execution
+     * @throws CommandException if the index is invalid
+     */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        validateIndex(index, lastShownList);
+
         Person personToView = model.getFilteredPersonList().get(index.getZeroBased());
         String comment = personToView.getComment().toString();
-        String successMessage = String.format(MESSAGE_VIEW_COMMENT_SUCCESS, Messages.format(personToView));
-        String result = successMessage + comment;
+        String result = formatSuccessMessage(personToView) + comment;
         return new CommandResult(result);
+    }
+
+    /**
+     * Validates the index of the person to view.
+     *
+     * @param index of the person to view
+     * @param lastShownList the list of persons to view from
+     * @throws CommandException if the index is invalid
+     */
+    public void validateIndex(Index index, List<Person> lastShownList) throws CommandException {
+        boolean isLargerThanListSize = index.getZeroBased() >= lastShownList.size();
+        if (isLargerThanListSize) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    private String formatSuccessMessage(Person personToView) {
+        return String.format(MESSAGE_VIEW_COMMENT_SUCCESS, Messages.format(personToView));
     }
 
     @Override

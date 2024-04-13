@@ -56,7 +56,7 @@ public class CommentCommand extends Command implements ReversibleCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        validateIndex(lastShownList, index);
+        validateIndex(index, lastShownList);
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createCommentedPerson(personToEdit, editComment);
@@ -67,8 +67,9 @@ public class CommentCommand extends Command implements ReversibleCommand {
         return new CommandResult(String.format(MESSAGE_COMMENT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    private void validateIndex(List<Person> list, Index index) throws CommandException {
-        if (index.getZeroBased() >= list.size()) {
+    private void validateIndex(Index index, List<Person> list) throws CommandException {
+        boolean isLargerThanListSize = index.getZeroBased() >= list.size();
+        if (isLargerThanListSize) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }

@@ -45,7 +45,8 @@ public class LinkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        validateIndexes(indexes, model.getFilteredPersonList());
+        List<Person> lastShownList = model.getFilteredPersonList();
+        validateIndexes(indexes, lastShownList);
 
         Path filePath = Path.of("./selectedPeople/list.csv");
         String header = "Name, Phone, Email, Comment\n";
