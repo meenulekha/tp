@@ -3,8 +3,9 @@ package seedu.address.model.person;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a participants in hackathon. Guarantees: details are present and
- * not null, field values are validated, immutable.
+ * Represents a participants in hackathon.
+ * Inherits interface Identifiable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Participant extends Person {
     private Group group;
@@ -18,8 +19,8 @@ public class Participant extends Person {
     }
 
     /**
-     * Constructs participants with comment. Every field must be present and not
-     * null.
+     * Constructs participants with comment.
+     * Every field must be present and not null.
      */
     public Participant(Name name, Phone phone, Email email, Category category, Comment comment) {
         super(name, phone, email, category, comment);
@@ -56,19 +57,6 @@ public class Participant extends Person {
     @Override
     public int getGroupNumber() {
         return group.getGroupNumber();
-    }
-
-    @Override
-    public boolean isSamePerson(Person other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Participant)) {
-            return false;
-        }
-
-        return super.isSamePersonBase(other);
     }
 
     @Override
