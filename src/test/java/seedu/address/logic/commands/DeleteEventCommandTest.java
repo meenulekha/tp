@@ -19,8 +19,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.event.exceptions.DuplicateEventException;
-import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteEventCommand}.
@@ -47,7 +45,8 @@ public class DeleteEventCommandTest {
                     model.getEventBook(), new UserPrefs());
 
             // Prepare the expected message
-            String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete.toString());
+            String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
+                    eventToDelete.toString());
 
             // Assert that the feedback message is as expected
             assertEquals(expectedMessage, commandResult.getFeedbackToUser());
@@ -113,11 +112,13 @@ public class DeleteEventCommandTest {
             EventCommandResult deleteResult = deleteCommand.execute(model);
 
             // Verify that the delete operation was successful
-            assertEquals(String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, Messages.formatEvent(eventToDelete)),
+            assertEquals(String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
+                            Messages.formatEvent(eventToDelete)),
                     deleteResult.getFeedbackToUser());
 
             // Get the current state of the model
-            ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getEventBook(), new UserPrefs());
+            ModelManager expectedModel = new ModelManager(model.getAddressBook(),
+                    model.getEventBook(), new UserPrefs());
 
             // Verify that the event is deleted from the model's list of events
             assertFalse(expectedModel.getFilteredEventList().contains(eventToDelete));
