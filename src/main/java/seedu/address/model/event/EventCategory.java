@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.event.EventName.MESSAGE_CONSTRAINTS;
 
-import seedu.address.model.person.Categories;
 import seedu.address.model.person.Category;
+import seedu.address.model.person.CategoryType;
 
 /**
  * Represents an Event's category in the address book.
@@ -31,7 +31,7 @@ public class EventCategory {
      * Returns true if a given string is a valid Category.
      */
     public static boolean isValidCategory(String test) {
-        return Categories.contains(test);
+        return CategoryType.contains(test);
     }
 
     @Override

@@ -10,6 +10,7 @@ public class Category {
     public static final String MESSAGE_CONSTRAINTS =
             "Category should be one of participant, staff, and sponsor.";
     public final String value;
+    public final CategoryType type;
 
     /**
      * Constructs a {@code Category}.
@@ -20,13 +21,14 @@ public class Category {
         requireNonNull(category);
         checkArgument(isValidCategory(category), MESSAGE_CONSTRAINTS);
         value = category;
+        type = CategoryType.valueOf(category.toUpperCase());
     }
 
     /**
      * Returns true if a given string is a valid Category.
      */
     public static boolean isValidCategory(String test) {
-        return Categories.contains(test);
+        return CategoryType.contains(test);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class Category {
         }
 
         Category otherCategory = (Category) other;
-        return value.equals(otherCategory.value);
+        return type == otherCategory.type;
     }
 
     @Override

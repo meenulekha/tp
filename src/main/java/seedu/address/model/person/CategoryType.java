@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
 /**
- * Enum for three categories of contacts.
+ * Enum for three category types of contacts.
  */
-public enum Categories {
+public enum CategoryType {
     PARTICIPANT, STAFF, SPONSOR;
 
     /**
@@ -14,7 +14,7 @@ public enum Categories {
         if (test == null) {
             return false;
         }
-        for (Categories c : Categories.values()) {
+        for (CategoryType c : CategoryType.values()) {
             if (c.name().equals(test)) {
                 return true;
             }
