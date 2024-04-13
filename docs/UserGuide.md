@@ -525,6 +525,13 @@ the data of your previous AddressBook home folder.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
    application before running the application again.
+2. When **undoing a deletion** by `undo` command after a `delete` command, the restored contact may not appear at the
+   same row and/or having the same ID as the original contact. Refer to the example below: <br>
+   ![img.png](images/knownIssues_undo_pic1.png)
+    - `delete 2` deletes the person with ID 2 ("Bernice Yu") in the contact list
+      ![img.png](images/knownIssues_undo_pic2.png)
+    - `undo` re-adds this person back to the list, but possibly with a different ID
+    - `delete 2` does not guarantee to delete the same person again
 
 ---
 
