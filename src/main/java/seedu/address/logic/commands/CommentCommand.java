@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Category;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonFactory;
@@ -103,8 +104,9 @@ public class CommentCommand extends Command implements ReversibleCommand {
         Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Category category = personToEdit.getCategory();
+        Group group = personToEdit.getGroup();
 
-        return PersonFactory.createPerson(name, phone, email, category, comment);
+        return PersonFactory.createPerson(name, phone, email, category, group, comment);
     }
 
     @Override
