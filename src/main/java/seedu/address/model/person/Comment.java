@@ -12,8 +12,9 @@ public class Comment {
     /**
      * The first character of the comment must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * The parser will trim the comment before storing it.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "\\S.*";
 
     public static final String DEFAULT_COMMENT = "No comment provided.";
 
