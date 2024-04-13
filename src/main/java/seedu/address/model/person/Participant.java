@@ -78,6 +78,6 @@ public class Participant extends Person {
 
     @Override
     public String getInformation() {
-        return super.getInformation() + "Group: " + group + "\n";
+        return super.getInformation() + group + "\n";
     }
 }

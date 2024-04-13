@@ -151,10 +151,6 @@ public abstract class Person {
      * Returns a string representation of the person's details for display.
      */
     public String getInformation() {
-        return "Name: " + name + "\n"
-                + "Phone: " + phone + "\n"
-                + "Email: " + email + "\n"
-                + "Category: " + category + "\n"
-                + "Comment: " + comment + "\n";
+        return name + "\n" + phone + "\n" + email + "\n" + category + "\n" + comment + "\n";
     }
 }
