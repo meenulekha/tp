@@ -41,7 +41,7 @@ public class EventCategory {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
 
@@ -50,7 +50,7 @@ public class EventCategory {
             return false;
         }
 
-        Category otherCategory = (Category) other;
+        EventCategory otherCategory = (EventCategory) other;
         return value.equals(otherCategory.value);
     }
 

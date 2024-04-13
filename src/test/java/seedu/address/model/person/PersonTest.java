@@ -17,48 +17,80 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     @Test
-    public void isSamePerson_sameObject_returnsTrue() {
-        assertTrue(ALICE.isSamePerson(ALICE));
+    public void isSameIdentity_sameObject_returnsTrue() {
+        assertTrue(ALICE.isSameIdentity(ALICE));
     }
 
     @Test
-    public void isSamePerson_null_returnsFalse() {
-        assertFalse(ALICE.isSamePerson(null));
+    public void isSameIdentity_null_returnsFalse() {
+        assertFalse(ALICE.isSameIdentity(null));
     }
 
     @Test
-    public void isSamePerson_sameNameAndPhoneOtherDiff_returnsTrue() {
+    public void isSameIdentity_diffNameDiffPhoneDiffEmail_returnsFalse() {
+        // different name, phone number and email, all other attributes same -> false
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSameIdentity(editedAlice));
+    }
+
+    @Test
+    public void isSameIdentity_diffCategory_returnsTrue() {
+        // different category, all other attributes same -> true
+        Person editedAlice = new PersonBuilder(ALICE).withCategory("STAFF").build();
+        assertTrue(ALICE.isSameIdentity(editedAlice));
+    }
+
+    @Test
+    public void isSameIdentity_diffCategoryDiffName_returnsFalse() {
+        // different category and name, all other attributes same -> false
+        Person editedAlice = new PersonBuilder(ALICE).withCategory("STAFF").withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameIdentity(editedAlice));
+    }
+
+    @Test
+    public void isSameIdentity_diffCategoryDiffPhone_returnsTrue() {
+        // different category and phone number, all other attributes same -> true
+        Person editedAlice = new PersonBuilder(ALICE).withCategory("STAFF").withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSameIdentity(editedAlice));
+    }
+
+    @Test
+    public void isSameIdentity_diffCategoryDiffEmail_returnsTrue() {
+        // different category and email, all other attributes same -> true
+        Person editedAlice = new PersonBuilder(ALICE).withCategory("STAFF").withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSameIdentity(editedAlice));
+    }
+
+    @Test
+    public void isSameIdentity_sameNameAndPhoneOtherDiff_returnsTrue() {
         Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).withComment("some comment").build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameIdentity(editedAlice));
     }
 
     @Test
-    public void isSamePerson_sameNameDiffPhone_returnsFalse() {
-        // different phone number, all other attributes same -> false
-        Person aliceDiffPhone = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.isSamePerson(aliceDiffPhone));
-
+    public void isSameIdentity_sameNameDiffPhone_returnsFalse() {
         // different phone number and email, all other attributes same -> false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameIdentity(editedAlice));
     }
 
     @Test
-    public void isSamePerson_diffNameSamePhone_returnsFalse() {
+    public void isSameIdentity_diffNameSamePhone_returnsFalse() {
         // different name, all other attributes same -> false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameIdentity(editedAlice));
 
         // different name and email, all other attributes same -> false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_AMY).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameIdentity(editedAlice));
     }
 
     @Test
-    public void isSamePerson_diffNameDiffPhone_returnsFalse() {
+    public void isSameIdentity_diffNameDiffPhone_returnsFalse() {
         // different name and phone number, all other attributes same -> false
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameIdentity(editedAlice));
     }
 
     @Test

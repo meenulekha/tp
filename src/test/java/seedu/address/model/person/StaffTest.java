@@ -14,11 +14,11 @@ public class StaffTest {
         Staff staff = (Staff) new PersonBuilder().withCategory("STAFF").withName("John").build();
         Staff staffCopy = (Staff) new PersonBuilder().withCategory("STAFF").withName("John").build();
         Staff other = (Staff) new PersonBuilder().withCategory("STAFF").withName("Peter").build();
-        assertFalse(staff.isSamePerson(other));
-        assert (staff.isSamePerson(staffCopy));
+        assertFalse(staff.isSameIdentity(other));
+        assert (staff.isSameIdentity(staffCopy));
 
         Sponsor sponsor = (Sponsor) new PersonBuilder().withCategory("SPONSOR").withName("Jake").build();
-        assertFalse(staff.isSamePerson(sponsor));
+        assertFalse(staff.isSameIdentity(sponsor));
 
     }
 

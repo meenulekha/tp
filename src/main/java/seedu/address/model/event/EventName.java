@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -32,7 +33,7 @@ public class EventName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !isNull(test) && test.matches(VALIDATION_REGEX);
     }
 
 
