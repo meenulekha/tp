@@ -7,7 +7,7 @@ import seedu.address.model.person.exceptions.GroupSponsorException;
  * Inherits interface Identifiable.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Sponsor extends Person implements Identifiable {
+public class Sponsor extends Person {
     public static final int INVALID_GROUP_NUMBER = -1;
 
     /**
