@@ -492,7 +492,7 @@ menubar.
 
 An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how
 the app contains some sample data for the events.<br>
-![Ui](images/toEventsWindow.png)
+![Ui](images/toEventsWindowUpdated.png)
 
 You can get back to the main window by clicking on the Back to Main on the menubar.<br>
 ![Ui](images/backToMain.png)
