@@ -59,8 +59,11 @@ public class Messages {
      */
     public static String formatEvent(Event toAdd) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(toAdd.getEventName())
-                .append("; Category: ")
+        builder.append("eventName=")
+                .append(toAdd.getEventName())
+                .append(", eventDate=")
+                .append(toAdd.getEventDate())
+                .append(", eventCategory=")
                 .append(toAdd.getEventCategory());
         return builder.toString();
     }

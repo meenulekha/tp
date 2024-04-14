@@ -4,6 +4,8 @@ import seedu.address.model.person.exceptions.GroupSponsorException;
 
 /**
  * Represents a sponsor in the hackathon.
+ * Inherits interface Identifiable.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Sponsor extends Person {
     public static final int INVALID_GROUP_NUMBER = -1;
@@ -50,17 +52,5 @@ public class Sponsor extends Person {
      */
     public int getGroupNumber() {
         return INVALID_GROUP_NUMBER;
-    }
-
-    @Override
-    public boolean isSamePerson(Person other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Sponsor)) {
-            return false;
-        }
-        return super.isSamePersonBase(other);
     }
 }

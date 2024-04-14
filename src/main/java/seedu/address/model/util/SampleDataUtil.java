@@ -56,19 +56,19 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[]{
-                EventFactory.createEvent(new EventName("Meeting"), new EventDate("23/05/2024"),
+                EventFactory.createEvent(new EventName("Meeting"), new EventDate("23-05-2024"),
                         new EventCategory("PARTICIPANT")),
-                EventFactory.createEvent(new EventName("Conference"), new EventDate("24/05/2024"),
+                EventFactory.createEvent(new EventName("Conference"), new EventDate("24-05-2024"),
                         new EventCategory("STAFF")),
-                EventFactory.createEvent(new EventName("Seminar"), new EventDate("25/05/2024"),
+                EventFactory.createEvent(new EventName("Seminar"), new EventDate("25-05-2024"),
                         new EventCategory("SPONSOR")),
-                EventFactory.createEvent(new EventName("Workshop"), new EventDate("27/05/2024"),
+                EventFactory.createEvent(new EventName("Workshop"), new EventDate("27-05-2024"),
                         new EventCategory("PARTICIPANT")),
-                EventFactory.createEvent(new EventName("Training"), new EventDate("01/06/2024"),
+                EventFactory.createEvent(new EventName("Training"), new EventDate("01-06-2024"),
                         new EventCategory("PARTICIPANT")),
-                EventFactory.createEvent(new EventName("Lecture"), new EventDate("02/06/2024"),
+                EventFactory.createEvent(new EventName("Lecture"), new EventDate("02-06-2024"),
                         new EventCategory("PARTICIPANT")),
-                EventFactory.createEvent(new EventName("Meeting 2"), new EventDate("06/06/2024"),
+                EventFactory.createEvent(new EventName("Meeting 2"), new EventDate("06-06-2024"),
                         new EventCategory("STAFF"))
         };
 

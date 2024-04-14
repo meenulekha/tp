@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.commands.FindEventCommand;
@@ -59,6 +60,9 @@ public class EventBookParser {
 
         case ListEventCommand.COMMAND_WORD:
             return new ListEventCommand();
+
+        case ClearEventCommand.COMMAND_WORD:
+            return new ClearEventCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

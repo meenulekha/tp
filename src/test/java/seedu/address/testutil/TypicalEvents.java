@@ -6,27 +6,24 @@ import java.util.List;
 
 import seedu.address.model.EventBook;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code event} objects to be used in tests.
  */
 public class TypicalEvents {
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withEmail("alice@example.com").withPhone("94351253").withCategory("PARTICIPANT").build();
     public static final Event EVENT1 = new EventBuilder().withEventName("event 1")
-            .withEventDate("01/01/2021").withEventCategory("PARTICIPANT").build();
-    public static final Event EVENT2 = new EventBuilder().withEventName("event 2").withEventDate("02/02/2021")
+            .withEventDate("01-01-2025").withEventCategory("PARTICIPANT").build();
+    public static final Event EVENT2 = new EventBuilder().withEventName("event 2").withEventDate("02-02-2025")
             .withEventCategory("PARTICIPANT").build();
-    public static final Event EVENT3 = new EventBuilder().withEventName("event 3").withEventDate("03/03/2021")
+    public static final Event EVENT3 = new EventBuilder().withEventName("event 3").withEventDate("03-03-2025")
             .withEventCategory("STAFF").build();
-    public static final Event EVENT4 = new EventBuilder().withEventName("event 4").withEventDate("04/04/2021")
+    public static final Event EVENT4 = new EventBuilder().withEventName("event 4").withEventDate("04-04-2025")
             .withEventCategory("SPONSOR").build();
-    public static final Event EVENT5 = new EventBuilder().withEventName("event 5").withEventDate("05/05/2021")
+    public static final Event EVENT5 = new EventBuilder().withEventName("event 5").withEventDate("05-05-2025")
             .withEventCategory("PARTICIPANT").build();
-    public static final Event EVENT6 = new EventBuilder().withEventName("event 6").withEventDate("06/06/2021")
+    public static final Event EVENT6 = new EventBuilder().withEventName("event 6").withEventDate("06-06-2025")
             .withEventCategory("STAFF").build();
-    public static final Event EVENT7 = new EventBuilder().withEventName("event 7").withEventDate("07/07/2021")
+    public static final Event EVENT7 = new EventBuilder().withEventName("event 7").withEventDate("07-07-2025")
             .withEventCategory("SPONSOR").build();
 
 

@@ -66,7 +66,7 @@ public class DeleteEventCommand extends EventCommand implements ReversibleComman
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteEventCommand)) {
             return false;
         }
 

@@ -5,62 +5,59 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalEvents.EVENT1;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.UndoException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
-public class AddCommandTest {
-
+public class AddEventCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        EventCommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        assertTrue(modelStub.eventsAdded.contains(validEvent));
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addCommand = new AddEventCommand(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddEventCommand.MESSAGE_DUPLICATE_EVENT, () -> addCommand.execute(modelStub));
     }
 
     @Test
-    public void undo_validPerson_success() throws CommandException, UndoException {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+    public void undo_validEvent_success() throws CommandException, UndoException {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addCommand = new AddEventCommand(validEvent);
 
         // Execute the add command
         addCommand.execute(modelStub);
@@ -68,28 +65,28 @@ public class AddCommandTest {
         // Undo the add command
         CommandResult undoResult = addCommand.undo(modelStub);
 
-        // Verify that the person is removed from the model
-        assertFalse(modelStub.personsAdded.contains(validPerson));
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_UNDO, Messages.format(validPerson)),
+        // Verify that the event is removed from the model
+        assertFalse(modelStub.hasEvent(validEvent));
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS_UNDO, validEvent),
                 undoResult.getFeedbackToUser());
     }
 
     @Test
-    public void undo_nonExistentPerson_throwsCommandException() {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person nonExistentPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(nonExistentPerson);
+    public void undo_nonExistentEvent_throwsCommandException() {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event nonExistentEvent = new EventBuilder().build();
+        AddEventCommand addCommand = new AddEventCommand(nonExistentEvent);
 
-        // Undo the add command for a non-existent person
-        String expectedMessage = AddCommand.MESSAGE_UNDO_NONEXISTENT_PERSON;
+        // Undo the add command for a non-existent event
+        String expectedMessage = AddEventCommand.MESSAGE_UNDO_NONEXISTENT_EVENT;
         assertThrows(UndoException.class, expectedMessage, () -> addCommand.undo(modelStub));
     }
 
     @Test
-    public void redo_validPerson_success() throws CommandException, UndoException {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+    public void redo_validEvent_success() throws CommandException, UndoException {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addCommand = new AddEventCommand(validEvent);
 
         // Execute the add command
         addCommand.execute(modelStub);
@@ -100,46 +97,88 @@ public class AddCommandTest {
         // Redo the add command
         CommandResult redoResult = addCommand.redo(modelStub);
 
-        // Verify that the person is added back to the model
-        assertTrue(modelStub.personsAdded.contains(validPerson));
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        // Verify that the event is added back to the model
+        assertTrue(modelStub.hasEvent(validEvent));
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent),
                 redoResult.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Event eventOne = new EventBuilder().withEventName("event 1").build();
+        Event eventTwo = new EventBuilder().withEventName("event 2").build();
+        AddEventCommand addEventOneCommand = new AddEventCommand(eventOne);
+        AddEventCommand addEventTwoCommand = new AddEventCommand(eventTwo);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addEventOneCommand.equals(addEventOneCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddEventCommand addEventOneCommandCopy = new AddEventCommand(eventOne);
+        assertTrue(addEventOneCommand.equals(addEventOneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addEventOneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addEventOneCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different event -> returns false
+        assertFalse(addEventOneCommand.equals(addEventTwoCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddEventCommand addEventCommand = new AddEventCommand(EVENT1);
+        String expected = AddEventCommand.class.getCanonicalName() + "{toAdd=" + EVENT1 + "}";
+        assertEquals(expected, addEventCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A Model stub that contains a single event.
      */
+    private class ModelStubWithEvent extends ModelStub {
+        private final Event event;
+
+        ModelStubWithEvent(Event event) {
+            this.event = event;
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            return this.event.isSameEvent(event);
+        }
+
+        @Override
+        public void addCommand(ReversibleCommand command) {
+            return;
+        }
+    }
+
+    /**
+     * A Model stub that always accept the event being added.
+     */
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasEvent(Event event) {
+            return eventsAdded.stream().anyMatch(event::isSameEvent);
+        }
+
+        @Override
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
+        }
+
+        @Override
+        public void deleteEvent(Event target) {
+            eventsAdded.remove(target);
+        }
+
+    }
+
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -218,12 +257,12 @@ public class AddCommandTest {
 
         @Override
         public CommandResult undoAddressBook() throws UndoException {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
         public CommandResult redoAddressBook() throws UndoException {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
@@ -238,7 +277,7 @@ public class AddCommandTest {
 
         @Override
         public void addCommand(ReversibleCommand command) {
-            throw new AssertionError("This method should not be called.");
+            return;
         }
         @Override
         public boolean hasEvent(Event event) {
@@ -291,57 +330,4 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSameIdentity(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSameIdentity);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            personsAdded.remove(target);
-        }
-
-        @Override
-        public void addCommand(ReversibleCommand c) {
-        }
-    }
-
 }
