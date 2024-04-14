@@ -446,3 +446,67 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Adding events
+
+1. **Access the "Add Event" Functionality**:
+   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+
+2. **Input Form**:
+   - Input the correct addevent command including name, date, and category following the appropriate format.
+   - Validate that the command handles various data types and formats correctly (e.g., date format (dd-MM-YYYY) should be enforced).
+
+3. **Submit Event**:
+   - Press enter submit the event.
+
+4. **Verification**:
+   - Verify that the event is successfully added to the event list.
+   - Confirm that the details provided during input match the details displayed for the newly added event.
+
+### Deleting Event
+1. **Access the "Delete Event" Functionality**:
+   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+
+2. **Select Event to Delete**:
+   - Identify an event and its index from the list that you want to delete.
+
+3. **Deletion**:
+   - Input the delete event command to delete the event.
+
+4. **Verification**:
+   - Ensure that the event you selected for deletion is no longer present in the event list.
+
+### Finding an event
+
+1. **Input Search Query**:
+   - Enter findevent followed by the keyword related to the event you want to find.
+   - Try different search terms and variations to test the search functionality comprehensively.
+
+2. **Initiate Search**:
+   - Press Enter to execute the search.
+
+3. **Review Results**:
+   - Check the search results to ensure they match the criteria you specified.
+   - Verify that the search results include relevant events based on your input.
+
+### Listing events
+
+1. **View Event List**:
+   - Confirm that the list displays all events currently available in the system.
+   - Verify that the events are listed in a clear and organized manner.
+
+2. **Scrolling and Pagination**:
+   - If the event list is extensive, test scrolling and pagination features to navigate through the list effectively.
+
+### Clearing events
+
+2. **Initiate Clearing**:
+   - Input the clear command to clear all events from the system.
+
+4. **Verification**:
+   - Ensure that all events are removed from the event list.
+   - Verify that the event list is empty after clearing.
+
+5. **Check Impact**:
+   - If the application has related functionalities or features affected by event clearing (e.g., statistics, reports), verify that they are updated accordingly.
+   - Confirm that there are no unintended side effects or data inconsistencies caused by clearing events.
