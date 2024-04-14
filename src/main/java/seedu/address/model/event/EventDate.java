@@ -39,11 +39,10 @@ public class EventDate {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             LocalDate date = LocalDate.parse(test, formatter);
-            return !date.isBefore(LocalDate.now());
+            return true;
         } catch (DateTimeParseException e) {
             return false;
         }
-        //return test.matches(VALIDATION_REGEX);
     }
 
     @Override
