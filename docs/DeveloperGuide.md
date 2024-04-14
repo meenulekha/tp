@@ -562,3 +562,39 @@ testers are expected to do more *exploratory* testing.
 5. **Check Impact**:
    - If the application has related functionalities or features affected by event clearing (e.g., statistics, reports), verify that they are updated accordingly.
    - Confirm that there are no unintended side effects or data inconsistencies caused by clearing events.
+
+## **Appendix: Planned Enhancements**
+Team size: 4
+
+1. **Add Confirmation Dialog for Delete Event**:
+   - **Feature Flaw**: Currently, when a user executes the "delete event" command, the event is immediately removed without any confirmation. This can lead to accidental deletions.
+   - **Proposed Fix**: Implement a confirmation dialog that prompts the user to confirm the deletion before proceeding. The dialog should display details of the event to be deleted and provide options to confirm or cancel the deletion.
+
+2. **Implement restriction that events can only be added for the future for Add Event**:
+   - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
+   - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
+   - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
+
+## **Appendix: Effort**
+Our project involved the development of a comprehensive event management system, which presented several challenges and required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with multiple entity types (events, persons), making it more complex.
+
+**Difficulty Level:**
+- The project's difficulty level was moderate to high due to the need to handle multiple entity types and implement various features such as grouping, undo/redo commands and event commands.
+
+**Challenges Faced:**
+- One challenge was ensuring the system's robustness and reliability, especially when handling complex data interactions and user inputs.
+- We had to consider various scenarios that could result in a not so friendly user-friendly experience.
+
+**Effort Required:**
+- The project required a significant amount of effort from both development and testing perspectives. Development involved designing and implementing features, handling data storage and retrieval, and ensuring smooth system operations.
+- Testing efforts were extensive to ensure the system's functionality, reliability, and security.
+
+**Achievements:**
+- Despite the challenges, we successfully developed a functional and robust event management system that meets the project requirements and provides a seamless user experience.
+- Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event commands, as well as ensuring data integrity and system stability.
+
+**Effort Saved Through Reuse:**
+- A significant part of the effort was saved through reuse, particularly the structure of the already existing ab3 code, which allowed us to structure our own features more effectively as well.
+
+
+## **Appendix: Requirementss**
