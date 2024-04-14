@@ -83,7 +83,7 @@ streamline the process of organizing and coordinating your hackathon event.
 6. Navigate to the Event Window by clicking on Events in the menubar. Refer to the [Event window](#event-window) section
    for more details.
 
-7. Type the commands in the comman box and press Enter to execute them.
+7. Type the commands in the command box and press Enter to execute them.
 
     - `addevent en/Meeting ed/11-06-2024 ec/staff` : Adds an event named `meeting`.
 
@@ -92,6 +92,8 @@ streamline the process of organizing and coordinating your hackathon event.
     - `findevent meeting` : Finds events which names contain "meeting".
 
     - `listevent` : Lists all events.
+  
+    - `clear` : Clears all events
 
 8. Refer to the [Main features](#main-features) below for details of each command.
 
@@ -131,6 +133,8 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessageHackLink.png)
 
 Format: `help`
+
+**Note**: `help` cannot be used in event window
 
 ### Adding a person : `add`
 
@@ -346,14 +350,14 @@ Examples:
 **Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar.
 Refer to the [Event Window](#event-window) section for more details.
 
-Adds an event to HackLink.
+Adds an event to HackLink with a name, date and category where the category represents who the event involves.
 
-Format: `add en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
+Format: `addevent en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
 
 Examples:
 
-- `add addevent en/meeting ed/11-06-2024 ec/staff`
-- `add addevent en/conference ed/22-06-2024 ec/participant`
+- `addevent en/meeting ed/11-06-2024 ec/staff`
+- `addevent en/conference ed/22-06-2024 ec/participant`
 
 Cautions / Warnings for Addevent:
 
@@ -409,9 +413,12 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the database.
+Clears all entries from the database, either the persons or events.
 
 Format: `clear`
+
+- Inputting the clear command in the **main window** clears all **persons**.
+- Inputting the clear command in the **events window** clears all **events**.
 
 ### Exiting the program : `exit`
 
@@ -420,6 +427,9 @@ Exits the program.
 Format: `exit`
 
 Aliases: `ex`
+
+**Note**: `exit` cannot be used in event window
+
 
 ## Utility features
 
@@ -482,7 +492,7 @@ menubar.
 
 An event window will appear with a list of events. You can add, delete, and find events in the event window. Note how
 the app contains some sample data for the events.<br>
-![Ui](images/toEventsWindow.png)
+![Ui](images/toEventsWindowUpdated.png)
 
 You can get back to the main window by clicking on the Back to Main on the menubar.<br>
 ![Ui](images/backToMain.png)
