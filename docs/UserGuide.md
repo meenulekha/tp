@@ -9,11 +9,10 @@ HackLink is a Hackathon Participant Management Application, designed to help org
 information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can
 streamline the process of organizing and coordinating your hackathon event.
 
-- Table of Contents
+## Table of Contents
 
 1. [Quick start](#quick-start)
 2. [Main features](#main-features)
-
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
@@ -33,7 +32,6 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Exiting the program](#exiting-the-program--exit)
 
 3. [Utility features](#utility-features)
-
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Navigating to older commands](#navigating-to-older-commands)
@@ -62,8 +60,7 @@ streamline the process of organizing and coordinating your hackathon event.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HackLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![UI of the app](images/Ui.png)
-
+   ![img.png](images/Ui.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
@@ -92,7 +89,7 @@ streamline the process of organizing and coordinating your hackathon event.
     - `findevent meeting` : Finds events which names contain "meeting".
 
     - `listevent` : Lists all events.
-  
+
     - `clear` : Clears all events
 
 8. Refer to the [Main features](#main-features) below for details of each command.
@@ -431,7 +428,6 @@ Format: `exit`
 Aliases: `ex`
 
 **Note**: `exit` cannot be used in event window
-
 
 ## Utility features
 
