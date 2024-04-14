@@ -20,6 +20,7 @@ public abstract class Person implements Identifiable {
 
     // Data fields
     private final Comment comment;
+
     /**
      * Constructs person with essential information and given comment. Every field must be present and not null.
      */
@@ -127,6 +128,9 @@ public abstract class Person implements Identifiable {
                 .add("comment", comment);
     }
 
+    /**
+     * Returns a string representation of the person's details in CSV format.
+     */
     public String toCsvString() {
         return name + "," + phone + "," + email + "," + comment + "\n";
     }

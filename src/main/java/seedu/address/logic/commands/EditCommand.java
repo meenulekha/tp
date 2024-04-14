@@ -262,10 +262,12 @@ public class EditCommand extends Command implements ReversibleCommand {
 
         @Override
         public String toString() {
-            return new ToStringBuilder(this).add("name", name)
-                                                    .add("phone", phone)
-                                                    .add("email", email)
-                                                    .add("group", group).toString();
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("category", category)
+                    .add("group", group).toString();
         }
     }
 }
