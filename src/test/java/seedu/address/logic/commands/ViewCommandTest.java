@@ -7,13 +7,14 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ViewCommandTest {
     @Test
-    public void execute() {
+    public void execute() throws CommandException {
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalEventBook(), new UserPrefs());
         assertEquals("Viewing comment of Person: Alice Pauline; Phone: 94351253; Email: alice@example.com; "

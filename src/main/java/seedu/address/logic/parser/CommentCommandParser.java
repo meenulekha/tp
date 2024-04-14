@@ -12,8 +12,6 @@ import seedu.address.model.person.Comment;
  * Parses input arguments and creates a new CommentCommand object
  */
 public class CommentCommandParser implements Parser<CommentCommand> {
-    public static final String MESSAGE_INVALID_COMMENT = "Comment should not be empty";
-    public static final String MESSAGE_INVALID_COMMENT_LENGTH = "Comment should not exceed 1000 characters";
 
     /**
      * Parses the given {@code String} of arguments in the context of the CommentCommand

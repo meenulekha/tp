@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,12 +14,19 @@ import seedu.address.commons.util.ToStringBuilder;
 public class ContactContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Creates a ContactContainsKeywordsPredicate with the given keywords.
+     *
+     * @param keywords the keywords to test against
+     */
     public ContactContainsKeywordsPredicate(List<String> keywords) {
+        requireNonNull(keywords);
         this.keywords = keywords;
     }
 
     /**
      * Tests that a {@code Person}'s information matches any of the keywords given.
+     *
      * @param person the input argument
      * @return true if the person's information contains any of the keywords given
      */
