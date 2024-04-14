@@ -20,21 +20,8 @@ public abstract class Person implements Identifiable {
 
     // Data fields
     private final Comment comment;
-
     /**
-     * Constructs person without comment. Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Category category) {
-        requireAllNonNull(name, phone, email, category);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.category = category;
-        this.comment = new Comment();
-    }
-
-    /**
-     * Constructs person with given comment. Every field must be present and not null.
+     * Constructs person with essential information and given comment. Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Category category, Comment comment) {
         requireAllNonNull(name, phone, email, category);
@@ -133,19 +120,15 @@ public abstract class Person implements Identifiable {
      * Returns a ToStringBuilder representation of the person's details as a toString() method helper.
      */
     public ToStringBuilder toStringBuilder() {
-        return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
-                .add("category", category).add("comment", comment);
+        return new ToStringBuilder(this).add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("category", category)
+                .add("comment", comment);
     }
 
     public String toCsvString() {
-        return toCsvLine() + "\n";
-    }
-
-    /**
-     * Returns a string representation of the person's details as a toCsvString() method helper.
-     */
-    public String toCsvLine() {
-        return name + "," + phone + "," + email + "," + comment;
+        return name + "," + phone + "," + email + "," + comment + "\n";
     }
 
     /**

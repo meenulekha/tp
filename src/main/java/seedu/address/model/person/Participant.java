@@ -11,15 +11,7 @@ public class Participant extends Person {
     private Group group;
 
     /**
-     * Constructs participants. Every field must be present and not null.
-     */
-    public Participant(Name name, Phone phone, Email email, Category category) {
-        super(name, phone, email, category);
-        this.group = new Group();
-    }
-
-    /**
-     * Constructs participants with comment.
+     * Constructs participants with essential information and comment.
      * Every field must be present and not null.
      */
     public Participant(Name name, Phone phone, Email email, Category category, Comment comment) {

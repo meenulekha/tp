@@ -11,15 +11,7 @@ public class Staff extends Person {
     private Group group;
 
     /**
-     * Constructs staff. Every field must be present and not null.
-     */
-    public Staff(Name name, Phone phone, Email email, Category category) {
-        super(name, phone, email, category);
-        this.group = new Group();
-    }
-
-    /**
-     * Constructs staff with comment. Every field must be present and not null.
+     * Constructs staff with essential information and comment. Every field must be present and not null.
      */
     public Staff(Name name, Phone phone, Email email, Category category, Comment comment) {
         super(name, phone, email, category, comment);
