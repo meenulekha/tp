@@ -286,6 +286,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event    |
 | `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                |
 | `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
+| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.    |
+| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant.|
+| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event  |
+| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.            |
+
+
+
+
 
 _{More to be added}_
 
@@ -377,6 +385,50 @@ _{More to be added}_
 
 - System displays an error message.
 - Use case ends.
+
+**Use case: Add Events**
+
+**MSS**
+
+1. User requests to add an new event.
+2. User provides valid information for contact details: name, date, and category.
+3. System validates input and adds the event to the list.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+2a. Invalid input provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Remove Event**
+
+**MSS**
+
+1. User requests to remove an specific event.
+2. User provides the ID of event to be removed.
+3. System deletes the event.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+2a. Event not found.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: View Events List**
+
+**MSS**
+
+1. User requests to view the list of all events.
+2. System displays the list with relevant information.
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
