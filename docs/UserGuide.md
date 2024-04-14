@@ -24,6 +24,8 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Locating persons by keywords](#locating-persons-by-keywords--find)
     - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--delete)
+
+3. [Event features](#event-features)
     - [Adding an event](#adding-an-event--addevent)
     - [Listing all events](#listing-all-events--listevent)
     - [Removing an event](#removing-an-event--deleteevent)
@@ -31,7 +33,7 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
 
-3. [Utility features](#utility-features)
+4. [Utility features](#utility-features)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Navigating to older commands](#navigating-to-older-commands)
@@ -40,12 +42,12 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Undo](#undo)
     - [Redo](#redo)
 
-4. [Event window](#event-window)
-5. [FAQ](#faq)
-6. [Warnings](#warnings)
-7. [Known issues](#known-issues)
-8. [Tips](#tips)
-9. [Command summary](#command-summary)
+5. [Event window](#event-window)
+6. [FAQ](#faq)
+7. [Warnings](#warnings)
+8. [Known issues](#known-issues)
+9. [Tips](#tips)
+10. [Command summary](#command-summary)
 
 ---
 
@@ -132,17 +134,31 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessageHackLink.png)
 
-Format: `help`
+**Format:** `help`
 
-**Note**: `help` cannot be used in event window
+<div markdown="block" class="alert alert-info">
+:information_source: **Notes:**
+
+`help` cannot be used in event window
+
+</div>
 
 ### Adding a person : `add`
 
 Adds a person to HackLink.
 
-Format: `add n/NAME p/PHONE e/EMAIL c/CATEGORY g/GROUP`
+**Format:** `add n/NAME p/PHONE e/EMAIL c/CATEGORY [g/GROUP]`
 
-Aliases:
+**Parameters:**
+
+- `NAME`: Person's name. Only alphanumeric characters and spaces are allowed, and must contain at least 1 non-space
+  character.
+- `PHONE`: Person's phone number. Only digits are allowed and must be at least 3 digits long.
+- `EMAIL`: Person's email.
+- `CATEGORY`: Either Participant, Sponsor, or Staff.
+- `GROUP` _(optional)_: Person's group number. Must be a **positive integer**.
+
+**Aliases:**
 
 - `ap`: add participant
 - `as`: add sponsor
@@ -151,153 +167,193 @@ Aliases:
   You can skip the `CATEGORY` parameter and the application will automatically assign the category based on the alias
   used.
 
-Examples:
+**Examples:**
 
 - `add n/John Doe e/johnd@example.com p/98765432 c/participant g/1`
 - `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/sponsor g/3`
 - `ap n/John Doe e/johnd@example.com p/98765432`
 
-Cautions / Warnings for Add:
+<div markdown="block" class="alert alert-info">
+:information_source: **Notes about parameter format and behavior:**
 
 - There should be no “/” in each parameter.
+
 - There should be no contacts with the same information. 2 contacts are considered the same if they have the same
-  **name** and **phone number**.
-- Category should be either Participant, Sponsor, or Staff.
+  **name** and **phone number**. Names are case-sensitive, e.g. "Jason" and "jason" does not match.
+
+- As `NAME` only allow alphanumeric characters and spaces, names like "Dr. Jean-Paul O'Brien" cannot be inserted. You
+  can work around this by either removing them or replacing them with space, e.g. "Dr. Jean-Paul O'Brien" can be
+  inserted as "Dr JeanPaul OBrien". For abbreviations like "s/o", you can use the full word "son of" instead.
+
+- `CATEGORY` is case-insensitive, e.g. `c/participant` and `c/PARTICIPANT` will set the person inserted as a
+  participant.
+
+- If no `g/GROUP` is provided, the person will be assigned group 0 in the list.
+
 - This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the
   contact list is 2147483647. Please delete some contacts to add a new person if you reach the limit.
+
+</div>
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in HackLink.
 
-The table will show all the data
+The table will show all the data.
 
-Format: `list`
+**Format:** `list`
 
 ### Editing a person : `edit`
 
 Update and edit participant contact details.
 
-Format: `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP]`
+**Format:** `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP]`
 
-Example: `edit 1 n/John Doe p/98765432`
-
-Acceptable values for each parameter
+**Parameters:**
 
 - `ID`: the index of the contact in the list. It should be a positive integer smaller than 2147483648.
 
-Aliases: `ed`
+**Aliases:** `ed`
 
-Cautions / Warnings for Edit:
+**Example:** `edit 1 n/John Doe p/98765432`
 
-- There should be no “/” in each parameter.
+<div markdown="block" class="alert alert-info">
+:information_source: **Notes about parameter format and command constraints:**
+
+- The constraint for each parameter is the same as in [`add` command](#adding-a-person--add).
+
 - There should be at least one field to edit. (`edit 1` is invalid, `edit 1 n/John Doe` is valid)
-- Updated information should be different from the original.
-- The edit command only supports editing name, phone, email, and group.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+
+- The edit command only supports editing name, phone, email, and group. You _cannot_ change a person's category with
+  `edit` command.
+
+- As the maximum number of entries in the contact list is 2147483647, `ID` should be a positive integer smaller than
   2147483648.
+
+</div>
 
 ### Grouping a person : `group`
 
-Assigns a group to a participant or a staff.
+Assigns a participant or a staff to a group.
 
-Format: `group ID [GROUP_NUMBER]`
+**Format:** `group ID [GROUP_NUMBER]`
 
-- You can only randomly assign a person to an existing group.
-- The `ID` refers to the index number of the contact in the list.
-- The `GROUP_NUMBER` can be any positive integer.
-- You can only group staff and participant, sponsor cannot be grouped.
-- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
-  2147483648.
+**Parameters:**
 
-Examples:
+- `ID`: the index number of the person in the list.
+- `GROUP_NUMBER` _(optional)_: the group number. Can be any positive integer. When none is provided, the selected person
+  will be randomly assigned to an existing group.
+
+**Examples:**
 
 - `group 1`
 - `group 1 3`
 
-Tips for Group:
+- Before
+  ![before group](images/beforeGroup.png)
 
-- Not typing the group number will randomly assign the person into an existing group.
+- After executing `group 1 3`
+  ![img.png](images/afterGroup13.png)
 
-Cautions / Warnings for Group:
+<div markdown="block" class="alert alert-info">
 
-- When no group exist you cannot randomly assign a person into a group.
+:information_source: **Notes about command constraints:**
+
+- You can only randomly assign a person to an **existing group**.
+
+- You can only group staff and participant, sponsor cannot be grouped.
+
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
+
+- When no group exist you _cannot_ randomly assign a person into a group.
+
+</div>
 
 ### Grouping randomly listed persons : `grouprandom`
 
 Assigns a random group to each participant and staff that are currently listed.
 
-Format: `grouprandom MAXIMUM_GROUP_SIZE`
+**Format:** `grouprandom MAXIMUM_GROUP_SIZE`
 
-- The `MAXIMUM_GROUP_SIZE` refers to the maximum number of people in a group.
-- The `MAXIMUM_GROUP_SIZE` can be any positive integer smaller than 2147483648.
-- You can only group staff and participant, sponsor cannot be grouped.
+**Parameters:**
 
-Example:
+- `MAXIMUM_GROUP_SIZE`: the maximum number of people in a group. Can be any positive integer smaller than 2147483648.
 
-- `grouprandom 3`
+**Example:**
+
+- `grouprandom 2`
+
+- Before
+  ![img.png](images/beforeGrouprandom.png)
+
+- After executing `grouprandom 2`
+  ![img.png](images/afterGroupRandom.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** Like `group` command, you can only group staff and participant, sponsor cannot be
+grouped.
+
+</div>
 
 ### Commenting a person : `comment`
 
-Add notes or comments to contacts. New comment will replace the old comment.
-Comma in the comment might cause the csv file to be corrupted, so they are removed from your input.
+Add notes or comments to contacts.
 
-Format `comment ID NOTES`
+**Format:** `comment ID NOTES`
 
-Example:
+**Parameters:**
+
+- `ID`: the id of the person to comment on
+- `NOTES`: the comment to give
+
+**Example:**
 
 - `comment 1 Allergic to peanuts`
+  ![img.png](images/comment.png)
+  The dialog icon appearing next to the person name means that they have a comment.
 
-Acceptable values for each parameter:
+<div markdown="block" class="alert alert-info">
 
-- `ID`: the id of the contact in the list
-- `NOTES`: any string
+:information_source: **Note:**
 
-Precise expected outputs when the command succeeds:
+- Adding a new comment on a person will replace any comments they have.
 
-- 'Commented Person: name; phone; email; category;
-- e.g. Commented Person: Alex Yeoh; Phone: 12345678; Email: edited@example.com; Category: PARTICIPANT
+- **All commas in your comment will be removed** when it is inserted into the application for compatibility with csv
+  exporting.
 
-Precise expected outputs when the command fails:
-
-- Error: Invalid command format. (when note is not provided)
+</div>
 
 ### Viewing comments : `view`
 
-view comments of a specific contact
+View comments of a specific contact
 
-Format `view ID`
+**Format:** `view ID`
 
-Example:`view 1`
-
-Acceptable values for each parameter:
+**Parameter:**
 
 - `ID`: the index of the contact in the list
 
-Precise expected outputs when the command succeeds:
-
-- Viewing comments of Person: <name> <phone> <email> <category>
-
-Precise expected outputs when the command fails:
-
-- Error: Invalid command format. (when id is not provided)
+**Example:** `view 1`
+![img.png](images/viewComment.png)
 
 ### Locating persons by keywords : `find`
 
 Finds persons who contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format:** `find KEYWORD [MORE_KEYWORDS]…`
 
 - The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Full text of a person is searched.
+- Full text of a person is searched, i.e. their name, email, phone number, group number, category and comments if any.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Aliases: `f`
+**Aliases:** `f`
 
-Examples:
+**Examples:**
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
@@ -306,96 +362,120 @@ Examples:
 
 ### Exporting selected participants : `link`
 
-Produce a csv file with selected participants' contact information to provide to sponsor.
-The csv file will be saved in the `selectedParticipants` folder with the name `list.csv`.
+Produce a csv file with selected contacts' information.
+The csv file will be saved in the `selectedPeople` folder with the name `list.csv`.
 
-Format: `link ID [MORE_ID]...`
+**Format:** `link ID [MORE_ID]…`
 
-- The number of ids is not limited.
+**Parameters:**
+
+- `ID`, `MORE_ID`: id(s) of the selected contact(s)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes on parameter constraints:**
+
 - The order of the ids does not matter.
 - The ids should be valid and in the list.
 - The ids should be separated by a space.
 - There should be no duplicate ids.
 
-Examples:
+</div>
+
+**Examples:**
 
 - `link 1 2 3` returns a csv file with the contact information of participants 1, 2, and 3
 - `link 1` returns a csv file with the contact information of participant 1
 - `link 1 2 3 4 5` returns a csv file with the contact information of participants 1, 2, 3, 4, and 5
 
-Warning:
+<div markdown="block" class="alert alert-warning">
 
-- comma in the comment might cause the csv file to be corrupted, so they are removed from your input. Avoid using comma.
-- Do not open the list.csv file while the application is running.
+:exclamation: **Caution:**
+
+- As mentioned in [`comment` command](#commenting-a-person--comment), commas in the comment might cause the csv file to
+  be corrupted, so they are removed from your input. Avoid using commas.
+
+- Do not open the `list.csv` file while the application is running.
+
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
+
+</div>
 
 ### Removing a person : `delete`
 
 Deletes the person identified by the index shown in the displayed person list.
 
-Format: `delete ID`
+**Format:** `delete ID`
 
-- The ID used must exist in the list.
+**Parameters:** `ID`: the id of the person to be deleted. Must exist in the list shown in the app.
 
-Aliases: `d`
+**Aliases:** `d`
 
-Examples:
+**Examples:**
 
 - `delete 1` deletes the first person in the list.
 
-### Adding an event : `addevent`
+## Event features
 
-**Note**: for event features, you need to navigate to the event window by clicking on the Events menu in the menubar.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note**: For event features, you need to navigate to the event window by clicking on the Events
+menu in the menubar.
 Refer to the [Event Window](#event-window) section for more details.
+
+</div>
+
+### Adding an event : `addevent`
 
 Adds an event to HackLink with a name, date and category where the category represents who the event involves.
 
-Format: `addevent en/EVENTNAME ed/EVENTDATE c/EVENTCATEGORY`
+**Format:** `addevent en/EVENTNAME ed/EVENTDATE ec/EVENTCATEGORY`
 
-Examples:
+**Parameters:**
 
-- `addevent en/meeting ed/11-06-2024 ec/staff`
+- `EVENTNAME`: Name of the event. Only alphanumeric characters and spaces are allowed.
+- `EVENTDATE`: Date of the event in format dd-MM-yyyy (e.g. 20-06-2024)
+- `EVENTCATEGORY`: Type of the event. Either Participant, Sponsor, or Staff
+
+**Examples:**
+
 - `addevent en/conference ed/22-06-2024 ec/participant`
+- `addevent en/meeting ed/11-06-2024 ec/staff`
 
-Cautions / Warnings for Addevent:
+<div markdown="block" class="alert alert-info">
 
-- There should be no <span style="color:yellow">“/”</span> in each parameter.
-- Category should be one of Participant, Sponsor, and Staff.
-- This app is designed for small hackathons. However, the maximum number of events entries is 2147483647. Please delete
-  some events to add a new event if you reach the limit.
+:information_source: **Note:** This app is designed for small hackathons. However, the maximum number of events entries
+is 2147483647. Please delete some events to add a new event if you reach the limit.
+
+</div>
 
 ### Listing all events : `listevent`
 
 Shows a list of all events in HackLink.
-Example: `Total: <total number of data>`
 The table will show all the data
 
-Format: `listevent`
+**Format:** `listevent`
 
 ### Removing an event : `deleteevent`
 
 Remove specific events from the database.
 
-Format: `deleteevent ID`
-Example:
-`deleteevent 1`
-Acceptable values for each parameter
+**Format:** `deleteevent ID`
 
-- `ID`: the id of the event in the list(positive integer smaller than 2147483648)
+**Parameters:**
 
-Precise expected outputs when the command succeeds
+- `ID`: the id of the event in the list (positive integer smaller than 2147483648)
 
-- You have successfully deleted <category> <name>.
-  Example: You have successfully deleted event meeting.
-  Precise expected outputs when the command fails
-- Error: no event with id <id>. (when event is not in the list)
+**Example:**
+
+- `deleteevent 1`
 
 ### Locating events by keywords : `findevent`
 
 Finds events which contain any of the given keywords.
 
-Format: `findevent KEYWORD [MORE_KEYWORDS]`
+**Format:** `findevent KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `meeting` will match `Meeting`
 - The order of the keywords does not matter. e.g. `Lecture git` will match `git Lecture`
@@ -404,7 +484,7 @@ Format: `findevent KEYWORD [MORE_KEYWORDS]`
 - Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Lecture 1` will return `Lecture 2`, `Lecture 3`
 
-Examples:
+**Examples:**
 
 - `findevent meeting` returns `meeting 1` and `meeting 2`
 - `findevent lecture` returns `AI lecture`, `OS lecture`<br>
@@ -414,7 +494,7 @@ Examples:
 
 Clears all entries from the database, either the persons or events.
 
-Format: `clear`
+**Format:** `clear`
 
 - Inputting the clear command in the **main window** clears all **persons**.
 - Inputting the clear command in the **events window** clears all **events**.
@@ -423,9 +503,9 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+**Format:** `exit`
 
-Aliases: `ex`
+**Aliases:** `ex`
 
 **Note**: `exit` cannot be used in event window
 
@@ -441,26 +521,34 @@ manually.
 HackLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="block" class="alert alert-warning">:exclamation: **Caution:**<br>
 If your changes to the data file makes its format invalid, HackLink will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the HackLink to behave in unexpected ways (e.g., if the value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Undo
 
-You can undo the last command by using `undo` command. This will revert the last command that changed the data.
+You can undo the last **changes made to the contact list** by using `undo` command. This will revert the last command
+that changed the data.
 
-Format: `undo`
+**Format:** `undo`
 
-Aliases: `ud`
+**Aliases:** `ud`
 
 ### Redo
 
-You can redo the last command by using `redo` command. This will redo the last command that was undone.
+You can redo the last command that was undone by using `redo` command.
 
-Format: `redo`
+**Format:** `redo`
 
-Aliases: `rd`
+**Aliases:** `rd`
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** `undo` and `redo` currently are **not supported on event window**. This means that you
+cannot use these commands to revert the changes made to the event list.
+
+</div>
 
 ### Navigating to older commands
 
@@ -472,13 +560,14 @@ to repeat a command you have previously entered.
 Aliases are shortcuts for commands. In each command, you can use the alias in place of the command word, unless
 specified otherwise by the command. Please refer to each command details for the alias.<br>
 
-Example:
+**Example:**
 
 - [Delete command](#removing-a-person--delete) has command word `delete` and alias `d`. `d 1` and `delete 1` both
   deletes the person at index 1.
 - [Adding command](#adding-a-person--add) has command word `add` and alias `ap` for adding participant. You don't need
   to include participant parameter when using this alias for `add` command.<br>
-  `add n/John e/john@mail.com p/84831193 c/participant` and `ap n/John e/john@mail.com p/84831193` both adds new contact
+  `add n/John e/john@mail.com p/84831193 c/participant` and `ap n/John e/john@mail.com p/84831193` both adds new
+  participant
   named "John" with given information to the contact list.
 
 ### Shortcuts
@@ -510,7 +599,7 @@ You can get back to the main window by clicking on the Back to Main on the menub
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+the data of your previous HackLink home folder.
 
 ---
 
@@ -559,10 +648,10 @@ the data of your previous AddressBook home folder.
 | **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CATEGORY [g/GROUP]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/participant g/3` |
 | **Clear**          | `clear`                                                                                                                                  |
 | **Remove**         | `delete ID`<br> e.g., `delete 3`                                                                                                         |
-| **Edit**           | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/CATEGORY] [g/GROUP]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`               |
+| **Edit**           | `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [g/GROUP]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                   |
 | **Group**          | `group ID [GROUP_NUMBER]`<br> e.g., `group 1 3`                                                                                          |
-| **Group Randomly** | `grouprandom MAX_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                                   |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                               |
+| **Group Randomly** | `grouprandom MAXIMUM_GROUP_SIZE`<br> e.g., `grouprandom 3`                                                                               |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`                                                                            |
 | **List**           | `list`                                                                                                                                   |
 | **Link**           | `link ID [MORE_ID]...`<br> e.g., `link 1 2 3`                                                                                            |
 | **Comment**        | `comment ID NOTES`<br> e.g., `comment 1 Allergic to peanuts`                                                                             |
