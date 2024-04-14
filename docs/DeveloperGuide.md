@@ -574,7 +574,7 @@ Team size: 4
    - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
    - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
    - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
-
+     
 ## **Appendix: Effort**
 Our project involved the development of a comprehensive event management system, which presented several challenges and required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with multiple entity types (events, persons), making it more complex.
 
@@ -598,3 +598,37 @@ Our project involved the development of a comprehensive event management system,
 
 
 ## **Appendix: Requirementss**
+
+### Requirements Implemented in the Current Version
+1. **Person creation**
+   - Users must be able to create a person who is a participant, staff or sponsor with valid information.
+   - The system should validate user inputs to ensure data integrity.
+   - Upon successful creation, users should have access to the list of persons.
+   - Users should be able to perform various commands such as add, delete, update, find, list and clear. This allows users to oversee the persons in the addressbook.
+     
+2. **Grouping**
+   - Users should be able to assign the staff and participants a group.
+     
+3. **Undo/Redo**
+   - In the event that users have executed incorrect/undesirable commands, they must be able to undo/redo their commands to restore the previous state of the databse.
+     
+4. **Link**
+   - Users must be able to create CSV files of the persons they want using the link command.
+
+5. **Event Creation**
+   - Users should be able to create new events by providing relevant details such as event name, date, and category. The event should involve a certain category of people.
+   - The system should validate user inputs to ensure data integrity.
+   -  Upon successful creation, users should have access to the list of events.
+   - Users should be able to perform various commands such as add, delete, find, list and clear. This allows users to oversee the persons in the database.
+     
+### Requirements Yet to Be Implemented
+
+1. **Sending emails to a group**
+   - Users should be able to send a message to a selected group of people based on the contact information given in the database using commands.
+     
+2. **Editing Events**
+   - Users should be able to edit the events that they have created.
+     
+3. **Event Reminders**
+   - Users can set reminders to notify them about upcoming events
+
