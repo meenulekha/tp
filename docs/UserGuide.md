@@ -160,11 +160,10 @@ Cautions / Warnings for Add:
 
 - There should be no “/” in each parameter.
 - There should be no contacts with the same information. 2 contacts are considered the same if they have the same
-  **name**, **phone number** and **category**.
+  **name** and **phone number**.
 - Category should be either Participant, Sponsor, or Staff.
 - This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the
-  contact list is 2147483647.
-  Please delete some contacts to add a new person if you reach the limit.
+  contact list is 2147483647. Please delete some contacts to add a new person if you reach the limit.
 
 ### Listing all persons : `list`
 
