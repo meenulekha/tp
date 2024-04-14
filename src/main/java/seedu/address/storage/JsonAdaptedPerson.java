@@ -112,6 +112,7 @@ class JsonAdaptedPerson {
 
         if (Group.isValidGroup(group)) {
             model.setGroupNumber(Integer.parseInt(group));
+            Group.setTotalGroupNumber(Math.max(Group.getTotalGroupNumber(), Integer.parseInt(group)));
         }
 
         return model;
