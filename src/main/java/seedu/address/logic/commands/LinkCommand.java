@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileUtil;
@@ -29,7 +31,9 @@ public class LinkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Exported all selected people";
 
-    public final List<Index> indexes;
+    private static Logger logger = Logger.getLogger("LinkCommandLogger");
+    private final List<Index> indexes;
+
 
     /**
      * Creates a LinkCommand to send information of the specified {@code Person} using a csv file.
@@ -49,22 +53,9 @@ public class LinkCommand extends Command {
         validateIndexes(indexes, lastShownList);
 
         Path filePath = Path.of("./selectedPeople/list.csv");
-        String header = "Name, Phone, Email, Comment\n";
+        createFile(filePath);
+        writeToFile(filePath, model);
 
-        try {
-            FileUtil.createCsvFile(filePath, header);
-        } catch (IOException e) {
-            throw new CommandException(Messages.MESSAGE_IO_ERROR);
-        }
-
-        for (Index index : indexes) {
-            Person person = model.getFilteredPersonList().get(index.getZeroBased());
-            try {
-                FileUtil.appendToFile(filePath, person.toCsvString());
-            } catch (IOException e) {
-                throw new CommandException(Messages.MESSAGE_IO_ERROR);
-            }
-        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -102,6 +93,45 @@ public class LinkCommand extends Command {
                 }
             }
         }
+    }
+    /**
+     * Creates a empty csv file with header for the selected people.
+     *
+     * @param filePath the path of the csv file
+     * @throws CommandException if there is an error creating the file
+     */
+    private void createFile(Path filePath) throws CommandException {
+        logger.log(Level.INFO, "Creating csv file for selected people");
+        String header = "Name, Phone, Email, Comment\n";
+
+        try {
+            FileUtil.createCsvFile(filePath, header);
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Error creating a csv file");
+            throw new CommandException(Messages.MESSAGE_IO_ERROR);
+        }
+        logger.log(Level.INFO, "Created csv file for selected people");
+    }
+
+    /**
+     * Writes the selected people to the csv file.
+     *
+     * @param filePath the path of the csv file
+     * @param model the model of the hacklink
+     * @throws CommandException if there is an error writing to the file
+     */
+    private void writeToFile(Path filePath, Model model) throws CommandException {
+        logger.log(Level.INFO, "Writing selected people to csv file");
+        for (Index index : indexes) {
+            Person person = model.getFilteredPersonList().get(index.getZeroBased());
+            try {
+                FileUtil.appendToFile(filePath, person.toCsvString());
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Error writing to a csv file");
+                throw new CommandException(Messages.MESSAGE_IO_ERROR);
+            }
+        }
+        logger.log(Level.INFO, "Wrote selected people to csv file");
     }
 
     @Override
