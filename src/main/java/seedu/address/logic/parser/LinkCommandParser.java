@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;
@@ -19,10 +21,11 @@ public class LinkCommandParser implements Parser<LinkCommand> {
     public LinkCommand parse(String args) throws ParseException {
         String trimmed = args.trim();
         Boolean isEmpty = trimmed.isEmpty();
-        Boolean isInvalid = !trimmed.matches("\\d+(\\s+\\d+)*");
+        String validationRegex = "[1-9][0-9]*(\\s+[1-9][0-9]*)*";
+        Boolean isInvalid = !trimmed.matches(validationRegex);
         if (isEmpty || isInvalid) {
             //checks if the user input is not all integers separated by spaces or empty
-            throw new ParseException(LinkCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
         Index[] indexes = Arrays.stream(trimmed.split("\\s+"))
