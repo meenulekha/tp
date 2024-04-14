@@ -35,6 +35,7 @@ public class GroupCommand extends Command implements ReversibleCommand {
     public static final String MESSAGE_PERSON_WITHOUT_GROUP = "Sponsor doesn't have a group";
     public static final String MESSAGE_NO_EXISTING_GROUP =
             "Cannot group without a group number when there is no existing group";
+    public static final String MESSAGE_INVALID_GROUP_NUMBER = "Group number must be a positive integer.";
     public static final String MESSAGE_SUCCESS_UNDO = "Changes reverted: %1$s";
 
     private final Index targetIndex;
@@ -74,6 +75,10 @@ public class GroupCommand extends Command implements ReversibleCommand {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (targetGroupNumber.isPresent() && (targetGroupNumber.get() < 0)) {
+            throw new CommandException(MESSAGE_INVALID_GROUP_NUMBER);
         }
 
         Person personToGroup = lastShownList.get(targetIndex.getZeroBased());
