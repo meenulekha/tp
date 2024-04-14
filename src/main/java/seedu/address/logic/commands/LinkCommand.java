@@ -26,7 +26,7 @@ public class LinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links all selected people to sponsors by "
             + "exporting into a csv file. "
-            + "Parameters: multiple index (must be a positive integer)\n"
+            + "Parameters: one or multiple index (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
     public static final String MESSAGE_SUCCESS = "Exported all selected people";
@@ -94,6 +94,7 @@ public class LinkCommand extends Command {
             }
         }
     }
+
     /**
      * Creates a empty csv file with header for the selected people.
      *
@@ -117,7 +118,7 @@ public class LinkCommand extends Command {
      * Writes the selected people to the csv file.
      *
      * @param filePath the path of the csv file
-     * @param model the model of the hacklink
+     * @param model    the model of the hacklink
      * @throws CommandException if there is an error writing to the file
      */
     private void writeToFile(Path filePath, Model model) throws CommandException {

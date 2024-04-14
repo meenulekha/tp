@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
@@ -21,19 +22,29 @@ public class LinkCommandParser implements Parser<LinkCommand> {
     public LinkCommand parse(String args) throws ParseException {
         String trimmed = args.trim();
         Boolean isEmpty = trimmed.isEmpty();
-        String validationRegex = "[1-9][0-9]*(\\s+[1-9][0-9]*)*";
+        String validationRegex = "\\d+(\\s+\\d+)*";
         Boolean isInvalid = !trimmed.matches(validationRegex);
         if (isEmpty || isInvalid) {
             //checks if the user input is not all integers separated by spaces or empty
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
-
-        Index[] indexes = Arrays.stream(trimmed.split("\\s+"))
-                                .mapToInt(Integer::parseInt)
-                                .mapToObj(Index::fromOneBased)
-                                .toArray(Index[]::new);
-
+        Index[] indexes = parseIndexes(trimmed);
         return new LinkCommand(indexes);
     }
 
+    /**
+     * Returns an array of Indexes from the given {@code String}.
+     */
+    public static Index[] parseIndexes(String trimmed) throws ParseException {
+        List<Index> list = new ArrayList<>();
+        for (String s : trimmed.split("\\s+")) {
+            try {
+                Index index = ParserUtil.parseIndex(s);
+                list.add(index);
+            } catch (ParseException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+            }
+        }
+        return list.toArray(Index[]::new);
+    }
 }

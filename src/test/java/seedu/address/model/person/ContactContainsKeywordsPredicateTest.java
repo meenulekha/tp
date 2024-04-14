@@ -59,7 +59,7 @@ public class ContactContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords() {
+    public void test_nameDoesNotContainKeyword_returnsFalse() {
         // Zero keywords
         ContactContainsKeywordsPredicate predicate = new ContactContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
