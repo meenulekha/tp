@@ -111,7 +111,7 @@ public class CommentCommand extends Command implements ReversibleCommand {
         Category category = personToEdit.getCategory();
         Group group = personToEdit.getGroup();
 
-        return PersonFactory.createPerson(name, phone, email, category, group, comment);
+        return PersonFactory.createPerson(name, phone, email, category, comment, group);
     }
 
     @Override

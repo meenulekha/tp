@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's comment in the address book.
+ * Represents a Person's comment in the HackLink.
  * Guarantees: immutable; is valid as declared in {@link #isValidComment(String)}
  */
 public class Comment {

@@ -1,56 +1,42 @@
 package seedu.address.model.person;
 
-
 /**
  * Factory class for creating Person objects.
  */
 public class PersonFactory {
     /**
-     * Creates a Person based on the category.
+     * Creates a Person based on the necessary fields.
      */
     public static Person createPerson(Name name, Phone phone, Email email, Category category) {
-        switch (category.type) {
-        case PARTICIPANT:
-            return new Participant(name, phone, email, category);
-        case STAFF:
-            return new Staff(name, phone, email, category);
-        case SPONSOR:
-            return new Sponsor(name, phone, email, category);
-        default: // cannot happen due to category validation
-            throw new IllegalArgumentException("Invalid category");
-        }
+        return createPerson(name, phone, email, category, new Comment());
     }
+
     /**
-     * Creates a Person based on the category and comment.
+     * Creates a Person with the category and comment.
      */
     public static Person createPerson(Name name, Phone phone, Email email, Category category, Comment comment) {
+        return createPerson(name, phone, email, category, comment, Group.getDefaultGroupForCategory(category.type));
+    }
+
+    /**
+     * Creates a Person with the category, comment and group.
+     */
+    public static Person createPerson(Name name, Phone phone, Email email, Category category, Comment comment,
+                                      Group group) {
+        Person categoryPerson;
         switch (category.type) {
         case PARTICIPANT:
-            return new Participant(name, phone, email, category, comment);
+            categoryPerson = new Participant(name, phone, email, category, comment);
+            break;
         case STAFF:
-            return new Staff(name, phone, email, category, comment);
+            categoryPerson = new Staff(name, phone, email, category, comment);
+            break;
         case SPONSOR:
             return new Sponsor(name, phone, email, category, comment);
         default: // cannot happen due to category validation
-            throw new IllegalArgumentException("Invalid category");
+            throw new IllegalArgumentException(Category.MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Creates a Person based on the category, group, and comment.
-     */
-    public static Person createPerson(Name name, Phone phone, Email email, Category category, Group group,
-                                      Comment comment) {
-        if (group == null) {
-            return createPerson(name, phone, email, category, comment);
-        }
-
-        if (category.value.equals("SPONSOR")) {
-            throw new IllegalArgumentException("Sponsor doesn't have a group");
-        }
-
-        Person person = createPerson(name, phone, email, category, comment);
-        person.setGroup(group);
-        return person;
+        categoryPerson.setGroup(group);
+        return categoryPerson;
     }
 }
