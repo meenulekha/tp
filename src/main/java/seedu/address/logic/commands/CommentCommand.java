@@ -42,7 +42,7 @@ public class CommentCommand extends Command implements ReversibleCommand {
     private Person editedPerson;
 
     /**
-     * @param index of the person in the filtered person list to comment
+     * @param index       of the person in the filtered person list to comment
      * @param editComment comment to the person
      */
     public CommentCommand(Index index, Comment editComment) {
@@ -56,48 +56,53 @@ public class CommentCommand extends Command implements ReversibleCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        validateIndex(index, lastShownList);
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editComment);
+        Person editedPerson = createCommentedPerson(personToEdit, editComment);
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateModelPerson(model, personToEdit, editedPerson);
+        recordEdit(model, personToEdit, editedPerson);
 
-        this.originalPerson = personToEdit;
-        this.editedPerson = editedPerson;
-
-        model.addCommand(this);
         return new CommandResult(String.format(MESSAGE_COMMENT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    private void validateIndex(Index index, List<Person> list) throws CommandException {
+        boolean isLargerThanListSize = index.getZeroBased() >= list.size();
+        if (isLargerThanListSize) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    private void updateModelPerson(Model model, Person originalPerson, Person editedPerson) {
+        model.setPerson(originalPerson, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    private void recordEdit(Model model, Person originalPerson, Person editedPerson) {
+        this.originalPerson = originalPerson;
+        this.editedPerson = editedPerson;
+        model.addCommand(this);
     }
 
     @Override
     public CommandResult undo(Model model) {
         requireNonNull(model);
-
-        model.setPerson(editedPerson, originalPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        updateModelPerson(model, editedPerson, originalPerson);
         return new CommandResult(String.format(CommentCommand.MESSAGE_SUCCESS_UNDO, Messages.format(originalPerson)));
     }
 
     @Override
     public CommandResult redo(Model model) throws CommandException {
         requireNonNull(model);
-
-        model.setPerson(originalPerson, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        updateModelPerson(model, originalPerson, editedPerson);
         return new CommandResult(String.format(MESSAGE_COMMENT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private static Person createEditedPerson(Person personToEdit, Comment comment) {
+    private static Person createCommentedPerson(Person personToEdit, Comment comment) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
@@ -106,7 +111,7 @@ public class CommentCommand extends Command implements ReversibleCommand {
         Category category = personToEdit.getCategory();
         Group group = personToEdit.getGroup();
 
-        return PersonFactory.createPerson(name, phone, email, category, group, comment);
+        return PersonFactory.createPerson(name, phone, email, category, comment, group);
     }
 
     @Override
@@ -127,7 +132,8 @@ public class CommentCommand extends Command implements ReversibleCommand {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("index", index)
+        return new ToStringBuilder(this)
+                .add("index", index)
                 .add("editComment", editComment).toString();
     }
 }

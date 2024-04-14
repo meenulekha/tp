@@ -15,7 +15,7 @@ public class Group {
 
 
     /**
-     * Constructs a {@code Group} with group number 0.
+     * Constructs a default {@code Group} with group number 0.
      */
     public Group() {
         this.groupNumber = 0;
@@ -34,7 +34,7 @@ public class Group {
     }
 
     /**
-     * Returns true if a given integer is a valid Group.
+     * Returns true if a given integer is a valid Group. Includes 0 for default group.
      */
     public static boolean isValidGroup(int test) {
         return test >= 0;
@@ -73,6 +73,19 @@ public class Group {
      */
     public int getGroupNumber() {
         return groupNumber;
+    }
+
+    public static Group getDefaultGroupForCategory(CategoryType categoryType) {
+        switch (categoryType) {
+        case PARTICIPANT:
+        case STAFF:
+            return new Group();
+        case SPONSOR:
+            return null;
+        default:
+            // should not reach here
+            throw new IllegalArgumentException(Category.MESSAGE_CONSTRAINTS);
+        }
     }
 
     @Override
