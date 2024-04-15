@@ -1,10 +1,11 @@
 ---
 layout: page
+toc: true
 title: Developer Guide
 ---
 
 * TOC
-  {:toc}
+{:toc}
 
 ---
 
