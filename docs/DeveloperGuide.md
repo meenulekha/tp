@@ -292,9 +292,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Link Feature
+### Link Feature
 
 #### Implementation
+
 The activity diagram below illustrates the flow of the `link` command.
 ![LinkActivity](images/LinkCommandActivityDiagram.png)
 
@@ -329,22 +330,21 @@ and , offering a dedicated tool to optimize hackathon planning. Optimized for us
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                     | So that I can…​                                              |
-|----------|-----------------------------|--------------------------------------------------|--------------------------------------------------------------|
-| `* * *`  | Student Hackathon Organizer | Add new participants to the contact managing app | Have a centralized database of all hackathon attendees.      |
-| `* * *`  | Student Hackathon Organizer | Update and edit participant contact details      | Ensure accurate and up-to-date information.                  |
-| `* * *`  | Student Hackathon Organizer | Add notes or comments to contact                 | Provide additional context or reminders for each contact.    |
-| `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event    |
-| `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                |
-| `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
-| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.    |
-| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant.|
-| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event  |
-| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.            |
-
-
-
-
+| Priority | As a …​                     | I want to …​                                     | So that I can…​                                               |
+|----------|-----------------------------|--------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | Student Hackathon Organizer | Add new participants to the contact managing app | Have a centralized database of all hackathon attendees.       |
+| `* * *`  | Student Hackathon Organizer | Update and edit participant contact details      | Ensure accurate and up-to-date information.                   |
+| `* * *`  | Student Hackathon Organizer | Add notes or comments to contact                 | Provide additional context or reminders for each contact.     |
+| `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event     |
+| `* * *`  | Student Hackathon Organizer | View comment of a specific participant           | Have a quick reference to the important notes for a contact   |
+| `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                 |
+| `* * *`  | Student Hackathon Organizer | Find a participant with keyword                  | Effectively search for a specific participant's information   |
+| `* * *`  | Student Hackathon Organizer | Export specific contact details to a CSV file    | Share contact information with sponsors                       |
+| `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate.  |
+| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.     |
+| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant. |
+| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event   |
+| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.             |
 
 _{More to be added}_
 
@@ -402,22 +402,24 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: Comment**
+**Use case: Add a Comment to person with index**
 
 **MSS**
 
-1. User requests to add notes or comments to a participant.
-2. System prompts for the participant's name and the notes.
-3. User provides notes.
-4. System adds the notes to the participant's profile.
-5. System displays a success message.
+1. User requests to add comments to a person by providing the person's index and the comment.
+2. System replace the old comment data of the participant's into a new comment.
+3. System displays a success message.
 
    Use case ends.
 
 **Extensions**
-3a. No notes provided.
+3a. Invalid index provided.
 
 - System displays an error message.
+
+3b. No notes provided.
+
+- System displays an error message. 
 - Use case ends.
 
 **Use case: Remove Participant**
@@ -434,6 +436,47 @@ otherwise)
 
 **Extensions**
 3a. Participant not found.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Find Participant by keywords**
+
+**MSS**
+
+1. User requests to find a person by providing a keyword.
+2. System searches and filters for the keyword in the information of people.
+3. System shows the filtered list of people with success message containing number of people found to the user.
+
+   Use case ends.
+
+**Use case: Export specific contact by indexes**
+
+**MSS**
+
+1. User requests to export specific contact details to a CSV file by providing the indexes of the contacts.
+2. System reads and exports the contact details to a CSV file.
+3. System displays a success message to the user.
+
+   Use case ends.
+
+**Extensions**
+1a. Invalid index(es) provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: View Comment of a specific person**
+
+**MSS**
+
+1. User requests to view the comment of a specific person by providing the index of the person.
+2. System displays the comment of the person.
+
+    Use case ends.
+
+**Extensions**
+1a. Invalid index provided.
 
 - System displays an error message.
 - Use case ends.
