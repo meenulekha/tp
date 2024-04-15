@@ -411,17 +411,18 @@ _{More to be added}_
 
 **MSS**
 
-1. User requests to group randomly all participants in the current list.
-2. User provides valid maximum group size.
-3. System assigns randomly all participants into a group, where each group
+1. User requests to find participant in the current list.
+2. User requests to group randomly all persons in the current list.
+3. User provides valid maximum group size.
+4. System assigns randomly all participants into a group, where each group
    size is less than or equal to the maximum group size.
-4. System displays a success message.
+5. System displays a success message.
 
    Use case ends.
 
 **Extensions**
 
-2a. Invalid maximum group size provided.
+3a. Invalid maximum group size provided.
 
 - System displays an error message.
 - Use case ends.
@@ -539,21 +540,37 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-<<<<<<< HEAD
+
 ### Grouping a person
 
-1. Randomly grouping a participant without prior existing groups
+1. **Randomly grouping a participant or staff without prior existing groups**
    1. Prerequisites: Delete addressbook.json in the data folder.
-   2. Test case: `group 1`<br>
+   2. Test case: `group x` (where x is the index of a participant or staff)<br>
       Expected: No person is grouped. Error details shown in the status message.
-2. Group a person into a participant or staff into a specific group number.
-   1. Prerequisites: A participant or a staff is the first person in the list
-   2. Test case: `group 1 1` <br>
-      Expected: First contact is assigned into group 1.
-   3. Test case: `group 1 -1` <br>
+2. **Group a person into a participant or staff into a specific group number.**
+   1. Prerequisites: A participant or a staff is in the list.
+   2. Test case: `group x 1` (where x is the index of a participant or staff)<br>
+      Expected: First contact is assigned into group 1. Details of the grouped contact shown in the status message.
+   3. Test case: `group x -1` (where x is the index of a participant or staff)<br>
       Expected: No person is grouped. Error details shown in the status message.
-3. Randomly grouping a participant into an existing groups
-=======
+3. **Randomly grouping a participant into an existing groups**
+   1. Prerequisites: There exist a positive (non-zero) group number in the list.<br>
+      If they don't exist, input `group x 5` (where x is the index of a participant or staff)
+   2. Test case: `group x` (where x is the index of a participant or staff)<br>
+      Expected: First person is assigned into a random existing group.
+
+### Group randomly all persons
+
+1. **Randomly grouping all participants and staffs in the list**
+   1. Prerequisites: Multiple persons in the list.
+   2. Test case: `grouprandom 3`<br>
+      Expected: All participants and staffs are assigned into a random group number.
+      Each group have less than or equal to 3 members.
+   3. Test case: `grouprandom x` (where x is larger than the list size) <br>
+      Expected: All participants and staffs are assigned into group 1.
+   4. Test case: `grouprandom 0`<br>
+      Expected: No person is grouped. Error details shown in the status message.
+
 ### Adding events
 
 1. **Access the "Add Event" Functionality**:
@@ -629,6 +646,14 @@ Team size: 4
    - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
    - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
    - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
+
+3. **Implement priority system when assigning a person into a random group with Group Command**:
+   - **Feature Flaw**: Assigning a person to a totally random group might not be accurate as ideally hackathon would need groups with similar group sizes.
+   - **Proposed Fix**: Implement a priority system where the group that have fewer members have higher priority
+
+4. **Add an option to not include existing groups for GroupRandom Command**:
+   - **Feature Flaw**: Currently, GroupRandom Command will be randomly assigning group numbers, that ranges from 1 to a certain number. This is not ideal for when a hackathon organiser wants to randomize a subset of the contacts without changing the existing groups.
+   - **Proposed Fix**: Introduce an option to randomly assigning groups without modifying the existing group members.
      
 ## **Appendix: Effort**
 Our project involved the development of a comprehensive event management system, which presented several challenges and required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with multiple entity types (events, persons), making it more complex.
@@ -647,4 +672,3 @@ Our project involved the development of a comprehensive event management system,
 **Achievements:**
 - Despite the challenges, we successfully developed a functional and robust event management system that meets the project requirements and provides a seamless user experience.
 - Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event commands, as well as ensuring data integrity and system stability.
->>>>>>> master
