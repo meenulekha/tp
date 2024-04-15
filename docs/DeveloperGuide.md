@@ -189,53 +189,60 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The undo/redo feature is implemented using the following components:
 
-- `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-- `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
+- `ReverisbleCommand` interface. This interface defines two methods:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
+   - `ReversibleCommand#undo(Model model)`— Reverts the command and returns a `CommandResult`.
+   - `ReversibleCommand#redo(Model model)`— Re-executes the command and returns a `CommandResult`.
+
+   `ReversibleCommand` interface is used in conjunction with the abstract `Command` class. Commands that support undo/redo
+   implement this interface.
+
+- `CommandHistoryManager` class. This class is responsible for managing the undo/redo history. It maintains 2 lists 
+of `ReversibleCommand` objects: `history` and `future`.
+
+   - `history` contains the commands that have been executed and can be undone. New commands are added to the end of the list.
+   - `future` contains the commands that have been undone and can be redone.
+
+   <br>
+   `CommandHistoryManager` provides the following methods:
+
+   - `CommandHistoryManager#addCommand(ReversibleCommand command)`— Adds a command to the `history` list and clears the `future` list.
+   - `CommandHistoryManager#getCommandToUndo(Model model)`— Returns the last command in the `history` list and moves it to the end of the `future` list.
+   - `CommandHistoryManager#getCommandToRedo(Model model)`— Returns the last command in the `future` list and moves it to the end of the `history` list.
+
+These operations are exposed in the `Model` interface as `Model#addCommand(ReversibleCommand)`, `Model#undoAddressBook()`
 and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Step 1.** The user launches the application. The `CommandHistoryManager` is initialized with empty `history` and `future` lists.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+**Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
+calls `Model#addCommand(ReversibleCommand)` to add the itself to the `history` list.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+![Add "delete 5" to history](images/UndoRedoAddCommandObjectDiagram.png)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#addCommand(ReversibleCommand)` to add itself to the `history` list.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
+![Add "add n/David" to history](images/UndoRedoAddCommandObjectDiagram2.png)
 
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#addCommand(ReversibleCommand)`, so the command will not be added to the `history` list. This ensures that only successful commands are added to the history.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**Step 4.** The user decides to undo the `add n/David …​` command by executing the `undo` command. The `undo` command calls `Model#undoAddressBook()`, which retrieves the last command from the `history` list and calls `ReversibleCommand#undo(Model model)` on it. The add command is removed from the `history` list and added to the `future` list.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![Undo "add n/David"](images/UndoRedoUndoCommandObjectDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `history` list is empty, there is no command to undo.
+The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo. Similarly, the `redo` command uses `Model#canRedoAddressBook()` to check if the `future` list is empty.
 
 </div>
 
@@ -251,51 +258,37 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command is similar — it calls `Model#redoAddressBook()`, which retrieves the last command from the `future` list and calls `ReversibleCommand#redo(Model model)` on it.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-</div>
+**Step 5.** The user then decides to execute the command `list`. Commands that do not modify the data, such
+as `list`, will usually not call `Model#addCommand()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
+Thus, the `history` list remains unchanged.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+![Undo "add n/David"](images/UndoRedoUndoCommandObjectDiagram.png)
 
-![UndoRedoState4](images/UndoRedoState4.png)
+**Step 6.** The user executes `delete 1`, which calls `Model#addCommand(ReversibleCommand)`. The `future` list, which contains the previous `add n/David...` command, is cleared. 
+Reason: It no longer makes sense to redo the `add n/David …​` command, since `delete 1` may affect the added person. This is the behavior that most modern desktop applications follow.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
+![Add "delete 1" to history](images/UndoRedoAddCommandObjectDiagram3.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="200" />
 
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
 
-- **Alternative 1 (current choice):** Saves the entire address book.
+- **Alternative 1:** Saves the entire address book.
 
     - Pros: Easy to implement.
     - Cons: May have performance issues in terms of memory usage.
 
-- **Alternative 2:** Individual command knows how to undo/redo by
+- **Alternative 2 (current choice):** Individual command knows how to undo/redo by
   itself.
     - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -441,10 +434,9 @@ otherwise)
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
-- \*\*Java 11: A version of the Java programming language and runtime environment, required for running the application
-- \*\*Participant: An individual registered to participate in the hackathon
-- \*\*ID: A unique identifier assigned to each participant in the system
--
+- **Java 11**: A version of the Java programming language and runtime environment, required for running the application
+- **Participant**: An individual registered to participate in the hackathon
+- **ID**: A unique identifier assigned to each participant in the system
 
 ---
 
