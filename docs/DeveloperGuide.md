@@ -397,6 +397,8 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
+
 **Use case: View Participant List**
 
 **MSS**
@@ -406,6 +408,8 @@ otherwise)
 3. System shows the total count of participants.
 
    Use case ends.
+
+<br>
 
 **Use case: Update Participant Contact Details**
 
@@ -426,6 +430,8 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
+
 **Use case: Comment**
 
 **MSS**
@@ -444,6 +450,8 @@ otherwise)
 
 - System displays an error message.
 - Use case ends.
+
+<br>
 
 **Use case: Remove Participant**
 
@@ -464,6 +472,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
 
 **Use case: Group A Participant**
 
@@ -482,6 +491,8 @@ otherwise)
 
 - System displays an error message.
 - Use case ends.
+
+<br>
 
 **Use case: Randomly Group All Participant**
 
@@ -503,6 +514,8 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
+
 **Use case: Add Events**
 
 **MSS**
@@ -520,6 +533,8 @@ otherwise)
 
 - System displays an error message.
 - Use case ends.
+
+<br>
 
 **Use case: Remove Event**
 
@@ -539,6 +554,8 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
+
 **Use case: View Events List**
 
 **MSS**
@@ -546,6 +563,8 @@ otherwise)
 1. User requests to view the list of all events.
 2. System displays the list with relevant information.
    Use case ends.
+
+<br>
 
 **Use case: Revert last change**
 
