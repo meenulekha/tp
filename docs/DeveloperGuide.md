@@ -720,21 +720,32 @@ Team size: 4
     - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
     - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
 
+3. **Proper undoing of deletion**:
+   Currently, undoing a delete command adds the deleted person to the end of the contact list instead of their original
+   position. This can be confusing for users who expect the undo operation to truely revert the deletion. We plan to
+   re-implment the undo feature of the delete command to restore the deleted person to their original position in the
+   contact list.
+
+4. **Allow more flexible name for contact**:
+   Currently, the name of a contact can only contain alphanumeric characters and spaces. We plan to allow more characters such as
+   hyphens, periods, apostrophes, slashes, and commas in the name of a contact.
+
 ## **Appendix: Effort**
 
 Our project involved the development of a comprehensive event management system, which presented several challenges and
 required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with
-multiple entity types (events, persons), making it more complex.
+multiple entity types (events, persons: participants, staffs, sponsors), making it more complex.
 
 **Difficulty Level:**
 
 - The project's difficulty level was moderate to high due to the need to handle multiple entity types and implement
-  various features such as grouping, undo/redo commands and event commands.
+  various features such as grouping, undoing/redoing and event commands.
 
 **Challenges Faced:**
 
 - One challenge was ensuring the system's robustness and reliability, especially when handling complex data interactions
   and user inputs.
+
 - We had to consider various scenarios that could result in a not so friendly user-friendly experience.
 
 **Effort Required:**
@@ -742,7 +753,7 @@ multiple entity types (events, persons), making it more complex.
 - The project required a significant amount of effort from both development and testing perspectives. Development
   involved designing and implementing features, handling data storage and retrieval, and ensuring smooth system
   operations.
-- Testing efforts were extensive to ensure the system's functionality, reliability, and security.
+- Testing efforts were extensive to ensure the system's functionality and reliability.
 
 **Achievements:**
 
