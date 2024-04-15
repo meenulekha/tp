@@ -433,6 +433,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
 
 **Use case: Add a Comment to person with index**
 
@@ -475,6 +476,8 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
+<br>
+
 **Use case: Find Participant by keywords**
 
 **MSS**
@@ -486,20 +489,24 @@ otherwise)
    Use case ends.
    
  **Extensions**
+
 2a. No one's information contain the keyword.
 
 -System displays an empty list.
 - Use case ends.
 
-**Use case: Export specific contact by indexes**
+<br>
+
+**Use case: Export specific people by indexes**
 
 **MSS**
 
-1. User requests to export specific contact details to a CSV file by providing the indexes of the contacts.
+1. User requests to export specific contact details to a CSV file by providing the indexes of the people.
 2. System reads and exports the contact details to a CSV file.
 3. System displays a success message to the user.
 
 **Extensions**
+
 1a. Invalid index(es) provided.
 
 - System displays an error message.
@@ -520,6 +527,7 @@ otherwise)
    Use case ends.
 
 **Extensions**
+
 2a. Invalid input provided.
 
 - System displays an error message.
@@ -527,7 +535,7 @@ otherwise)
 
 <br>
 
-**Use case: View Comment of a specific person**
+**Use case: View comment of a specific person**
 
 **MSS**
 
@@ -537,6 +545,7 @@ otherwise)
     Use case ends.
 
 **Extensions**
+
 1a. Invalid index provided.
 
 - System displays an error message.
