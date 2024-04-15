@@ -47,8 +47,8 @@ public class Event {
 
         return otherEvent != null
                 && (otherEvent.getEventName().equals(getEventName())
-                || otherEvent.getEventDate().equals(getEventDate())
-                || otherEvent.getEventCategory().equals(getEventCategory()));
+                && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getEventCategory().equals(getEventCategory()));
     }
 
     /**
