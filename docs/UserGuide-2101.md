@@ -5,40 +5,14 @@ title: User Guide
 
 WELCOME TO HACKLINK!
 
-## Introduction
-
-Again, Welcome to HackLink! This user guide is designed to help you navigate and utilize this HackLink app to its full
-potential. HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage
-contact information for hackathons. This app is aimed at simplifying the management of participant, staff, and sponsor's
-information. With this user guide, you will easily and quickly learn to make use of important features, such as adding,
-deleting, finding, and commenting contacts. you can streamline the complex process of organizing and coordinating your
-hackathon event.
-
-### Target Audience
-
-This user guide is intended for hackathon organizers and coordinators who are looking for a simple and efficient way to
-manage their hackathons. We assume that you have a basic understanding of hackathon event management and are familiar
-with digital tools and CLI-based applications. However, even if you are new to hackathon management, this user guide
-will help you get started with HackLink. No prior experience is required, as this guide will cover all the necessary
-fundamentals to help you get started with HackLink.
-
-### Purpose of this User Guide
-
-The purpose of this user guide is to equip you with a thorough understanding of HackLink. This guide will provide a
-comprehensive overview of the features and functionalities of HackLink. It will guide you through the process of
-installing the application, understanding the UI(user interface), and using the various commands to manage your
-hackathon event. This guide will also provide you with good examples and cautions to help you avoid errors and make the
-best use of the application. By the end of this guide, you will be able to efficiently manage your hackathon
-event using HackLink.
-
----
+HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant
+information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can
+streamline the process of organizing and coordinating your hackathon event.
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Product Information Overview](#product-information-overview)
-3. [Quick start](#quick-start)
-4. [Main features](#main-features)
+1. [Quick start](#quick-start)
+2. [Main features](#main-features)
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
@@ -48,10 +22,10 @@ event using HackLink.
     - [Commenting a person](#commenting-a-person--comment)
     - [Viewing comments](#viewing-comments--view)
     - [Locating persons by keywords](#locating-persons-by-keywords--find)
-    - [Exporting selected people](#exporting-selected-people--link)
+    - [Exporting a selected participants](#exporting-selected-participants--link)
     - [Removing a person](#removing-a-person--delete)
 
-5. [Event features](#event-features)
+3. [Event features](#event-features)
     - [Adding an event](#adding-an-event--addevent)
     - [Listing all events](#listing-all-events--listevent)
     - [Removing an event](#removing-an-event--deleteevent)
@@ -59,7 +33,7 @@ event using HackLink.
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
 
-6. [Utility features](#utility-features)
+4. [Utility features](#utility-features)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Navigating to older commands](#navigating-to-older-commands)
@@ -68,28 +42,16 @@ event using HackLink.
     - [Undo](#undo)
     - [Redo](#redo)
 
-7. [Event window](#event-window)
-8. [FAQ](#faq)
-9. [Warnings](#warnings)
-10. [Known issues](#known-issues)
-11. [Tips](#tips)
-12. [Command summary](#command-summary)
-
----
-
-## Product Information Overview
-HackLink allows you to manage your hackathon event efficiently by providing following features:
-- Adding/Deleting a person
-- Editing/List/Grouping/Commenting a person
-- Finding a person by keywords
-- Exporting selected people
-- Managing events
+5. [Event window](#event-window)
+6. [FAQ](#faq)
+7. [Warnings](#warnings)
+8. [Known issues](#known-issues)
+9. [Tips](#tips)
+10. [Command summary](#command-summary)
 
 ---
 
 ## Quick start
-
-To begin using HackLink, please follow these steps:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -133,8 +95,6 @@ To begin using HackLink, please follow these steps:
     - `clear` : Clears all events
 
 8. Refer to the [Main features](#main-features) below for details of each command.
-
-### Navigating this User Guide
 
 ---
 
@@ -434,7 +394,7 @@ Finds persons who contain any of the given keywords.
 - `find participant` returns a list that includes all participants in the list
 - `find 1` returns a list that includes the person with group number 1
 
-### Exporting selected people : `link`
+### Exporting selected participants : `link`
 
 Produce a csv file with selected contacts' information.
 The csv file will be saved in the `selectedPeople` folder with the name `list.csv`.

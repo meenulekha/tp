@@ -13,16 +13,20 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
-Class Address
+Class "{abstract}\nPerson" as Person
 Class Email
 Class Name
 Class Phone
-Class Category
-Class Tag
+
+Class Participant
+Class Sponsor
+Class Staff
 
 Class I #FFFFFF
+Class J #FFFFFF
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
@@ -41,17 +45,19 @@ UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" Email
-Person *--> "1" Address
-Person *--> "1" Category
-Person *--> "*" Tag
+
+Participant --|> Person
+Staff --|> Person
+Sponsor --|> Person
+
+Staff -[hidden]left--> Sponsor
+Sponsor -[hidden]left--> Participant
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-Email -[hidden]right-> Category
+Phone -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml

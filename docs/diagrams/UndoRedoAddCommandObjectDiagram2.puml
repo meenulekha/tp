@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+class Delete as "<u>d5:DeleteCommand</u>"
+class Manager as "<u>mng:CommandHistoryManager</u>"
+class History as "<u>history:Deque<ReversibleCommand></u>"
+class Future as "<u>future:Deque<ReversibleCommand></u>"
+class Model as "<u>:Model</u>"
+class Add as "<u>addDavid:AddCommand</u>"
+
+Model --> Manager
+
+Manager --> History
+Manager --> Future
+History -[hidden]right-> Future
+
+History --> Delete
+History --> Add
+@enduml
