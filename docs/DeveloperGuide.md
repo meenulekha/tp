@@ -716,6 +716,46 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the filtered list size)<br>
       Expected: Similar to previous.
 
+### Commenting/Viewing a person
+
+1. Commenting
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `comment 1 This is a comment`<br>
+     Expected: Comment is added to the first person in the list. The dialog mark is displayed next to the person's name.
+   
+   3. Test case: `comment 0 This is a comment`<br>
+      Expected: No comment is added. Comment command should fail with an error message.
+   
+   4. Other incorrect comment commands to try: `comment`, `comment x another comment` (where x is larger than the list size)<br>
+      Expected: No comment is added. The comment command should fail with an error message.
+   
+2. Viewing a comment
+   1. Prerequisites: Comment added to the first person in the list using the `comment` command. Comment is not added to the second person in the list.
+   
+   2. Test case: `view 1`<br>
+     Expected: The comment added to the first person in the list is displayed with other information.
+   
+   3. Test case: `view 2`<br>
+     Expected: The view command should work without any error message. With other information, the comment is displayed as "No comment provided.".
+   
+   4.  Other incorrect view commands to try: `view`, `view x` (where x is larger than the list size)<br>
+      Expected: The view command should fail with an error message.
+
+3. Link(Exporting a selected list of people to a CSV file to send to sponsors)
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `link 1 2 3`<br>
+      Expected: The details(name, email, phone, comment) of the first three persons in the list are exported to a CSV file. The file should be saved in the selectedPeople folder with name list.csv.
+
+   3. Test case: `link 0 2`<br>
+      Expected: No person is exported. Error details shown in the status message.
+
+   4. Other incorrect link commands to try: `link`, `link x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -890,6 +930,10 @@ Team size: 4
 6. **Add an option to not include existing groups for GroupRandom Command**:
    - **Feature Flaw**: Currently, GroupRandom Command will be randomly assigning group numbers, that ranges from 1 to a certain number. This is not ideal for when a hackathon organiser wants to randomize a subset of the contacts without changing the existing groups.
    - **Proposed Fix**: Introduce an option to randomly assigning groups without modifying the existing group members.
+
+7. **Add a way to reset comments for a person**:
+   Currently, it is possible to remove the dialog mark for a person by setting the comment to default command "No comment provided."
+   However, there is no way to remove the comment by commands. We plan to add a command to reset the comment for a person.
      
 ## **Appendix: Effort**
 
