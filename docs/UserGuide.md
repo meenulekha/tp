@@ -379,6 +379,12 @@ Add notes or comments to contacts.
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
 
+- The default comment for a person without any assigned comment is `No comment provided.`
+
+- There is no separate command to reset or delete a comment. You can always replace the existing comment with a new one
+  by using the `comment` command, but if you still want to remove the dialog icon, you can manually remove it by setting
+the comment to default comment `No comment provided.`
+
 </div>
 
 ### Viewing comments : `view`
@@ -401,7 +407,7 @@ View comment of a specific contact
   2147483648.
 
 - If the person does not have a comment, you can still use the `view` command to check if they have a comment or not.
-  The application will display that "No comment provided.".
+  The application will display the default comment 'No comment provided.'.
 
 - As mentioned in comment command, commas in the comment might cause the csv file to be corrupted, so they are removed
   from your input.
@@ -409,6 +415,8 @@ View comment of a specific contact
 - As mentioned in comment command, some special characters that are not supported by the system might be displayed
   differently in the application. It is recommended to use only alphanumeric characters and common punctuation marks
   when making comment. Use of special characters is at your own risk.
+
+- `Redo` and `Undo` commands are not supported for `view` command.
 
 ### Locating persons by keywords : `find`
 
@@ -436,8 +444,9 @@ Finds persons who contain any of the given keywords.
 
 ### Exporting selected people : `link`
 
-Produce a csv file with selected contacts' information.
-The csv file will be saved in the `selectedPeople` folder with the name `list.csv`.
+Produce a csv file with selected contacts' information.(name, phone, email, and comment)
+The csv file will be saved in the `selectedPeople` folder in the same directory as the `HackLink.jar` file, with the name
+`list.csv`. If the folder does not exist, it will be created. If the file already exists, it will be overwritten.
 
 **Format:** `link ID [MORE_ID]…`
 
@@ -469,11 +478,16 @@ The csv file will be saved in the `selectedPeople` folder with the name `list.cs
 - As mentioned in [`comment` command](#commenting-a-person--comment), commas in the comment might cause the csv file to
   be corrupted, so they are removed from your input. Avoid using commas.
 
+- As mentioned in [`comment` command](#commenting-a-person--comment), some special characters that are not supported by
+  the system might be displayed differently in the application. Some special characters and emojis might be displayed as
+`??` in the csv file. It is recommended to use only alphanumeric characters and common punctuation marks when making comment. Use of special characters is at your own risk.
+
 - Do not open the `list.csv` file while the application is running. The file should be closed to write to it. Opening
   the file while the application is running may cause errors.
 
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
+- The `link` command does not support `undo` and `redo` commands.
 
 </div>
 

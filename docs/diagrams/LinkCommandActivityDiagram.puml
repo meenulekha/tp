@@ -3,9 +3,9 @@ start
 
 :Read one or more indexes(integers) from keyboard(user input);
 
-if () then ([All indexes are valid])
+if () then ([All indexes are valid and no duplicate])
   :Create a new CSV file;
-  :Read people's information(of given indexes) from data file;
+  :Read people's information(of given indexes) from the current list;
   :Export(Write) those people's information to the CSV file;
   :Notify user of success;
 else ([else])

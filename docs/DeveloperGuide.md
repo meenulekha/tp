@@ -310,9 +310,39 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
+The `link` command allows users to export selected contacts to a CSV file. The user can first use `list` command to view all contacts
+and then use the `link` command to export the selected contacts to a CSV file. The CSV file will be saved in the
+`selectedPeople` folder in the project directory with the name `list.csv`. The file will contain selected people's name,
+email, phone number, and comments.
+
+The `LinkCommandParser` class is responsible for parsing the user input and creating instance of `LinkCommand`. The parser extracts the 
+indexes of the contacts to be exported from the user input. The parser uses `split()` method to split the user input into
+each `String`. The parser then uses `ParserUtil#parseIndex(String)` to parse all those `String` values into a `Index` objects. The objects are
+stored in a `List<Index>`. The parser then creates a `LinkCommand` object with the `List<Index>` and returns it. If the
+user input is invalid, the parser throws a `ParseException`. The parser method ensures that there are no duplicate indexes and that the
+indexes are within the range of the contact list.
+
+The `LinkCommand` class is responsible for executing the link command. The class uses the `Model#getFilteredPersonList()`to get the list of contacts.
+`FileUtil#createCsvFile(Path, String)` is then used to create the CSV file with the given path and the header. The fixed Path and header are passed to the method.
+Then it iterates through the list of indexes and writes the details of the contacts to the CSV file through
+`FileUtil#appendToFile(Path, String)`. The class then returns a `CommandResult` with the success message. User can then find the CSV file in the `selectedPeople` folder.
+
 The activity diagram below illustrates the flow of the `link` command.
+
 ![LinkActivity](images/LinkCommandActivityDiagram.png)
 
+#### Design considerations:
+
+- **Aspect: Exporting selected contacts:**
+
+    - **Alternative 1:** Export all contacts in the contact list.
+        - Pros: Easy to implement.
+        - Cons: May not be user-friendly as the user may not want to export all contacts. Especially sponsors may only
+          want to export talented selected contacts.
+
+    - **Alternative 2 (current choice):** Export selected contacts.
+        - Pros: More user-friendly as the user can choose which contacts to export.
+        - Cons: More complex to implement.
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -716,6 +746,46 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the filtered list size)<br>
       Expected: Similar to previous.
 
+### Commenting/Viewing a person
+
+1. Commenting
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `comment 1 This is a comment`<br>
+     Expected: Comment is added to the first person in the list. The dialog mark is displayed next to the person's name.
+   
+   3. Test case: `comment 0 This is a comment`<br>
+      Expected: No comment is added. Comment command should fail with an error message.
+   
+   4. Other incorrect comment commands to try: `comment`, `comment x another comment` (where x is larger than the list size)<br>
+      Expected: No comment is added. The comment command should fail with an error message.
+   
+2. Viewing a comment
+   1. Prerequisites: Comment added to the first person in the list using the `comment` command. Comment is not added to the second person in the list.
+   
+   2. Test case: `view 1`<br>
+     Expected: The comment added to the first person in the list is displayed with other information.
+   
+   3. Test case: `view 2`<br>
+     Expected: The view command should work without any error message. With other information, the comment is displayed as "No comment provided.".
+   
+   4.  Other incorrect view commands to try: `view`, `view x` (where x is larger than the list size)<br>
+      Expected: The view command should fail with an error message.
+
+3. Link(Exporting a selected list of people to a CSV file to send to sponsors)
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `link 1 2 3`<br>
+      Expected: The details(name, email, phone, comment) of the first three persons in the list are exported to a CSV file. The file should be saved in the selectedPeople folder with name list.csv.
+
+   3. Test case: `link 0 2`<br>
+      Expected: No person is exported. Error details shown in the status message.
+
+   4. Other incorrect link commands to try: `link`, `link x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -890,6 +960,10 @@ Team size: 4
 6. **Add an option to not include existing groups for GroupRandom Command**:
    - **Feature Flaw**: Currently, GroupRandom Command will be randomly assigning group numbers, that ranges from 1 to a certain number. This is not ideal for when a hackathon organiser wants to randomize a subset of the contacts without changing the existing groups.
    - **Proposed Fix**: Introduce an option to randomly assigning groups without modifying the existing group members.
+
+7. **Add a way to reset comments for a person**:
+   Currently, it is possible to remove the dialog mark for a person by setting the comment to default command "No comment provided."
+   However, there is no way to remove the comment by commands. We plan to add a command to reset the comment for a person.
      
 ## **Appendix: Effort**
 
