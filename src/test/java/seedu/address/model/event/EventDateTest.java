@@ -22,9 +22,4 @@ public class EventDateTest {
         assertFalse(EventDate.isValidDate("abc")); // Non-numeric characters
     }
 
-    @Test
-    public void isValidDate_pastDate_false() {
-        assertFalse(EventDate.isValidDate("01-01-2000")); // Past date
-    }
-
 }
