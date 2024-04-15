@@ -352,6 +352,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event     |
 | `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                 |
 | `* * *`  | Student Hackathon Organizer | Remove specific participants                     | Remove participants who signed up but unable to participate.  |
+| `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
+| `* * *`  | Student Hackathon Organizer | Group specific participants                      | Know which participants are working together.                |
+| `* * *`  | Student Hackathon Organizer | Group specific staff                             | Assign easily a staff to a group.                            |
+| `* * *`  | Student Hackathon Organizer | Randomly group all participants                  | Quickly ensure that all participants have a group.           |
 | `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.     |
 | `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant. |
 | `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event   |
@@ -368,7 +372,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Student Hackathon Organizer | Save the data automatically                      | Ensure that my data is always up to date.                     |
 | `* *`    | Student Hackathon Organizer | See error messages when I enter invalid commands | Understand what went wrong and how to correct it.             |
 | `* * *`  | Student Hackathon Organizer | View commands I have entered                     | Recall what I have done previously.                           |
-
 
 ### Use cases
 
@@ -460,7 +463,46 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: UC005 - Add Events**
+
+**Use case: Group A Participant**
+
+**MSS**
+
+1. User requests to group a specific participant to a specific group.
+2. User provides valid information: participant's ID and group number.
+3. System groups the participant into the group number.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+2a. Invalid input provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Randomly Group All Participant**
+
+**MSS**
+
+1. User requests to find participant in the current list.
+2. User requests to group randomly all persons in the current list.
+3. User provides valid maximum group size.
+4. System assigns randomly all participants into a group, where each group
+   size is less than or equal to the maximum group size.
+5. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+3a. Invalid maximum group size provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Add Events**
 
 **MSS**
 
@@ -634,6 +676,37 @@ testers are expected to do more *exploratory* testing.
    - Redo the last undone command: `redo`<br>
      Expected: The redo command should fail with an error message.
 
+
+### Grouping a person
+
+1. **Randomly grouping a participant or staff without prior existing groups**
+   1. Prerequisites: Delete addressbook.json in the data folder.
+   2. Test case: `group x` (where x is the index of a participant or staff)<br>
+      Expected: No person is grouped. Error details shown in the status message.
+2. **Group a person into a participant or staff into a specific group number.**
+   1. Prerequisites: A participant or a staff is in the list.
+   2. Test case: `group x 1` (where x is the index of a participant or staff)<br>
+      Expected: First contact is assigned into group 1. Details of the grouped contact shown in the status message.
+   3. Test case: `group x -1` (where x is the index of a participant or staff)<br>
+      Expected: No person is grouped. Error details shown in the status message.
+3. **Randomly grouping a participant into an existing groups**
+   1. Prerequisites: There exist a positive (non-zero) group number in the list.<br>
+      If they don't exist, input `group x 5` (where x is the index of a participant or staff)
+   2. Test case: `group x` (where x is the index of a participant or staff)<br>
+      Expected: First person is assigned into a random existing group.
+
+### Group randomly all persons
+
+1. **Randomly grouping all participants and staffs in the list**
+   1. Prerequisites: Multiple persons in the list.
+   2. Test case: `grouprandom 3`<br>
+      Expected: All participants and staffs are assigned into a random group number.
+      Each group have less than or equal to 3 members.
+   3. Test case: `grouprandom x` (where x is larger than the list size) <br>
+      Expected: All participants and staffs are assigned into group 1.
+   4. Test case: `grouprandom 0`<br>
+      Expected: No person is grouped. Error details shown in the status message.
+
 ### Adding events
 
 1. **Access the "Add Event" Functionality**:
@@ -730,6 +803,18 @@ Team size: 4
    Currently, the name of a contact can only contain alphanumeric characters and spaces. We plan to allow more characters such as
    hyphens, periods, apostrophes, slashes, and commas in the name of a contact.
 
+   - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
+   - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
+   - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
+
+5. **Implement priority system when assigning a person into a random group with Group Command**:
+   - **Feature Flaw**: Assigning a person to a totally random group might not be accurate as ideally hackathon would need groups with similar group sizes.
+   - **Proposed Fix**: Implement a priority system where the group that have fewer members have higher priority
+
+6. **Add an option to not include existing groups for GroupRandom Command**:
+   - **Feature Flaw**: Currently, GroupRandom Command will be randomly assigning group numbers, that ranges from 1 to a certain number. This is not ideal for when a hackathon organiser wants to randomize a subset of the contacts without changing the existing groups.
+   - **Proposed Fix**: Introduce an option to randomly assigning groups without modifying the existing group members.
+     
 ## **Appendix: Effort**
 
 Our project involved the development of a comprehensive event management system, which presented several challenges and
