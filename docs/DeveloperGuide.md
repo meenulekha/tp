@@ -244,9 +244,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Link Feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+The activity diagram below illustrates the flow of the `link` command.
+![LinkActivity](images/LinkCommandActivityDiagram.png)
 
 ---
 
