@@ -514,6 +514,9 @@ otherwise)
    Use case ends.
 
 **Extensions**
+1a. No changes to revert.
+   1a1. System displays an error message.
+   Use case ends.
 
 
 ### Non-Functional Requirements
