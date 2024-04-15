@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.event.EventName.MESSAGE_CONSTRAINTS;
 
-import seedu.address.model.person.Category;
 import seedu.address.model.person.CategoryType;
 
 /**
@@ -46,7 +45,7 @@ public class EventCategory {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Category)) {
+        if (!(other instanceof EventCategory)) {
             return false;
         }
 
