@@ -244,17 +244,17 @@ Assigns a participant or a staff to a group.
 
 - `ID`: the index number of the person in the list.
 - `GROUP_NUMBER` _(optional)_: the group number. Can be any positive integer. When none is provided, the selected person
-  will be randomly assigned to an existing group.
+  will be randomly assigned to an **existing** group. If there is no existing valid group in the list (non-zero), the group number must be provided.
 
 **Examples:**
 
-- `group 1`
+- `group 1` (Note: This will produce an error if no groups exist yet.)
 - `group 1 3`
 
-- Before
+- Before<br>
   ![before group](images/beforeGroup.png)
 
-- After executing `group 1 3`
+- After executing `group 1 3`<br>
   ![img.png](images/afterGroup13.png)
 
 <div markdown="block" class="alert alert-info">
@@ -263,12 +263,12 @@ Assigns a participant or a staff to a group.
 
 - You can only randomly assign a person to an **existing group**.
 
+- When no group exist you _cannot_ randomly assign a person into a group.
+
 - You can only group staff and participant, sponsor cannot be grouped.
 
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
-
-- When no group exist you _cannot_ randomly assign a person into a group.
 
 </div>
 
@@ -286,10 +286,10 @@ Assigns a random group to each participant and staff that are currently listed.
 
 - `grouprandom 2`
 
-- Before
+- Before<br>
   ![img.png](images/beforeGrouprandom.png)
 
-- After executing `grouprandom 2`
+- After executing `grouprandom 2`<br>
   ![img.png](images/afterGroupRandom.png)
 
 <div markdown="block" class="alert alert-info">
