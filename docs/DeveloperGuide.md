@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `HackLink` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: UC001 - Add a Contact**
+**Use case: Add a Contact**
 
 **MSS**
 
@@ -397,7 +397,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: UC002 - View Participant List**
+**Use case: View Participant List**
 
 **MSS**
 
@@ -407,9 +407,7 @@ otherwise)
 
    Use case ends.
 
-**Extensions**
-
-**Use case: UC003 - Update Participant Contact Details**
+**Use case: Update Participant Contact Details**
 
 **MSS**
 
@@ -422,6 +420,7 @@ otherwise)
    Use case ends.
 
 **Extensions**
+
 3a. Invalid input provided.
 
 - System displays an error message.
@@ -440,12 +439,13 @@ otherwise)
    Use case ends.
 
 **Extensions**
+
 3a. No notes provided.
 
 - System displays an error message.
 - Use case ends.
 
-**Use case: UC004 - Remove Participant**
+**Use case: Remove Participant**
 
 **MSS**
 
@@ -458,6 +458,7 @@ otherwise)
    Use case ends.
 
 **Extensions**
+
 3a. Participant not found.
 
 - System displays an error message.
@@ -520,7 +521,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: UC006 - Remove Event**
+**Use case: Remove Event**
 
 **MSS**
 
@@ -532,12 +533,13 @@ otherwise)
    Use case ends.
 
 **Extensions**
+
 2a. Event not found.
 
 - System displays an error message.
 - Use case ends.
 
-**Use case: UC007 - View Events List**
+**Use case: View Events List**
 
 **MSS**
 
@@ -545,7 +547,7 @@ otherwise)
 2. System displays the list with relevant information.
    Use case ends.
 
-**Use case: UC010 - Revert last change**
+**Use case: Revert last change**
 
 **MSS**
 
@@ -802,10 +804,6 @@ Team size: 4
 4. **Allow more flexible name for contact**:
    Currently, the name of a contact can only contain alphanumeric characters and spaces. We plan to allow more characters such as
    hyphens, periods, apostrophes, slashes, and commas in the name of a contact.
-
-   - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
-   - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
-   - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
 
 5. **Implement priority system when assigning a person into a random group with Group Command**:
    - **Feature Flaw**: Assigning a person to a totally random group might not be accurate as ideally hackathon would need groups with similar group sizes.
