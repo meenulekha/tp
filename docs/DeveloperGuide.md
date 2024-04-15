@@ -592,6 +592,3 @@ Our project involved the development of a comprehensive event management system,
 **Achievements:**
 - Despite the challenges, we successfully developed a functional and robust event management system that meets the project requirements and provides a seamless user experience.
 - Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event commands, as well as ensuring data integrity and system stability.
-
-**Effort Saved Through Reuse:**
-- A significant part of the effort was saved through reuse, particularly the structure of the already existing ab3 code, which allowed us to structure our own features more effectively as well.
