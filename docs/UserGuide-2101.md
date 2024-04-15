@@ -5,14 +5,41 @@ title: User Guide
 
 WELCOME TO HACKLINK!
 
-HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage participant
-information for hackathons. With features such as finding, sorting, adding, and deleting participants, you can
-streamline the process of organizing and coordinating your hackathon event.
+## Introduction
+
+Again, Welcome to HackLink! This user guide is designed to help you navigate and utilize this HackLink app to its full
+potential. HackLink is a Hackathon Participant Management Application, designed to help organizers efficiently manage
+contact information for hackathons. This app is aimed at simplifying the management of participant, staff, and sponsor's
+information. With this user guide, you will easily and quickly learn to make use of important features, such as adding,
+deleting, finding, and commenting contacts. you can streamline the complex process of organizing and coordinating your
+hackathon event.
+
+### Target Audience
+
+This user guide is intended for hackathon organizers and coordinators who are looking for a simple and efficient way to
+manage their hackathons. We assume that you have a basic understanding of hackathon event management and are familiar
+with digital tools and CLI-based applications. However, even if you are new to hackathon management, this user guide
+will help you get started with HackLink. No prior experience is required, as this guide will cover all the necessary
+fundamentals to help you get started with HackLink.
+
+### Purpose of this User Guide
+
+The purpose of this user guide is to equip you with a thorough understanding of HackLink. This guide will provide a
+comprehensive overview of the features and functionalities of HackLink. It will guide you through the process of
+installing the application, understanding the UI(user interface), and using the various commands to manage your
+hackathon event. This guide will also provide you with good examples and cautions to help you avoid errors and make the
+best use of the application. By the end of this guide, you will be able to efficiently manage your hackathon
+event using HackLink.
+
+---
 
 ## Table of Contents
 
-1. [Quick start](#quick-start)
-2. [Main features](#main-features)
+1. [Introduction](#introduction)
+2. [Product Information Overview](#product-information-overview)
+3. [Quick start](#quick-start)
+4. [User Interface Basics](#user-interface-basics)
+5. [Main features](#main-features)
     - [Viewing help](#viewing-help--help)
     - [Adding a person](#adding-a-person--add)
     - [Listing all persons](#listing-all-persons--list)
@@ -22,10 +49,10 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Commenting a person](#commenting-a-person--comment)
     - [Viewing comments](#viewing-comments--view)
     - [Locating persons by keywords](#locating-persons-by-keywords--find)
-    - [Exporting a selected participants](#exporting-selected-participants--link)
+    - [Exporting selected people](#exporting-selected-people--link)
     - [Removing a person](#removing-a-person--delete)
 
-3. [Event features](#event-features)
+6. [Event features](#event-features)
     - [Adding an event](#adding-an-event--addevent)
     - [Listing all events](#listing-all-events--listevent)
     - [Removing an event](#removing-an-event--deleteevent)
@@ -33,7 +60,7 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
 
-4. [Utility features](#utility-features)
+7. [Utility features](#utility-features)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Navigating to older commands](#navigating-to-older-commands)
@@ -42,16 +69,28 @@ streamline the process of organizing and coordinating your hackathon event.
     - [Undo](#undo)
     - [Redo](#redo)
 
-5. [Event window](#event-window)
-6. [FAQ](#faq)
-7. [Warnings](#warnings)
-8. [Known issues](#known-issues)
-9. [Tips](#tips)
-10. [Command summary](#command-summary)
+8. [Event window](#event-window)
+9. [FAQ](#faq)
+10. [Warnings](#warnings)
+11. [Known issues](#known-issues)
+12. [Tips](#tips)
+13. [Command summary](#command-summary)
+
+---
+
+## Product Information Overview
+HackLink allows you to manage your hackathon event efficiently by providing following features:
+- Adding/Deleting a person
+- Editing/List/Grouping/Commenting a person
+- Finding a person by keywords
+- Exporting selected people
+- Managing events
 
 ---
 
 ## Quick start
+
+To begin using HackLink, please follow these steps:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -95,6 +134,19 @@ streamline the process of organizing and coordinating your hackathon event.
     - `clear` : Clears all events
 
 8. Refer to the [Main features](#main-features) below for details of each command.
+
+### Navigating this User Guide
+
+---
+## User Interface Basics
+
+Let's take a look at the basic components of the User Interface(UI)!
+
+![annotatedmainwindow](images/annotatedmainwindow.png)
+![annotatedpersoncard](images/annotatedpersoncard.png)
+![annotatedeventwindow](images/annotatedeventwindow.png)
+![annotatedeventcard](images/annotatedeventcard.png)
+
 
 ---
 
@@ -244,17 +296,17 @@ Assigns a participant or a staff to a group.
 
 - `ID`: the index number of the person in the list.
 - `GROUP_NUMBER` _(optional)_: the group number. Can be any positive integer. When none is provided, the selected person
-  will be randomly assigned to an existing group.
+  will be randomly assigned to an **existing** group. If there is no existing valid group in the list (non-zero), the group number must be provided.
 
 **Examples:**
 
-- `group 1`
+- `group 1` (Note: This will produce an error if no groups exist yet.)
 - `group 1 3`
 
-- Before
+- Before<br>
   ![before group](images/beforeGroup.png)
 
-- After executing `group 1 3`
+- After executing `group 1 3`<br>
   ![img.png](images/afterGroup13.png)
 
 <div markdown="block" class="alert alert-info">
@@ -263,12 +315,12 @@ Assigns a participant or a staff to a group.
 
 - You can only randomly assign a person to an **existing group**.
 
+- When no group exist you _cannot_ randomly assign a person into a group.
+
 - You can only group staff and participant, sponsor cannot be grouped.
 
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
-
-- When no group exist you _cannot_ randomly assign a person into a group.
 
 </div>
 
@@ -286,10 +338,10 @@ Assigns a random group to each participant and staff that are currently listed.
 
 - `grouprandom 2`
 
-- Before
+- Before<br>
   ![img.png](images/beforeGrouprandom.png)
 
-- After executing `grouprandom 2`
+- After executing `grouprandom 2`<br>
   ![img.png](images/afterGroupRandom.png)
 
 <div markdown="block" class="alert alert-info">
@@ -394,7 +446,7 @@ Finds persons who contain any of the given keywords.
 - `find participant` returns a list that includes all participants in the list
 - `find 1` returns a list that includes the person with group number 1
 
-### Exporting selected participants : `link`
+### Exporting selected people : `link`
 
 Produce a csv file with selected contacts' information.
 The csv file will be saved in the `selectedPeople` folder with the name `list.csv`.
