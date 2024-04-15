@@ -179,7 +179,8 @@ Adds a person to HackLink.
 - There should be no “/” in each parameter.
 
 - There should be no contacts with the same information. 2 contacts are considered the same if they have the same
-  **name** and **phone number**. Names are case-sensitive, e.g. "Jason" and "jason" does not match.
+  **name** and any match in **phone number** or **email**. Names are case-sensitive, e.g. "Jason" and "jason" does not
+  match.
 
 - As `NAME` only allow alphanumeric characters and spaces, names like "Dr. Jean-Paul O'Brien" cannot be inserted. You
   can work around this by either removing them or replacing them with space, e.g. "Dr. Jean-Paul O'Brien" can be
@@ -188,7 +189,7 @@ Adds a person to HackLink.
 - `CATEGORY` is case-insensitive, e.g. `c/participant` and `c/PARTICIPANT` will set the person inserted as a
   participant.
 
-- If no `g/GROUP` is provided, the person will be assigned group 0 in the list.
+- If no `g/GROUP` is provided, the person will be assigned to default group 0 in the list.
 
 - This app is designed for small hackathons, with around 500 participants. However, the maximum number of entries in the
   contact list is 2147483647. Please delete some contacts to add a new person if you reach the limit.
@@ -199,7 +200,7 @@ Adds a person to HackLink.
 
 Shows a list of all persons in HackLink.
 
-The table will show all the data.
+The table will show all people's name, email, phone, category, and group.
 
 **Format:** `list`
 
@@ -225,7 +226,8 @@ Update and edit participant contact details.
 - There should be at least one field to edit. (`edit 1` is invalid, `edit 1 n/John Doe` is valid)
 
 - The edit command only supports editing name, phone, email, and group. You _cannot_ change a person's category with
-  `edit` command.
+  `edit` command. Change of role should be done by deleting the person and adding them again with the new role. This is
+  to prevent accidental changes in the person's role.(e.g. changing a participant to a sponsor by mistake)
 
 - As the maximum number of entries in the contact list is 2147483647, `ID` should be a positive integer smaller than
   2147483648.
@@ -312,22 +314,36 @@ Add notes or comments to contacts.
 
 - `comment 1 Allergic to peanuts`
   ![img.png](images/comment.png)
-  The dialog icon appearing next to the person name means that they have a comment.
+
+  The dialog icon appearing next to the person name indicates that they have a comment.
 
 <div markdown="block" class="alert alert-info">
 
 :information_source: **Note:**
 
-- Adding a new comment on a person will replace any comments they have.
+- **Adding a new comment on a person will replace any comments they have.** The comment is not appended to the existing
+  comment. This is to prevent the comment from becoming too long and unreadable. Also it ensures that the comment is
+  up-to-date. Please write the overall comment in current state by considering the previous comments.
 
-- **All commas in your comment will be removed** when it is inserted into the application for compatibility with csv
-  exporting.
+- **All commas in your comment will be automatically removed** when it is inserted into the application for
+  compatibility with link command(csv exporting).
+
+- The comment format does not restrict the use of special characters. However, some special characters that are not
+  supported by the system might be displayed differently in the application. It is recommended to use only alphanumeric
+  characters and common punctuation marks. Use of special characters is at your own risk.
+
+- The comment is a section for taking your important notes about the person. It is not meant to be used as a
+  full-detailed description or review of the person. If you need to store more information, consider using a separate
+  document.
+
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
 
 </div>
 
 ### Viewing comments : `view`
 
-View comments of a specific contact
+View comment of a specific contact
 
 **Format:** `view ID`
 
@@ -337,6 +353,22 @@ View comments of a specific contact
 
 **Example:** `view 1`
 ![img.png](images/viewComment.png)
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Note:**
+
+- As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
+  2147483648.
+
+- If the person does not have a comment, you can still use the `view` command to check if they have a comment or not.
+  The application will display that "No comment provided.".
+
+- As mentioned in comment command, commas in the comment might cause the csv file to be corrupted, so they are removed
+  from your input.
+
+- As mentioned in comment command, some special characters that are not supported by the system might be displayed
+  differently in the application. It is recommended to use only alphanumeric characters and common punctuation marks
+  when making comment. Use of special characters is at your own risk.
 
 ### Locating persons by keywords : `find`
 
@@ -350,15 +382,17 @@ Finds persons who contain any of the given keywords.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Comment is also searched. e.g. `peanuts` will match `Allergic to peanuts`
 
 **Aliases:** `f`
 
 **Examples:**
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find John` includes `john` and `John Doe`
+- `find alex david` includes `Alex Yeoh`, `David Li`<br>
   ![img.png](images/findAlexDavid.png)
-- `find participant` returns all participants in the list
+- `find participant` includes all participants in the list
+- `find 1` includes the person with group number 1
 
 ### Exporting selected participants : `link`
 
@@ -369,14 +403,14 @@ The csv file will be saved in the `selectedPeople` folder with the name `list.cs
 
 **Parameters:**
 
-- `ID`, `MORE_ID`: id(s) of the selected contact(s)
+- `ID`, `MORE_ID`: index(es) of the selected contact(s)
 
 <div markdown="block" class="alert alert-info">
 
 :information_source: **Notes on parameter constraints:**
 
 - The order of the ids does not matter.
-- The ids should be valid and in the list.
+- The ids should be positive integers and valid and in the list.
 - The ids should be separated by a space.
 - There should be no duplicate ids.
 
@@ -384,9 +418,9 @@ The csv file will be saved in the `selectedPeople` folder with the name `list.cs
 
 **Examples:**
 
-- `link 1 2 3` returns a csv file with the contact information of participants 1, 2, and 3
-- `link 1` returns a csv file with the contact information of participant 1
-- `link 1 2 3 4 5` returns a csv file with the contact information of participants 1, 2, 3, 4, and 5
+- `link 1 2 3` returns a csv file with the information of people with index 1, 2, and 3
+- `link 1` returns a csv file with the information of person with index 1
+- `link 1 2 3 4 5` returns a csv file with the information of people 1, 2, 3, 4, and 5
 
 <div markdown="block" class="alert alert-warning">
 
@@ -395,7 +429,8 @@ The csv file will be saved in the `selectedPeople` folder with the name `list.cs
 - As mentioned in [`comment` command](#commenting-a-person--comment), commas in the comment might cause the csv file to
   be corrupted, so they are removed from your input. Avoid using commas.
 
-- Do not open the `list.csv` file while the application is running.
+- Do not open the `list.csv` file while the application is running. The file should be closed to write to it. Opening
+  the file while the application is running may cause errors.
 
 - As the maximum number of entries in the contact list is 2147483647, the id should be a positive integer smaller than
   2147483648.
