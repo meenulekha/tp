@@ -8,10 +8,12 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command commits AddressBook])
-    :Purge redundant states;
-    :Save AddressBook to
-    addressBookStateList;
+if () then ([command adds
+itself to history])
+    :Clear "future" list (all saved
+     undone commands);
+    :Save command to the
+    end of the history list;
 else ([else])
 endif
 stop
