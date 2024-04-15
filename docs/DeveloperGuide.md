@@ -197,38 +197,46 @@ The undo/redo feature is implemented using the following components:
 
 - `ReverisbleCommand` interface. This interface defines two methods:
 
-   - `ReversibleCommand#undo(Model model)`— Reverts the command and returns a `CommandResult`.
-   - `ReversibleCommand#redo(Model model)`— Re-executes the command and returns a `CommandResult`.
+    - `ReversibleCommand#undo(Model model)`— Reverts the command and returns a `CommandResult`.
+    - `ReversibleCommand#redo(Model model)`— Re-executes the command and returns a `CommandResult`.
 
-   `ReversibleCommand` interface is used in conjunction with the abstract `Command` class. Commands that support undo/redo
-   implement this interface.
+  `ReversibleCommand` interface is used in conjunction with the abstract `Command` class. Commands that support
+  undo/redo
+  implement this interface.
 
-- `CommandHistoryManager` class. This class is responsible for managing the undo/redo history. It maintains 2 lists 
-of `ReversibleCommand` objects: `history` and `future`.
+- `CommandHistoryManager` class. This class is responsible for managing the undo/redo history. It maintains 2 lists
+  of `ReversibleCommand` objects: `history` and `future`.
 
-   - `history` contains the commands that have been executed and can be undone. New commands are added to the end of the list.
-   - `future` contains the commands that have been undone and can be redone.
+    - `history` contains the commands that have been executed and can be undone. New commands are added to the end of
+      the list.
+    - `future` contains the commands that have been undone and can be redone.
 
    <br>
    `CommandHistoryManager` provides the following methods:
 
-   - `CommandHistoryManager#addCommand(ReversibleCommand command)`— Adds a command to the `history` list and clears the `future` list.
-   - `CommandHistoryManager#getCommandToUndo(Model model)`— Returns the last command in the `history` list and moves it to the end of the `future` list.
-   - `CommandHistoryManager#getCommandToRedo(Model model)`— Returns the last command in the `future` list and moves it to the end of the `history` list.
+    - `CommandHistoryManager#addCommand(ReversibleCommand command)`— Adds a command to the `history` list and clears
+      the `future` list.
+    - `CommandHistoryManager#getCommandToUndo(Model model)`— Returns the last command in the `history` list and moves it
+      to the end of the `future` list.
+    - `CommandHistoryManager#getCommandToRedo(Model model)`— Returns the last command in the `future` list and moves it
+      to the end of the `history` list.
 
-These operations are exposed in the `Model` interface as `Model#addCommand(ReversibleCommand)`, `Model#undoAddressBook()`
+These operations are exposed in the `Model` interface
+as `Model#addCommand(ReversibleCommand)`, `Model#undoAddressBook()`
 and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-**Step 1.** The user launches the application. The `CommandHistoryManager` is initialized with empty `history` and `future` lists.
+**Step 1.** The user launches the application. The `CommandHistoryManager` is initialized with empty `history`
+and `future` lists.
 
 **Step 2.** The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
 calls `Model#addCommand(ReversibleCommand)` to add the itself to the `history` list.
 
 ![Add "delete 5" to history](images/UndoRedoAddCommandObjectDiagram.png)
 
-**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#addCommand(ReversibleCommand)` to add itself to the `history` list.
+**Step 3.** The user executes `add n/David …​` to add a new person. The `add` command also
+calls `Model#addCommand(ReversibleCommand)` to add itself to the `history` list.
 
 ![Add "add n/David" to history](images/UndoRedoAddCommandObjectDiagram2.png)
 
@@ -236,7 +244,10 @@ calls `Model#addCommand(ReversibleCommand)` to add the itself to the `history` l
 
 </div>
 
-**Step 4.** The user decides to undo the `add n/David …​` command by executing the `undo` command. The `undo` command calls `Model#undoAddressBook()`, which retrieves the last command from the `history` list and calls `ReversibleCommand#undo(Model model)` on it. The add command is removed from the `history` list and added to the `future` list.
+**Step 4.** The user decides to undo the `add n/David …​` command by executing the `undo` command. The `undo` command
+calls `Model#undoAddressBook()`, which retrieves the last command from the `history` list and
+calls `ReversibleCommand#undo(Model model)` on it. The add command is removed from the `history` list and added to
+the `future` list.
 
 ![Undo "add n/David"](images/UndoRedoUndoCommandObjectDiagram.png)
 
@@ -258,8 +269,8 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command is similar — it calls `Model#redoAddressBook()`, which retrieves the last command from the `future` list and calls `ReversibleCommand#redo(Model model)` on it.
-
+The `redo` command is similar — it calls `Model#redoAddressBook()`, which retrieves the last command from the `future`
+list and calls `ReversibleCommand#redo(Model model)` on it.
 
 **Step 5.** The user then decides to execute the command `list`. Commands that do not modify the data, such
 as `list`, will usually not call `Model#addCommand()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
@@ -267,8 +278,10 @@ Thus, the `history` list remains unchanged.
 
 ![Undo "add n/David"](images/UndoRedoUndoCommandObjectDiagram.png)
 
-**Step 6.** The user executes `delete 1`, which calls `Model#addCommand(ReversibleCommand)`. The `future` list, which contains the previous `add n/David...` command, is cleared. 
-Reason: It no longer makes sense to redo the `add n/David …​` command, since `delete 1` may affect the added person. This is the behavior that most modern desktop applications follow.
+**Step 6.** The user executes `delete 1`, which calls `Model#addCommand(ReversibleCommand)`. The `future` list, which
+contains the previous `add n/David...` command, is cleared.
+Reason: It no longer makes sense to redo the `add n/David …​` command, since `delete 1` may affect the added person.
+This is the behavior that most modern desktop applications follow.
 
 ![Add "delete 1" to history](images/UndoRedoAddCommandObjectDiagram3.png)
 
@@ -295,6 +308,7 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Link Feature
 
 #### Implementation
+
 The activity diagram below illustrates the flow of the `link` command.
 ![LinkActivity](images/LinkCommandActivityDiagram.png)
 
@@ -329,31 +343,38 @@ and , offering a dedicated tool to optimize hackathon planning. Optimized for us
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                     | So that I can…​                                              |
-|----------|-----------------------------|--------------------------------------------------|--------------------------------------------------------------|
-| `* * *`  | Student Hackathon Organizer | Add new participants to the contact managing app | Have a centralized database of all hackathon attendees.      |
-| `* * *`  | Student Hackathon Organizer | Update and edit participant contact details      | Ensure accurate and up-to-date information.                  |
-| `* * *`  | Student Hackathon Organizer | Add notes or comments to contact                 | Provide additional context or reminders for each contact.    |
-| `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event    |
-| `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                |
-| `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
-| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.    |
-| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant.|
-| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event  |
-| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.            |
+| Priority | As a …​                     | I want to …​                                     | So that I can…​                                               |
+|----------|-----------------------------|--------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | Student Hackathon Organizer | Add new participants to the contact managing app | Have a centralized database of all hackathon attendees.       |
+| `* * *`  | Student Hackathon Organizer | Update and edit participant contact details      | Ensure accurate and up-to-date information.                   |
+| `* * *`  | Student Hackathon Organizer | Add notes or comments to contact                 | Provide additional context or reminders for each contact.     |
+| `* *`    | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event     |
+| `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                 |
+| `* * *`  | Student Hackathon Organizer | Remove specific participants                     | Remove participants who signed up but unable to participate.  |
+| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.     |
+| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant. |
+| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event   |
+| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.             |
+| `* *`    | Student Hackathon Organizer | Clear all events                                 | Remove all sample data and start with my own.                 |
+| `* * *`  | Student Hackathon Organizer | Revert the change made to the database           | Correct any mistakes made while managing the database.        |
+| `* *`    | Student Hackathon Organizer | Redo the change made to the database             | Reapply any changes that were undone.                         |
+| `* *`    | Student Hackathon Organizer | Export a list of people to a CSV file            | Share the list with other organizers or for record-keeping.   |
+| `* *`    | Student Hackathon Organizer | Import a list of people from a CSV file          | Quickly add a large number of contacts to the database.       |
+| `* *`    | Fast typist                 | Use keyboard shortcuts to perform common tasks   | Save time and effort in navigating and managing the app.      |
+| `* * *`  | Student Hackathon Organizer | See the output of my command                     | Confirm that my command was executed correctly.               |
+| `* * *`  | Student Hackathon Organizer | Get help on how to use the app                   | Understand how to use the app effectively.                    |
+| `* * *`  | Student Hackathon Organizer | Exit the app                                     | Close the app when I am done.                                 |
+| `* *`    | Student Hackathon Organizer | Save the data automatically                      | Ensure that my data is always up to date.                     |
+| `* *`    | Student Hackathon Organizer | See error messages when I enter invalid commands | Understand what went wrong and how to correct it.             |
+| `* * *`  | Student Hackathon Organizer | View commands I have entered                     | Recall what I have done previously.                           |
 
-
-
-
-
-_{More to be added}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `HackLink` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Add a Contact**
+**Use case: UC001 - Add a Contact**
 
 **MSS**
 
@@ -372,7 +393,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: View Participant List**
+**Use case: UC002 - View Participant List**
 
 **MSS**
 
@@ -384,7 +405,7 @@ otherwise)
 
 **Extensions**
 
-**Use case:Update Participant Contact Details**
+**Use case: UC003 - Update Participant Contact Details**
 
 **MSS**
 
@@ -420,7 +441,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: Remove Participant**
+**Use case: UC004 - Remove Participant**
 
 **MSS**
 
@@ -438,7 +459,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: Add Events**
+**Use case: UC005 - Add Events**
 
 **MSS**
 
@@ -456,7 +477,7 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: Remove Event**
+**Use case: UC006 - Remove Event**
 
 **MSS**
 
@@ -473,14 +494,13 @@ otherwise)
 - System displays an error message.
 - Use case ends.
 
-**Use case: View Events List**
+**Use case: UC007 - View Events List**
 
 **MSS**
 
 1. User requests to view the list of all events.
 2. System displays the list with relevant information.
    Use case ends.
-
 
 ### Non-Functional Requirements
 
@@ -558,93 +578,116 @@ testers are expected to do more *exploratory* testing.
 ### Adding events
 
 1. **Access the "Add Event" Functionality**:
-   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+    - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you
+      will be brought to the events window.
 
 2. **Input Form**:
-   - Input the correct addevent command including name, date, and category following the appropriate format.
-   - Validate that the command handles various data types and formats correctly (e.g., date format (dd-MM-YYYY) should be enforced).
+    - Input the correct addevent command including name, date, and category following the appropriate format.
+    - Validate that the command handles various data types and formats correctly (e.g., date format (dd-MM-YYYY) should
+      be enforced).
 
 3. **Submit Event**:
-   - Press enter submit the event.
+    - Press enter submit the event.
 
 4. **Verification**:
-   - Verify that the event is successfully added to the event list.
-   - Confirm that the details provided during input match the details displayed for the newly added event.
+    - Verify that the event is successfully added to the event list.
+    - Confirm that the details provided during input match the details displayed for the newly added event.
 
 ### Deleting Event
+
 1. **Access the "Delete Event" Functionality**:
-   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+    - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you
+      will be brought to the events window.
 
 2. **Select Event to Delete**:
-   - Identify an event and its index from the list that you want to delete.
+    - Identify an event and its index from the list that you want to delete.
 
 3. **Deletion**:
-   - Input the delete event command to delete the event.
+    - Input the delete event command to delete the event.
 
 4. **Verification**:
-   - Ensure that the event you selected for deletion is no longer present in the event list.
+    - Ensure that the event you selected for deletion is no longer present in the event list.
 
 ### Finding an event
 
 1. **Input Search Query**:
-   - Enter findevent followed by the keyword related to the event you want to find.
-   - Try different search terms and variations to test the search functionality comprehensively.
+    - Enter findevent followed by the keyword related to the event you want to find.
+    - Try different search terms and variations to test the search functionality comprehensively.
 
 2. **Initiate Search**:
-   - Press Enter to execute the search.
+    - Press Enter to execute the search.
 
 3. **Review Results**:
-   - Check the search results to ensure they match the criteria you specified.
-   - Verify that the search results include relevant events based on your input.
+    - Check the search results to ensure they match the criteria you specified.
+    - Verify that the search results include relevant events based on your input.
 
 ### Listing events
 
 1. **View Event List**:
-   - Confirm that the list displays all events currently available in the system.
-   - Verify that the events are listed in a clear and organized manner.
+    - Confirm that the list displays all events currently available in the system.
+    - Verify that the events are listed in a clear and organized manner.
 
 2. **Scrolling and Pagination**:
-   - If the event list is extensive, test scrolling and pagination features to navigate through the list effectively.
+    - If the event list is extensive, test scrolling and pagination features to navigate through the list effectively.
 
 ### Clearing events
 
 2. **Initiate Clearing**:
-   - Input the clear command to clear all events from the system.
+    - Input the clear command to clear all events from the system.
 
 4. **Verification**:
-   - Ensure that all events are removed from the event list.
-   - Verify that the event list is empty after clearing.
+    - Ensure that all events are removed from the event list.
+    - Verify that the event list is empty after clearing.
 
 5. **Check Impact**:
-   - If the application has related functionalities or features affected by event clearing (e.g., statistics, reports), verify that they are updated accordingly.
-   - Confirm that there are no unintended side effects or data inconsistencies caused by clearing events.
+    - If the application has related functionalities or features affected by event clearing (e.g., statistics, reports),
+      verify that they are updated accordingly.
+    - Confirm that there are no unintended side effects or data inconsistencies caused by clearing events.
 
 ## **Appendix: Planned Enhancements**
+
 Team size: 4
 
 1. **Add Confirmation Dialog for Delete Event**:
-   - **Feature Flaw**: Currently, when a user executes the "delete event" command, the event is immediately removed without any confirmation. This can lead to accidental deletions.
-   - **Proposed Fix**: Implement a confirmation dialog that prompts the user to confirm the deletion before proceeding. The dialog should display details of the event to be deleted and provide options to confirm or cancel the deletion.
+    - **Feature Flaw**: Currently, when a user executes the "delete event" command, the event is immediately removed
+      without any confirmation. This can lead to accidental deletions.
+    - **Proposed Fix**: Implement a confirmation dialog that prompts the user to confirm the deletion before proceeding.
+      The dialog should display details of the event to be deleted and provide options to confirm or cancel the
+      deletion.
 
 2. **Implement restriction that events can only be added for the future for Add Event**:
-   - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
-   - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
-   - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
-     
+    - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would
+      want to schedule events in the future.
+    - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
+    - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
+
 ## **Appendix: Effort**
-Our project involved the development of a comprehensive event management system, which presented several challenges and required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with multiple entity types (events, persons), making it more complex.
+
+Our project involved the development of a comprehensive event management system, which presented several challenges and
+required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with
+multiple entity types (events, persons), making it more complex.
 
 **Difficulty Level:**
-- The project's difficulty level was moderate to high due to the need to handle multiple entity types and implement various features such as grouping, undo/redo commands and event commands.
+
+- The project's difficulty level was moderate to high due to the need to handle multiple entity types and implement
+  various features such as grouping, undo/redo commands and event commands.
 
 **Challenges Faced:**
-- One challenge was ensuring the system's robustness and reliability, especially when handling complex data interactions and user inputs.
+
+- One challenge was ensuring the system's robustness and reliability, especially when handling complex data interactions
+  and user inputs.
 - We had to consider various scenarios that could result in a not so friendly user-friendly experience.
 
 **Effort Required:**
-- The project required a significant amount of effort from both development and testing perspectives. Development involved designing and implementing features, handling data storage and retrieval, and ensuring smooth system operations.
+
+- The project required a significant amount of effort from both development and testing perspectives. Development
+  involved designing and implementing features, handling data storage and retrieval, and ensuring smooth system
+  operations.
 - Testing efforts were extensive to ensure the system's functionality, reliability, and security.
 
 **Achievements:**
-- Despite the challenges, we successfully developed a functional and robust event management system that meets the project requirements and provides a seamless user experience.
-- Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event commands, as well as ensuring data integrity and system stability.
+
+- Despite the challenges, we successfully developed a functional and robust event management system that meets the
+  project requirements and provides a seamless user experience.
+- Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event
+  commands, as well as ensuring data integrity and system stability.
