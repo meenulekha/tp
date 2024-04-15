@@ -388,11 +388,11 @@ Finds persons who contain any of the given keywords.
 
 **Examples:**
 
-- `find John` includes `john` and `John Doe`
-- `find alex david` includes `Alex Yeoh`, `David Li`<br>
+- `find John` returns a list that includes `john` and `John Doe`
+- `find alex david` returns a list that includes `Alex Yeoh`, `David Li`<br>
   ![img.png](images/findAlexDavid.png)
-- `find participant` includes all participants in the list
-- `find 1` includes the person with group number 1
+- `find participant` returns a list that includes all participants in the list
+- `find 1` returns a list that includes the person with group number 1
 
 ### Exporting selected participants : `link`
 
