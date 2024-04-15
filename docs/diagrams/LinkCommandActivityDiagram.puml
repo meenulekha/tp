@@ -1,0 +1,16 @@
+@startuml
+start
+
+:Read one or more indexes(integers) from keyboard(user input);
+
+if () then ([All indexes are valid])
+  :Create a new CSV file;
+  :Read people's information(of given indexes) from data file;
+  :Export(Write) those people's information to the CSV file;
+  :Notify user of success;
+else ([else])
+  :Notify user of error (Invalid index);
+endif
+
+stop
+@enduml
