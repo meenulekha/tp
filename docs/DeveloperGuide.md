@@ -554,17 +554,17 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    2. Ensure that the current Java version is 11 by running `java -v` in the terminal
 
-1. Saving window preferences
+    3. After verifying the Java version, open a terminal in the same directory as the jar file and run the jar file by running `java -jar hacklink.jar` in the terminal. `hacklink.jar` is the name of the jar file.<br>
+    Expected: The app launches successfully and the main window is displayed with sample data.
+
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app as instructed in step 1.3.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -574,23 +574,65 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person while a filtered list is being shown
+
+   1. Prerequisites: Filter the list using the `find` command (e.g., `find alex`). Multiple persons in the filtered list.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. No change in the contacts that are not in the filtered list.
+
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. No change in the contacts that are not in the filtered list.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the filtered list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete the data file (e.g., `HackLinkData.json`) from the data directory.
 
-1. _{ more test cases …​ }_
+   2. Relaunch the app.<br>
+      Expected: The app should create a new data file and load with sample data.
+
+### Undo/Redo
+
+1. Undoing a command
+
+    1. Prerequisites: Add a new person using the `add` command.
+
+    2. Test case: `undo`<br>
+       Expected: The last command (add) is undone. The person added should be removed from the list.
+
+    3. Other commands with extraneous parameters: `undo x`, `undo add`, `undo delete`<br>
+       Expected: Similar to previous.
+
+1. Redoing a command
+
+   1. Prerequisites: Undo the last command (add).
+
+   2. Test case: `redo`<br>
+      Expected: The last undone command (add) is redone. The person added should be re-added to the list.
+
+   3. Other commands with extraneous parameters: `redo x`, `redo add`, `redo delete`<br>
+      Expected: Similar to previous.
+
+1. Redoing after new changes are made
+
+   1. Prerequisites: Undo the last command (add).
+
+   2. Test case: 
+   - Add new person: `add n/John p/98765432 e/john@email.com c/participant`
+   - Redo the last undone command: `redo`<br>
+     Expected: The redo command should fail with an error message.
 
 ### Adding events
 
