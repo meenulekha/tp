@@ -279,13 +279,16 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                     | I want to …​                                     | So that I can…​                                              |
-| -------- | --------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| -------- | --------------------------- |--------------------------------------------------|--------------------------------------------------------------|
 | `* * *`  | Student Hackathon Organizer | Add new participants to the contact managing app | Have a centralized database of all hackathon attendees.      |
 | `* * *`  | Student Hackathon Organizer | Update and edit participant contact details      | Ensure accurate and up-to-date information.                  |
 | `* * *`  | Student Hackathon Organizer | Add notes or comments to contact                 | Provide additional context or reminders for each contact.    |
 | `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event    |
 | `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                |
 | `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
+| `* * *`  | Student Hackathon Organizer | Group specific participants                      | Know which participants are working together.                |
+| `* * *`  | Student Hackathon Organizer | Group specific staff                             | Assign easily a staff to a group.                            |
+| `* * *`  | Student Hackathon Organizer | Randomly group all participants                  | Quickly ensure that all participants have a group.           |
 
 _{More to be added}_
 
@@ -378,6 +381,41 @@ _{More to be added}_
 - System displays an error message.
 - Use case ends.
 
+**Use case: Group A Participant**
+
+**MSS**
+
+1. User requests to group a specific participant to a specific group.
+2. User provides valid information: participant's ID and group number.
+3. System groups the participant into the group number.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+2a. Invalid input provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Group All Participant**
+
+**MSS**
+
+1. User requests to group randomly all participants in the current list.
+2. User provides valid maximum group size.
+3. System assigns randomly all participants into a group, where each group 
+   size is less than or equal to the maximum group size.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+2a. Invalid maximum group size provided.
+
+- System displays an error message.
+- Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -446,3 +484,17 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Grouping a person
+
+1. Randomly grouping a participant without prior existing groups
+   1. Prerequisites: Delete addressbook.json in the data folder.
+   2. Test case: `group 1`<br>
+      Expected: No person is grouped. Error details shown in the status message.
+2. Group a person into a participant or staff into a specific group number.
+   1. Prerequisites: A participant or a staff is the first person in the list
+   2. Test case: `group 1 1` <br>
+      Expected: First contact is assigned into group 1.
+   3. Test case: `group 1 -1` <br>
+      Expected: No person is grouped. Error details shown in the status message.
+3. Randomly grouping a participant into an existing groups
