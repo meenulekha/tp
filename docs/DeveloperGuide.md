@@ -288,6 +288,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Student Hackathon Organizer | View contact count in the database               | Know the number of participants, staff, etc. in the event    |
 | `* * *`  | Student Hackathon Organizer | List out members                                 | See all the members in one go                                |
 | `* * *`  | Student Hackathon Organizer | Remove specific participants                     | remove participants who signed up but unable to participate. |
+| `* * *`  | Student Hackathon Organizer | Add events for specific categories of people     | Have a database with all the events related to hackathon.    |
+| `* * *`  | Student Hackathon Organizer | Delete event                                     | Remove events that have been cancelled or no longer relevant.|
+| `* * *`  | Student Hackathon Organizer | Find events                                      | Find details such as date and category of an upcoming event  |
+| `* * *`  | Student Hackathon Organizer | List events                                      | Have an overall view of all the events in one go.            |
+
+
+
+
 
 _{More to be added}_
 
@@ -380,6 +388,50 @@ _{More to be added}_
 - System displays an error message.
 - Use case ends.
 
+**Use case: Add Events**
+
+**MSS**
+
+1. User requests to add an new event.
+2. User provides valid information for contact details: name, date, and category.
+3. System validates input and adds the event to the list.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+2a. Invalid input provided.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: Remove Event**
+
+**MSS**
+
+1. User requests to remove an specific event.
+2. User provides the ID of event to be removed.
+3. System deletes the event.
+4. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+2a. Event not found.
+
+- System displays an error message.
+- Use case ends.
+
+**Use case: View Events List**
+
+**MSS**
+
+1. User requests to view the list of all events.
+2. System displays the list with relevant information.
+   Use case ends.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -448,3 +500,97 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Adding events
+
+1. **Access the "Add Event" Functionality**:
+   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+
+2. **Input Form**:
+   - Input the correct addevent command including name, date, and category following the appropriate format.
+   - Validate that the command handles various data types and formats correctly (e.g., date format (dd-MM-YYYY) should be enforced).
+
+3. **Submit Event**:
+   - Press enter submit the event.
+
+4. **Verification**:
+   - Verify that the event is successfully added to the event list.
+   - Confirm that the details provided during input match the details displayed for the newly added event.
+
+### Deleting Event
+1. **Access the "Delete Event" Functionality**:
+   - Navigate to the events window by clicking on Events in the top menu bar and followed by show Events, where you will be brought to       the events window.
+
+2. **Select Event to Delete**:
+   - Identify an event and its index from the list that you want to delete.
+
+3. **Deletion**:
+   - Input the delete event command to delete the event.
+
+4. **Verification**:
+   - Ensure that the event you selected for deletion is no longer present in the event list.
+
+### Finding an event
+
+1. **Input Search Query**:
+   - Enter findevent followed by the keyword related to the event you want to find.
+   - Try different search terms and variations to test the search functionality comprehensively.
+
+2. **Initiate Search**:
+   - Press Enter to execute the search.
+
+3. **Review Results**:
+   - Check the search results to ensure they match the criteria you specified.
+   - Verify that the search results include relevant events based on your input.
+
+### Listing events
+
+1. **View Event List**:
+   - Confirm that the list displays all events currently available in the system.
+   - Verify that the events are listed in a clear and organized manner.
+
+2. **Scrolling and Pagination**:
+   - If the event list is extensive, test scrolling and pagination features to navigate through the list effectively.
+
+### Clearing events
+
+2. **Initiate Clearing**:
+   - Input the clear command to clear all events from the system.
+
+4. **Verification**:
+   - Ensure that all events are removed from the event list.
+   - Verify that the event list is empty after clearing.
+
+5. **Check Impact**:
+   - If the application has related functionalities or features affected by event clearing (e.g., statistics, reports), verify that they are updated accordingly.
+   - Confirm that there are no unintended side effects or data inconsistencies caused by clearing events.
+
+## **Appendix: Planned Enhancements**
+Team size: 4
+
+1. **Add Confirmation Dialog for Delete Event**:
+   - **Feature Flaw**: Currently, when a user executes the "delete event" command, the event is immediately removed without any confirmation. This can lead to accidental deletions.
+   - **Proposed Fix**: Implement a confirmation dialog that prompts the user to confirm the deletion before proceeding. The dialog should display details of the event to be deleted and provide options to confirm or cancel the deletion.
+
+2. **Implement restriction that events can only be added for the future for Add Event**:
+   - **Feature Flaw**: Adding events with dates in the past might not be accurate as ideally hackathon organisers would want to schedule events in the future.
+   - **Proposed Fix**: Introduce restrictions for the event date that can be specified in the add event command
+   - **Example**: addevent en/meeting ed/30-12-2023 ec/staff will be considered invalid
+     
+## **Appendix: Effort**
+Our project involved the development of a comprehensive event management system, which presented several challenges and required significant effort. Unlike AB3, which deals with only one entity type (persons), our project dealt with multiple entity types (events, persons), making it more complex.
+
+**Difficulty Level:**
+- The project's difficulty level was moderate to high due to the need to handle multiple entity types and implement various features such as grouping, undo/redo commands and event commands.
+
+**Challenges Faced:**
+- One challenge was ensuring the system's robustness and reliability, especially when handling complex data interactions and user inputs.
+- We had to consider various scenarios that could result in a not so friendly user-friendly experience.
+
+**Effort Required:**
+- The project required a significant amount of effort from both development and testing perspectives. Development involved designing and implementing features, handling data storage and retrieval, and ensuring smooth system operations.
+- Testing efforts were extensive to ensure the system's functionality, reliability, and security.
+
+**Achievements:**
+- Despite the challenges, we successfully developed a functional and robust event management system that meets the project requirements and provides a seamless user experience.
+- Our achievements include implementing key features such as grouping, undo/redo commands, creating CSV file and event commands, as well as ensuring data integrity and system stability.
