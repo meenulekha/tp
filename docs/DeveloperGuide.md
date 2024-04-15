@@ -502,6 +502,19 @@ otherwise)
 2. System displays the list with relevant information.
    Use case ends.
 
+**Use case: UC010 - Revert last change**
+
+**MSS**
+
+1. User requests to revert the last change made to the database.
+2. System reverts the last change made to the database.
+3. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
