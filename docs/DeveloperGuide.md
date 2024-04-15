@@ -317,16 +317,15 @@ email, phone number, and comments.
 
 The `LinkCommandParser` class is responsible for parsing the user input and creating instance of `LinkCommand`. The parser extracts the 
 indexes of the contacts to be exported from the user input. The parser uses `split()` method to split the user input into
-each `String`. The parser then uses `ParserUtil.parseIndex()` to parse all those `String` values into a `Index` objects. The objects are
+each `String`. The parser then uses `ParserUtil#parseIndex(String)` to parse all those `String` values into a `Index` objects. The objects are
 stored in a `List<Index>`. The parser then creates a `LinkCommand` object with the `List<Index>` and returns it. If the
 user input is invalid, the parser throws a `ParseException`. The parser method ensures that there are no duplicate indexes and that the
 indexes are within the range of the contact list.
 
-The `LinkCommand` class is responsible for executing the link command. The class uses the `Model.getFilteredPersonList()`
-to get the list of contacts. `FileUtil.createCsvFile()` is then used to create the CSV file with the given path and the
-header. The class then iterates through the list of indexes and writes the details of the contacts to the CSV file through
-`FileUtil.writeToCsvFile()`. The class then returns a `CommandResult` with the success message. User can then find the
-CSV file in the `selectedPeople` folder.
+The `LinkCommand` class is responsible for executing the link command. The class uses the `Model#getFilteredPersonList()`to get the list of contacts.
+`FileUtil#createCsvFile(Path, String)` is then used to create the CSV file with the given path and the header. The fixed Path and header are passed to the method.
+Then it iterates through the list of indexes and writes the details of the contacts to the CSV file through
+`FileUtil#appendToFile(Path, String)`. The class then returns a `CommandResult` with the success message. User can then find the CSV file in the `selectedPeople` folder.
 
 The activity diagram below illustrates the flow of the `link` command.
 
